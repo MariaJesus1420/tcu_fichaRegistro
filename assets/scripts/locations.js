@@ -1,8 +1,17 @@
-const getLocationData = async() => {
-    await fetch('https://ubicaciones.paginasweb.cr/provincias.json')
-        .then(response => response.json())
-        .then(data => console.log(data));
-    return data;
+const getProvincias = async() => {
+    let response = await fetch('https://ubicaciones.paginasweb.cr/provincias.json');
+    return response.json();
+}
+
+const getCantones = async(provincia) => {
+    let response = await fetch("https://ubicaciones.paginasweb.cr/provincia/" + provincia + "/cantones.json")
+    return response.json();
+}
+
+const getDistritos = async(provincia, canton) => {
+    let response = await fetch("https://ubicaciones.paginasweb.cr/provincia/" + provincia + "/canton/" + canton + "/distritos.json");
+    return response.json();
+
 }
 
 const loadData = (selectControl, data) => {
@@ -10,14 +19,15 @@ const loadData = (selectControl, data) => {
     firstOption.selected = true;
     firstOption.innerText = "Provincia";
     selectControl.append(firstOption);
-    for (let index = 0; index < data.length; index++) {
+    let objectData = Object.entries(data);
+
+    for (let index = 0; index < objectData.length; index++) {
+
         let option = document.createElement("option");
-        option.value = index + 1;
-        option.innerText = data[index + 1];
+        option.value = objectData[index][0];
+        option.innerText = objectData[index][1];
         selectControl.append(option);
     }
-    return selectControl;
+
 
 }
-
-getLocationData();
