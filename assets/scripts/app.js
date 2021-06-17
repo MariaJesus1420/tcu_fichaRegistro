@@ -7,15 +7,22 @@ let provincia;
 const loadOptions = async() => {
 
     loadData(selectProvincias, await getProvincias());
+    let value = event.target.value;
+    loadData(selectCantones, await getCantones(value));
+    provincia = event.target.value;
 }
 
 selectProvincias.addEventListener("change", (event) => {
-    loadData(selectCantones, await getCantones(event.target.value));
+    let value = event.target.value;
+    loadData(selectCantones, await getCantones(value));
     provincia = event.target.value;
 })
 
 selectCantones.addEventListener("change", (event) => {
-    loadData(selectDistritos, await getDistritos(provincia, event.target.value));
+    let value = event.target.value;
+    loadData(selectDistritos, await getDistritos(provincia, value));
 })
+
+
 
 loadOptions();
