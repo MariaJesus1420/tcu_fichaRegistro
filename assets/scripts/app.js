@@ -1,21 +1,38 @@
-let selectProvincias = document.querySelector("#selectProvincias");
-let selectCantones = document.querySelector("#selectCantones");
-let selectDistritos = document.querySelector("#selectDistritos");
+let selectProvincias = document.querySelector("#selectProvincia");
+let selectCantones = document.querySelector("#selectCanton");
+let selectDistritos = document.querySelector("#selectDistrito");
 
 let provincia;
 
 const loadOptions = async() => {
-
-    loadData(selectProvincias, await getProvincias());
+    let data = await getProvincias();
+    loadData(selectProvincias, data);
+    data = await getCantones(1);
+    loadData(selectCantones, data);
+    data = await getDistritos(1, 1);
+    loadData(selectDistritos, data);
 }
 
-selectProvincias.addEventListener("change", (event) => {
-    loadData(selectCantones, await getCantones(event.target.value));
-    provincia = event.target.value;
-})
 
-selectCantones.addEventListener("change", (event) => {
-    loadData(selectDistritos, await getDistritos(provincia, event.target.value));
-})
 
 loadOptions();
+
+
+selectProvincias.addEventListener('change', async(event) => {
+    console.log("ready");
+
+    provincia = event.target.value;
+
+    let data = await getCantones(provincia);
+    loadData(selectCantones, data);
+
+});
+
+selectCantones.addEventListener('change', async(event) => {
+    let canton = event.target.value;
+
+    let data = await getDistritos(provincia, canton);
+
+    loadData(selectDistritos, data);
+
+});
