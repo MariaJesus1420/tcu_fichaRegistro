@@ -1,7 +1,7 @@
 
 .form-group{
     margin-top: 20px;
-    
+    font-weight: bold;
 }
 .custom-select{
     margin-top: 30px;
@@ -9,4 +9,5 @@
 }
 .custom-control{
     margin-top: 10px;
+    font-weight: normal;
 }
