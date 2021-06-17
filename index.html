@@ -14,7 +14,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
     />
-    <link rel="stylesheet" href="assets/styles/styles.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
   <h1 style="text-align: center">
     Ficha de Registro TCU-374/486 Patrimonio y Cultura
@@ -22,7 +22,7 @@
   <body>
     <form>
       <div class="container">
-        <div class="form-group">
+        <div id="form" class="form-group">
           <label for="formGroupExampleInput">Fecha de evento </label>
           <input type="date"
             type="text"
@@ -69,12 +69,12 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="formGroupExampleInput2">Si digito "Otro" ingrese cual</label>
+          <label for="formGroupExampleInput2">Si digitó "Otro" ingrese cual</label>
           <input
             type="text"
             class="form-control"
             id="formGroupExampleInput2"
-            placeholder=" "
+            placeholder="Introduzca el patrimonio "
           />
         <div>
           <select class="custom-select custom-select-lg mb-3">
@@ -88,14 +88,22 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="formGroupExampleInput2">Si digito "Otro" ingrese cual</label>
+          <label for="formGroupExampleInput2">Si digitó "Otro" ingrese cual</label>
           <input
             type="text"
             class="form-control"
             id="formGroupExampleInput2"
-            placeholder=" "
+            placeholder="Introduzca el patrimonio "
           />
         </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Descripción de la manifestación patrimonial</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <h6 for="exampleFormControlTextarea1">Detalles/Contexto</h6>
+          <label for="exampleFormControlTextarea1">¿Consideran que estos espacios en los que se rescata este tipo de información sean importantes de continuar o realizar con la comunidad costarricense?</label>
+       </div>
         <div class="custom-control custom-radio">
           <input
             type="radio"
@@ -114,6 +122,41 @@
           />
           <label class="custom-control-label" for="customRadio2">NO</label>
         </div>
+        <div class="form-group">
+        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="¿Por qué?" rows="3"></textarea>
+        </div>
+
+
+
+        <div class="form-group">
+          <h6 for="exampleFormControlTextarea1">Vitalidad de la manifestación</h6>
+          <label for="exampleFormControlTextarea1">¿Lo han aprendido sus familiares o vecinxs?</label>
+       </div>
+        <div class="custom-control custom-radio">
+          <input
+            type="radio"
+            id="customRadio1"
+            name="customRadio"
+            class="custom-control-input"
+          />
+          <label class="custom-control-label" for="customRadio1">SI</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input
+            type="radio"
+            id="customRadio2"
+            name="customRadio"
+            class="custom-control-input"
+          />
+          <label class="custom-control-label" for="customRadio2">NO</label>
+        </div>
+        <div class="form-group">
+        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="¿A quiénes ha traspasado ese conocimiento?" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="¿Disponibilidad de ingredientes, de los objetos o espacios?" rows="3"></textarea>
+        </div>
+
       </div>
     </form>
     <script
@@ -125,6 +168,8 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-firestore.js"></script>
     <script src="assets/scripts/init.js"></script>
-    <script src="assets/javascript/app.js"></script>
+    <script src="assets/scripts/app.js"></script>
+    <script src="assets/scripts/app.js"></script>
+    <script src="assets/scripts/locations.js"></script>
   </body>
 </html>
