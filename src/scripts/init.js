@@ -1,10 +1,10 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyDbiN_dTk4yRZokbPk2mnTav2DZi8hylck",
-    authDomain: "tcu-374-486.firebaseapp.com",
-    projectId: "tcu-374-486",
-    storageBucket: "tcu-374-486.appspot.com",
-    messagingSenderId: "1025527060356",
-    appId: "1:1025527060356:web:5783a0c53d9265842befd1"
+    apiKey: "AIzaSyAgg0nJjChQ2R7TrmiRKT-wGcCVGM5ct7Y",
+    authDomain: "tcu-374-486-7712e.firebaseapp.com",
+    projectId: "tcu-374-486-7712e",
+    storageBucket: "tcu-374-486-7712e.appspot.com",
+    messagingSenderId: "725202363337",
+    appId: "1:725202363337:web:74d3e3d1da770c0f0e7e18"
 };
 
 firebase.initializeApp(firebaseConfig);
