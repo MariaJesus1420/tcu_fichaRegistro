@@ -1,38 +1,35 @@
+import { locations } from ".locations";
+
 let selectProvincias = document.querySelector("#selectProvincia");
 let selectCantones = document.querySelector("#selectCanton");
 let selectDistritos = document.querySelector("#selectDistrito");
 
 let provincia;
 
-const loadOptions = async() => {
-    let data = await getProvincias();
-    loadData(selectProvincias, data);
-    data = await getCantones(1);
-    loadData(selectCantones, data);
-    data = await getDistritos(1, 1);
-    loadData(selectDistritos, data);
-}
-
-
+const loadOptions = async () => {
+  let data = await locations.getProvincias();
+  locations.loadData(selectProvincias, data);
+  data = await locations.getCantones(1);
+  locations.loadData(selectCantones, data);
+  data = await locations.getDistritos(1, 1);
+  locations.loadData(selectDistritos, data);
+};
 
 loadOptions();
 
+selectProvincias.addEventListener("change", async (event) => {
+  
 
-selectProvincias.addEventListener('change', async(event) => {
-    console.log("ready");
+  provincia = event.target.value;
 
-    provincia = event.target.value;
-
-    let data = await getCantones(provincia);
-    loadData(selectCantones, data);
-
+  let data = await locations.getCantones(provincia);
+  locations.loadData(selectCantones, data);
 });
 
-selectCantones.addEventListener('change', async(event) => {
-    let canton = event.target.value;
+selectCantones.addEventListener("change", async (event) => {
+  let canton = event.target.value;
 
-    let data = await getDistritos(provincia, canton);
+  let data = await locations.getDistritos(provincia, canton);
 
-    loadData(selectDistritos, data);
-
+  locations.loadData(selectDistritos, data);
 });
