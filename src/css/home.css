@@ -19,23 +19,33 @@
     background-color: #41ade7;
 }
 
-.footer{
+#footer{
     background-color: #323232;
     color: white;
+    margin-top: 30px;
 }
 
-.footer li a{
+#footer li a{
   
     color: white;
 }
 
-.footer li a:hover{
+#footer li a:hover{
   
     color: white;
 }
 
 .imagenFooter{
     text-align: center;
+    
+}
+#imagenHeader{
+    max-width: none;
+}
+#linkHeader{
+    width: 650px;
+    overflow: hidden;
+    
 }
 body{
     background-color: #e6e6e6;
