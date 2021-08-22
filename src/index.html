@@ -15,22 +15,35 @@
         </a>
         </header>
     </div>
-    <h1 class="text-center">
+    <h1 class="text-center" style="margin-top: 30px; margin-bottom: 30px;"> 
         Ficha de Registro TCU-374/486 Patrimonio y Cultura
     </h1>
     <div class="container">
         <form>
 
             <div id="form" class="form-group">
-                <h5 for="exampleFormControlTextarea1">Datos del evento</h5>
-                <label for="formGroupExampleInput">Fecha de evento </label>
-                <input type="date" type="text" class="form-control" id="formGroupExampleInput"
+                <h5 for="exampleFormControlTextarea1" style="margin-bottom: 30px;">Datos del evento</h5>
+                <label for="formGroupExampleInput">Nombre del evento </label>  
+                <div id="formNombreEvento">
+                    <select class="custom-select custom-select-lg mb-3">
+                        <option selected>Museo por un dia</option>
+                        <option value="1">Taller Remedios y curaciones </option>
+                        <option value="6">Otro</option>
+                    </select>
+                </div>
+
+                <label for="formGroupExampleInput">Fecha del evento </label>
+                <input type="date" type="text" class="form-control" id="formFechaEvento"
                     placeholder="Example input" />
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">Nombre del informante clave</label>
-                <input type="text" class="form-control" id="formGroupExampleInput2"
+                <input type="text" class="form-control" id="formNombreInformante"
                     placeholder="Introduzca el nombre" />
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">Edad</label>
+                <input type="text" class="form-control" id="formEdad" placeholder="Introduzca la edad" />
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">Localidad</label>
@@ -48,12 +61,7 @@
 
               
             </div>
-
-            <div class="form-group">
-                <label for="formGroupExampleInput2">Edad</label>
-                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Introduzca la edad" />
-            </div>
-            <div>
+            <div id="formSeleccionEvento">
                 <select class="custom-select custom-select-lg mb-3">
                     <option selected>Patrimonio Material</option>
                     <option value="1">Monumentos Sitios</option>
@@ -65,9 +73,9 @@
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">Si digitó "Otro" ingrese cual</label>
-                <input type="text" class="form-control" id="formGroupExampleInput2"
+                <input type="text" class="form-control" id="formInputOtro"
                     placeholder="Introduzca el patrimonio " />
-                <div>
+                <div id="formSeleccionEvento2">
                     <select class="custom-select custom-select-lg mb-3">
                         <option selected>Patrimonio Inmaterial</option>
                         <option value="1">Leyenda/Historia/Cuento/Poema/Retahíla</option>
@@ -80,12 +88,12 @@
                 </div>
                 <div class="form-group">
                     <label for="formGroupExampleInput2">Si digitó "Otro" ingrese cual</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput2"
+                    <input type="text" class="form-control" id="formInputOtro2"
                         placeholder="Introduzca el patrimonio " />
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Descripción de la manifestación patrimonial</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea class="form-control" id="textDescripcionManifestacion" rows="3"></textarea>
                 </div>
                 <div class="form-group">
                     <h5 for="exampleFormControlTextarea1">Detalles/Contexto</h5>
@@ -94,15 +102,15 @@
                         comunidad costarricense?</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" />
+                    <input type="radio" id="si1" name="customRadio" class="custom-control-input" />
                     <label class="custom-control-label" for="customRadio1">SI</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" />
+                    <input type="radio" id="no1" name="customRadio" class="custom-control-input" />
                     <label class="custom-control-label" for="customRadio2">NO</label>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="¿Por qué?"
+                    <textarea class="form-control" id="textPorqueContexto" placeholder="¿Por qué?"
                         rows="3"></textarea>
                 </div>
                 <div class="form-group">
@@ -110,15 +118,15 @@
                     <label for="exampleFormControlTextarea1">¿Lo han aprendido sus familiares o vecinxs?</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" />
+                    <input type="radio" id="si2" name="customRadio" class="custom-control-input" />
                     <label class="custom-control-label" for="customRadio1">SI</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" />
+                    <input type="radio" id="no2" name="customRadio" class="custom-control-input" />
                     <label class="custom-control-label" for="customRadio2">NO</label>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" id="exampleFormControlTextarea1"
+                    <textarea class="form-control" id="textPorqueTraspaso"
                         placeholder="¿A quiénes ha traspasado ese conocimiento?" rows="3"></textarea>
                 </div>
                 <div class="form-group">
@@ -128,27 +136,27 @@
                 <div class="form-group">
                     <h5 for="exampleFormControlTextarea1">Importancia para la comunidad</h5>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <input class="form-check-input" type="checkbox" value="" id="checkVigente">
                         <label class="form-check-label" for="defaultCheck1">
                             Manifestación vigente
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <input class="form-check-input" type="checkbox" value="" id="checkVulnerable">
                         <label class="form-check-label" for="defaultCheck1">
                             Manifestación vigente vulnerable
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <input class="form-check-input" type="checkbox" value="" id="checkMemoria">
                         <label class="form-check-label" for="defaultCheck1">
                             Manifestación de la memoria
                         </label>
                     </div>
                 </div>
                 <div class="form-group">
-                    <h5 for="exampleFormControlTextarea1">Datos de control</h5>
-                    <input type="text" class="form-control" id="formGroupExampleInput2"
+                    <h5 for="exampleFormControlTextarea1" >Datos de control</h5>
+                    <input type="text" class="form-control" id="nombreEstudiante"
                         placeholder="Introduzca su nombre" />
                 </div>
 
@@ -156,16 +164,25 @@
         </form>
 
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid" >
         <footer class="row py-3 border-top "id="footer">
             <div class="col-sm imagenFooter">
                 <img src="assets/img/ucr.svg">
 
             </div>
 
+            <div class="col-sm imagenFooter">
+                <img src="assets/img/firma-vas-vertical.png">
+
+            </div>
+
+            <div class="col-sm imagenFooter">
+                <img src="assets/img/tcu-logo-vertical.png">
+
+            </div>
 
 
-            <div class="col">
+            <!-- <div class="col">
                 <h5>Section</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text">Home</a></li>
@@ -196,7 +213,7 @@
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text">FAQs</a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text">About</a></li>
                 </ul>
-            </div>
+            </div> -->
 
             <P class="text-center avisoCopy">&copy;2021 Universidad de Costa Rica -Tel. 2511-4000. Aviso Legal. Última
                 actualización: agosto de 2021.</P>
