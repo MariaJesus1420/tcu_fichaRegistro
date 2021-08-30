@@ -1,5 +1,5 @@
 {
-  "name": "paquete1",
+  "name": "maria",
   "version": "1.0.0",
   "description": "Esta es una descripcion de un node package",
   "main": "index.js",
@@ -25,5 +25,13 @@
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MariaJesus1420/tcu_fichaRegistro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MariaJesus1420/tcu_fichaRegistro/issues"
+  },
+  "homepage": "https://github.com/MariaJesus1420/tcu_fichaRegistro#readme"
 }
