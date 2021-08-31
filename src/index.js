@@ -1,43 +1,44 @@
 import { componentes } from "./javascript/componentes";
-    funcion = ()=>{
-     console.lsaog();
 
-   }
   const UTIL = {
     
-    fire : function(func,funcname, args){
+    fire : async function(func,funcname, args){
     
       var namespace = componentes;  // indicate your obj literal namespace here
-      console.log("FIRING ", func,funcname);
+      
       funcname = (funcname === undefined) ? 'init' : funcname;
       if (func !== '' && namespace[func] && typeof namespace[func][funcname] == 'function'){
-        namespace[func][funcname](args);
+        console.log("FIRING ", func,funcname);
+        await namespace[func][funcname](args);
       }
   
     },
   
-    loadEvents : function(){
+    loadEvents : async function(){
   
       var bodyId = document.body.id;
       
       // hit up common first.
-      UTIL.fire('common');
+      await UTIL.fire('common');
 
       // do all the classes too.
-      $.each(document.body.className.split(/\s+/),function(i,classnm){
-        UTIL.fire(classnm);
-        UTIL.fire(classnm,bodyId);
-      });
+      let ia = 0
+      $.each(document.body.className.split(/\s+/),async function(i,classnm){
+   
+       await UTIL.fire(classnm);
+        await UTIL.fire(classnm,bodyId);
+       
+      }); 
   
-      UTIL.fire('common','finalize');
+      await UTIL.fire('common','finalize');
   
     }
   
   };
   
   // kick it all off here 
-  document.addEventListener("DOMContentLoaded", function(event) {
-    UTIL.loadEvents()
+  document.addEventListener("DOMContentLoaded", async function(event) {
+    await UTIL.loadEvents()
     
 });
 

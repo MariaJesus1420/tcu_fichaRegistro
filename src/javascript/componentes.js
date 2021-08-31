@@ -2,12 +2,12 @@ import {COMMON} from "./common"
 import { HOME } from "./home"
 export const componentes = {
   common : {
-    init     : COMMON.init(),
+    init     : async ()=>{await COMMON.init()},
     finalize : function(){ }
   },
   home : {
-    init     : HOME.init(),
-    cart     : function(){ },
-    category : function(){ }
+    init     : async ()=>{await HOME.init() },
+    cart     : function(){console.log("CART"); },
+    category : function(){console.log("CATERGORY"); }
   }
 }

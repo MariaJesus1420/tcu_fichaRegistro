@@ -1,7 +1,7 @@
 import { locations } from "./locations";
-import "../css/home.css"
+import "../css/home.css";
 export const HOME = {
-  init: () => {
+  init: async () => {
     let selectProvincias = document.querySelector("#selectProvincia");
     let selectCantones = document.querySelector("#selectCanton");
     let selectDistritos = document.querySelector("#selectDistrito");
@@ -33,5 +33,30 @@ export const HOME = {
 
       locations.loadData(selectDistritos, data);
     });
+
+    console.log("START CALENDAR");
+
+    console.log("CALENDAR");
+    var calendarEl = document.getElementById("calendar");
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      views: {
+        dayGrid: {
+          // options apply to dayGridMonth, dayGridWeek, and dayGridDay views
+        },
+        timeGrid: {
+          // options apply to timeGridWeek and timeGridDay views
+        },
+        week: {
+          // options apply to dayGridWeek and timeGridWeek views
+        },
+        day: {
+          // options apply to dayGridDay and timeGridDay views
+        },
+      },
+    });
+    calendar.render();
+    console.log("calendar rendered");
+
+    console.log("FINISH CALENDAR");
   },
 };

@@ -25,7 +25,9 @@
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2"
   },
-  "dependencies": {},
+  "dependencies": {
+    "fullcalendar": "^5.9.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MariaJesus1420/tcu_fichaRegistro.git"
