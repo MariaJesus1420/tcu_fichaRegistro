@@ -17,7 +17,7 @@ export const HOME = {
       locations.loadData(selectDistritos, data);
     };
 
-    loadOptions();
+    await loadOptions();
 
     selectProvincias.addEventListener("change", async (event) => {
       provincia = event.target.value;
@@ -34,31 +34,27 @@ export const HOME = {
       locations.loadData(selectDistritos, data);
     });
 
-    console.log("START CALENDAR");
-
-    console.log("CALENDAR");
-   
-    console.log("calendar rendered");
-  
 
 
-    console.log("FINISH CALENDAR");
-
-    $("#btnListoModal").click((e)=>{
-      $("#myModal").hide()
+    var myModalEl = document.getElementById("myModal");
+    var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
+      keyboard: false
     })
-
     $("#btnSeleccion").click((e) => {
       console.log("CLICK");
       e.preventDefault();
-      $("#myModal").show();
-  //    var calendarEl = document.getElementById("calendar");
-  //    var calendar = new FullCalendar.Calendar(calendarEl, {
-  //      height: 500,
-  //      aspectRatio: 1.35,
-  //      expandRows: true,
-  //    });
-  //    calendar.render();
+     myModal.show()
+     
+      myModalEl.addEventListener("shown.bs.modal", function (event) {
+        // do something...
+        var calendarEl = document.getElementById("calendar");
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          height: 500,
+          aspectRatio: 1.35,
+          expandRows: true,
+        });
+        calendar.render();
+      });
     });
   },
 };

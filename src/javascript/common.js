@@ -24,7 +24,7 @@ export const COMMON = {
     // Now do stuff with those scripts.
 
     FirebaseINIT();
-
+    console.log("FINISH COMMON");
 
    
   },

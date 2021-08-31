@@ -39,7 +39,7 @@ import { componentes } from "./javascript/componentes";
   // kick it all off here 
   document.addEventListener("DOMContentLoaded", async function(event) {
     await UTIL.loadEvents()
-    
+    console.log("everything is loaded");
 });
 
 
