@@ -21,14 +21,18 @@
     <h1 class="text-center" style="margin-top: 30px; margin-bottom: 30px;"> 
         Ficha de Registro TCU-374/486 Patrimonio y Cultura
     </h1>
-    <div id='calendar' class="container"></div>
+ 
     <div class="container">
+       
         <form>
-
+            
             <div id="form" class="form-group">
+                <button id="btnSeleccion" class="btn btn-primary">Seleccione un evento</button>
                 <h5 for="exampleFormControlTextarea1" style="margin-bottom: 30px;">Datos del evento</h5>
                 <label for="formGroupExampleInput">Nombre del evento </label>  
+                
                 <div id="formNombreEvento">
+           
                     <select class="custom-select custom-select-lg mb-3">
                         <option selected>Museo por un dia</option>
                         <option value="1">Taller Remedios y curaciones </option>
@@ -190,38 +194,7 @@
             </div>
 
 
-            <!-- <div class="col">
-                <h5>Section</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text">About</a></li>
-                </ul>
-            </div>
-
-            <div class="col">
-                <h5>Section</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text">About</a></li>
-                </ul>
-            </div>
-
-            <div class="col">
-                <h5>Section</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text">About</a></li>
-                </ul>
-            </div> -->
+          
 
             <P class="text-center avisoCopy">&copy;2021 Universidad de Costa Rica -Tel. 2511-4000. Aviso Legal. Última
                 actualización: agosto de 2021.</P>
@@ -229,7 +202,23 @@
 
         </footer>
     </div>
-
-    
+    <div class="modal" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
 </body>
 </html>

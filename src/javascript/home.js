@@ -37,26 +37,28 @@ export const HOME = {
     console.log("START CALENDAR");
 
     console.log("CALENDAR");
-    var calendarEl = document.getElementById("calendar");
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      views: {
-        dayGrid: {
-          // options apply to dayGridMonth, dayGridWeek, and dayGridDay views
-        },
-        timeGrid: {
-          // options apply to timeGridWeek and timeGridDay views
-        },
-        week: {
-          // options apply to dayGridWeek and timeGridWeek views
-        },
-        day: {
-          // options apply to dayGridDay and timeGridDay views
-        },
-      },
-    });
-    calendar.render();
+   
     console.log("calendar rendered");
+  
+
 
     console.log("FINISH CALENDAR");
+
+    $("#btnListoModal").click((e)=>{
+      $("#myModal").hide()
+    })
+
+    $("#btnSeleccion").click((e) => {
+      console.log("CLICK");
+      e.preventDefault();
+      $("#myModal").show();
+  //    var calendarEl = document.getElementById("calendar");
+  //    var calendar = new FullCalendar.Calendar(calendarEl, {
+  //      height: 500,
+  //      aspectRatio: 1.35,
+  //      expandRows: true,
+  //    });
+  //    calendar.render();
+    });
   },
 };
