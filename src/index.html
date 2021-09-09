@@ -1,38 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-   
+
 
 </head>
+
 <body id="start" class="home">
-   
+
     <div class="container-fluid">
         <header class="row py-4 border-bottom header">
             <a id="linkHeader">
-            <img id="imagenHeader"src="assets/img/firma-ucr-c.svg"></img>
-        </a>
+                <img id="imagenHeader" src="assets/img/firma-ucr-c.svg"></img>
+            </a>
         </header>
     </div>
-    <h1 class="text-center" style="margin-top: 30px; margin-bottom: 30px;"> 
+    <h1 class="text-center" style="margin-top: 30px; margin-bottom: 30px;">
         Ficha de Registro TCU-374/486 Patrimonio y Cultura
     </h1>
- 
+
     <div class="container">
-       
+
         <form>
-            
+
             <div id="form" class="form-group">
                 <button id="btnSeleccion" class="btn btn-primary">Seleccione un evento</button>
                 <h5 for="exampleFormControlTextarea1" style="margin-bottom: 30px;">Datos del evento</h5>
-                <label for="formGroupExampleInput">Nombre del evento </label>  
-                
+                <label for="formGroupExampleInput">Nombre del evento </label>
+
                 <div id="formNombreEvento">
-           
+
                     <select class="custom-select custom-select-lg mb-3">
                         <option selected>Museo por un dia</option>
                         <option value="1">Taller Remedios y curaciones </option>
@@ -41,13 +43,11 @@
                 </div>
 
                 <label for="formGroupExampleInput">Fecha del evento </label>
-                <input type="date" type="text" class="form-control" id="formFechaEvento"
-                    placeholder="Example input" />
+                <input type="date" type="text" class="form-control" id="formFechaEvento" placeholder="Example input" />
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">Nombre del informante clave</label>
-                <input type="text" class="form-control" id="formNombreInformante"
-                    placeholder="Introduzca el nombre" />
+                <input type="text" class="form-control" id="formNombreInformante" placeholder="Introduzca el nombre" />
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">Edad</label>
@@ -67,7 +67,7 @@
 
                 </select>
 
-              
+
             </div>
             <div id="formSeleccionEvento">
                 <select class="custom-select custom-select-lg mb-3">
@@ -81,8 +81,7 @@
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">Si digitó "Otro" ingrese cual</label>
-                <input type="text" class="form-control" id="formInputOtro"
-                    placeholder="Introduzca el patrimonio " />
+                <input type="text" class="form-control" id="formInputOtro" placeholder="Introduzca el patrimonio " />
                 <div id="formSeleccionEvento2">
                     <select class="custom-select custom-select-lg mb-3">
                         <option selected>Patrimonio Inmaterial</option>
@@ -118,8 +117,7 @@
                     <label class="custom-control-label" for="customRadio2">NO</label>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" id="textPorqueContexto" placeholder="¿Por qué?"
-                        rows="3"></textarea>
+                    <textarea class="form-control" id="textPorqueContexto" placeholder="¿Por qué?" rows="3"></textarea>
                 </div>
                 <div class="form-group">
                     <h5 for="exampleFormControlTextarea1">Vitalidad de la manifestación</h5>
@@ -163,21 +161,21 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <h5 for="exampleFormControlTextarea1" >Datos de control</h5>
-                    <input type="text" class="form-control" id="nombreEstudiante"
-                        placeholder="Introduzca su nombre" />
+                    <h5 for="exampleFormControlTextarea1">Datos de control</h5>
+                    <input type="text" class="form-control" id="nombreEstudiante" placeholder="Introduzca su nombre" />
                 </div>
 
             </div>
 
             <div>
-                <button type="button" class="btn btn-primary" id="btnGuardar" style="margin-top: 30px; margin-left: 500px;">Guardar</button>
+                <button type="button" class="btn btn-primary" id="btnGuardar"
+                    style="margin-top: 30px; margin-left: 500px;">Guardar</button>
             </div>
         </form>
 
     </div>
-    <div class="container-fluid" >
-        <footer class="row py-3 border-top "id="footer">
+    <div class="container-fluid">
+        <footer class="row py-3 border-top " id="footer">
             <div class="col-sm imagenFooter">
                 <img src="assets/img/ucr.svg">
 
@@ -194,7 +192,7 @@
             </div>
 
 
-          
+
 
             <P class="text-center avisoCopy">&copy;2021 Universidad de Costa Rica -Tel. 2511-4000. Aviso Legal. Última
                 actualización: agosto de 2021.</P>
@@ -203,22 +201,24 @@
         </footer>
     </div>
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id='calendar'></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnAddEvent"class="btn btn-success" >Add event</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
             </div>
-            <div class="modal-body">
-                <div id='calendar'></div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
         </div>
-      </div>
-      
+    </div>
+
 </body>
+
 </html>

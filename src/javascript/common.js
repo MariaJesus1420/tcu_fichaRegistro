@@ -8,7 +8,8 @@ export const COMMON = {
     await linksLoader([
       "https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css",
       "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css",
-      "https://cdn.jsdelivr.net/npm/fullcalendar/main.css"
+      "https://cdn.jsdelivr.net/npm/fullcalendar/main.css",
+      'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css'
     ]);
    
     scriptsLoader.loaded = new Set();
@@ -18,7 +19,12 @@ export const COMMON = {
       "https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js",
       "https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js",
       "https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js",
+      
       "https://www.gstatic.com/firebasejs/8.6.7/firebase-firestore.js",
+    ]);
+    scriptsLoader.loaded = new Set();
+    await scriptsLoader([
+      "https://cdn.jsdelivr.net/npm/fullcalendar/locales/es.js",
     ]);
   
     // Now do stuff with those scripts.

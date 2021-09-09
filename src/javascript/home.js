@@ -34,26 +34,64 @@ export const HOME = {
       locations.loadData(selectDistritos, data);
     });
 
-
-
+    let calendarObj;
     var myModalEl = document.getElementById("myModal");
-    var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
-      keyboard: false
-    })
+    var myModal = new bootstrap.Modal(document.getElementById("myModal"), {
+      keyboard: false,
+    });
+
+    $("#btnAddEvent").click((e) => {
+      console.log("btn");
+      let event = {
+        id: "newEvent2",
+        start: "2021-09-08T11:30:00",
+        end: "2021-09-08T23:30:00",
+        title: "Este es un evento de prueba",
+        overlap:false,
+      };
+      var calendarEl = document.getElementById("calendar");
+      calendarObj.addEvent(event);
+    });
     $("#btnSeleccion").click((e) => {
       console.log("CLICK");
       e.preventDefault();
-     myModal.show()
-     
+      myModal.show();
+
       myModalEl.addEventListener("shown.bs.modal", function (event) {
         // do something...
         var calendarEl = document.getElementById("calendar");
         var calendar = new FullCalendar.Calendar(calendarEl, {
-          height: 500,
+
+          eventClick: function(info) {
+            console.log(info.event.id);
+            myModal.hide();
+          },
+          themeSystem: 'bootstrap',
+          height: 600,
+          navLinks:false,
+          locale: "es",
           aspectRatio: 1.35,
           expandRows: true,
+          initialView: "timeGridWeek",
+          headerToolbar:{
+            center: 'today',
+            end: 'dayGridMonth timeGridWeek prev,next'
+          },
+          eventTimeFormat: {
+            hour: "numeric",
+            minute: "2-digit",
+            meridiem: "short",
+          },
+          views: {
+            timeGridWeek: {
+              displayEventTime: true,
+            },
+            dayGridWeek: {},
+          },
         });
         calendar.render();
+
+        calendarObj = calendar;
       });
     });
   },
