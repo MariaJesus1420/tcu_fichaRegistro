@@ -47,7 +47,7 @@ export const HOME = {
         start: "2021-09-08T11:30:00",
         end: "2021-09-08T23:30:00",
         title: "Este es un evento de prueba",
-        overlap:false,
+        overlap: false,
       };
       var calendarEl = document.getElementById("calendar");
       calendarObj.addEvent(event);
@@ -61,21 +61,20 @@ export const HOME = {
         // do something...
         var calendarEl = document.getElementById("calendar");
         var calendar = new FullCalendar.Calendar(calendarEl, {
-
-          eventClick: function(info) {
+          eventClick: function (info) {
             console.log(info.event.id);
             myModal.hide();
           },
-          themeSystem: 'bootstrap',
+          themeSystem: "bootstrap",
           height: 600,
-          navLinks:false,
+          navLinks: false,
           locale: "es",
           aspectRatio: 1.35,
           expandRows: true,
           initialView: "timeGridWeek",
-          headerToolbar:{
-            center: 'today',
-            end: 'dayGridMonth timeGridWeek prev,next'
+          headerToolbar: {
+            center: "today",
+            end: "dayGridMonth timeGridWeek prev,next",
           },
           eventTimeFormat: {
             hour: "numeric",
