@@ -1,12 +1,17 @@
 export const DATABASE = {
-  db: firebase.firestore(),
+  db: () => {
+    firebase.firestore();
+  },
   addEvent: async (event, year, id) => {
-    db.collection("Events")
-      .doc(year)
+    db.collection("cities")
       .update({
         [id]: event,
       })
-      .then(() => {})
-      .catch((error) => {});
+      .then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
   },
 };
