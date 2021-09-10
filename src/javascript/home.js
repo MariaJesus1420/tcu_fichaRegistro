@@ -1,5 +1,6 @@
 import { locations } from "./locations";
 import "../css/home.css";
+import { DATABASE } from "./dataBase";
 export const HOME = {
   init: async () => {
     let selectProvincias = document.querySelector("#selectProvincia");
@@ -19,39 +20,10 @@ export const HOME = {
 
     await loadOptions();
 
-    const generateCalendar = (eventsList) => {
-      var calendarEl = document.getElementById("calendar");
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        eventClick: function (info) {
-          console.log(info.event.id);
-          myModal.hide();
-        },
-        eventOverlap: false,
-        themeSystem: "bootstrap",
-        height: 600,
-        navLinks: false,
-        locale: "es",
-        aspectRatio: 1.35,
-        expandRows: true,
-        initialView: "timeGridWeek",
-        headerToolbar: {
-          center: "today",
-          end: "dayGridMonth timeGridWeek prev,next",
-        },
-        eventTimeFormat: {
-          hour: "numeric",
-          minute: "2-digit",
-          meridiem: "short",
-        },
-        views: {
-          timeGridWeek: {
-            displayEventTime: true,
-          },
-          dayGridWeek: {},
-        },
-      });
-      calendar.render();
-    };
+    function getFirstProperty (obj){
+      return obj[Object.keys(obj)[0]];
+    }
+
     selectProvincias.addEventListener("change", async (event) => {
       provincia = event.target.value;
 
@@ -73,17 +45,25 @@ export const HOME = {
       keyboard: false,
     });
 
-    $("#btnAddEvent").click((e) => {
+   let db = new DATABASE
+    $("#btnAddEvent").click( async (e) => {
       console.log("btn");
       let event = {
-        id: "newEvent2",
+        id: "newEvent333",
         start: "2021-09-08T11:30:00",
         end: "2021-09-08T23:30:00",
         title: "Este es un evento de prueba",
+        
       };
+      await db.addEvent(event, "2021", "dgg") 
+      let doc = await db.obtenerDocumento("Events","2021")
+      console.log(new Date(getFirstProperty(doc).end.seconds*1000 ).toISOString());
       var calendarEl = document.getElementById("calendar");
       calendarObj.addEvent(event);
     });
+
+
+
     $("#btnSeleccion").click((e) => {
       console.log("CLICK");
       e.preventDefault();
@@ -97,7 +77,7 @@ export const HOME = {
             console.log(info.event.id);
             myModal.hide();
           },
-          eventOverlap: false,
+          eventOverlap:false,
           themeSystem: "bootstrap",
           height: 600,
           navLinks: false,
