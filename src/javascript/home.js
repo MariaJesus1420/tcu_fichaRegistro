@@ -1,5 +1,6 @@
 import { locations } from "./locations";
 import "../css/home.css";
+import { DATABASE } from "./dataBase";
 export const HOME = {
   init: async () => {
     let selectProvincias = document.querySelector("#selectProvincia");
@@ -18,6 +19,10 @@ export const HOME = {
     };
 
     await loadOptions();
+
+    function getFirstProperty (obj){
+      return obj[Object.keys(obj)[0]];
+    }
 
     selectProvincias.addEventListener("change", async (event) => {
       provincia = event.target.value;
@@ -40,18 +45,25 @@ export const HOME = {
       keyboard: false,
     });
 
-    $("#btnAddEvent").click((e) => {
+   let db = new DATABASE
+    $("#btnAddEvent").click( async (e) => {
       console.log("btn");
       let event = {
-        id: "newEvent2",
+        id: "newEvent333",
         start: "2021-09-08T11:30:00",
         end: "2021-09-08T23:30:00",
         title: "Este es un evento de prueba",
         
       };
+      await db.addEvent(event, "2021", "dgg") 
+      let doc = await db.obtenerDocumento("Events","2021")
+      console.log(new Date(getFirstProperty(doc).end.seconds*1000 ).toISOString());
       var calendarEl = document.getElementById("calendar");
       calendarObj.addEvent(event);
     });
+
+
+
     $("#btnSeleccion").click((e) => {
       console.log("CLICK");
       e.preventDefault();
