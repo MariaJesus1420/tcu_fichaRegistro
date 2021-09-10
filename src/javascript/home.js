@@ -19,6 +19,39 @@ export const HOME = {
 
     await loadOptions();
 
+    const generateCalendar = (eventsList) => {
+      var calendarEl = document.getElementById("calendar");
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        eventClick: function (info) {
+          console.log(info.event.id);
+          myModal.hide();
+        },
+        eventOverlap: false,
+        themeSystem: "bootstrap",
+        height: 600,
+        navLinks: false,
+        locale: "es",
+        aspectRatio: 1.35,
+        expandRows: true,
+        initialView: "timeGridWeek",
+        headerToolbar: {
+          center: "today",
+          end: "dayGridMonth timeGridWeek prev,next",
+        },
+        eventTimeFormat: {
+          hour: "numeric",
+          minute: "2-digit",
+          meridiem: "short",
+        },
+        views: {
+          timeGridWeek: {
+            displayEventTime: true,
+          },
+          dayGridWeek: {},
+        },
+      });
+      calendar.render();
+    };
     selectProvincias.addEventListener("change", async (event) => {
       provincia = event.target.value;
 
@@ -47,7 +80,6 @@ export const HOME = {
         start: "2021-09-08T11:30:00",
         end: "2021-09-08T23:30:00",
         title: "Este es un evento de prueba",
-        
       };
       var calendarEl = document.getElementById("calendar");
       calendarObj.addEvent(event);
@@ -65,7 +97,7 @@ export const HOME = {
             console.log(info.event.id);
             myModal.hide();
           },
-          eventOverlap:false,
+          eventOverlap: false,
           themeSystem: "bootstrap",
           height: 600,
           navLinks: false,
