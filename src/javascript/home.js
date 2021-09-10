@@ -47,7 +47,7 @@ export const HOME = {
         start: "2021-09-08T11:30:00",
         end: "2021-09-08T23:30:00",
         title: "Este es un evento de prueba",
-        overlap: false,
+        
       };
       var calendarEl = document.getElementById("calendar");
       calendarObj.addEvent(event);
@@ -65,6 +65,7 @@ export const HOME = {
             console.log(info.event.id);
             myModal.hide();
           },
+          eventOverlap:false,
           themeSystem: "bootstrap",
           height: 600,
           navLinks: false,
