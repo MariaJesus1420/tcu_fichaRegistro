@@ -28,22 +28,29 @@
 
         <form>
 
-            <div id="form" class="form-group">
-                <button id="btnSeleccion" class="btn btn-primary">Seleccione un evento</button>
-                <h5 for="exampleFormControlTextarea1" style="margin-bottom: 30px;">Datos del evento</h5>
-                <label for="formGroupExampleInput">Nombre del evento </label>
+            <div id="datosEvento" class="container  row shadow-sm p-3 mb-5 bg-body rounded ">
+                <h5 for="exampleFormControlTextarea1" style="margin-bottom: 20px;">Datos del evento</h5>
 
-                <div id="formNombreEvento">
+                <h6 id="lblNombreEvento">Nombre del evento </h6>
 
-                    <select class="custom-select custom-select-lg mb-3">
-                        <option selected>Museo por un dia</option>
-                        <option value="1">Taller Remedios y curaciones </option>
-                        <option value="6">Otro</option>
-                    </select>
+                <h6 id="lblDescripcion">Descripcion del evento</h6>
+
+                
+                <h6 >Organizacion que lo recibe</h6>
+                <h6 id="lblOrganizacion" >Escuela Alto Castro</h6>
+
+                <h6 id="lblFecha">Fecha del evento : ...</h6>
+
+                <h6 id="lblHoraInicio">Hora de inicio : ...</h6>
+
+                <h6 id="lblHoraFin">Hora de finalizacion : ...</h6>
+    
+
+
+                <div class="col-1">
+                    <button id="btnSeleccion" class="btn btn-primary">Eventos</button>
                 </div>
 
-                <label for="formGroupExampleInput">Fecha del evento </label>
-                <input type="date" type="text" class="form-control" id="formFechaEvento" placeholder="Example input" />
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">Nombre del informante clave</label>
@@ -211,7 +218,7 @@
                     <div id='calendar'></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="btnAddEvent"class="btn btn-success" >Add event</button>
+                    <button type="button" id="btnAddEvent" class="btn btn-success">Add event</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
