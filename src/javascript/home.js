@@ -181,7 +181,14 @@ export const HOME = {
         $("#calendar").css({ visibility: "hidden" });
         calendarObj = generateCalendar(generateEventsList(eventsDB));
         $("#calendar").css({ visibility: "visible" });
+        $("#datosEvento").show();
+        $("#infoGeneral").hide();
       });
+    });
+
+    $("#btnVolver").click(async (e) => {
+
+      $("#infoGeneral").show();
     });
   },
 };
