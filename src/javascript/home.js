@@ -157,8 +157,25 @@ export const HOME = {
     $("#btnGuardarForm").click(async (e) =>{
       e.preventDefault();
       let fichaRegistro = {
-        nombreParticipante : $("#nombreParticipante").value
+        nombreInformante : $("#formNombreInformante").val(),
+        edad: $("#formEdad").val(),
+        locacion: [$("#selectProvincia").val(),$("#selectCanton").val(), $("#selectDistrito").val()],
+        evento: $("#formSeleccionEvento").val(),
+        otroEvento: $("#formInputOtro").val(),
+        patrimonio: $("#formSeleccionEvento2").val(),
+        otroPatrimonio: $("#formInputOtro2").val(),
+        descManifestacionPatrimonial : $("#textDescripcionManifestacion").val(),
+        opcionImportancia : [$("#si1").val(), $("#no1").val()],
+        porqueContexto: $("#textPorqueContexto").val(),
+        opcionAprendido :[ $("#si2").val(),$("#no2").val() ],
+       explicacionTraspaso : $("#textPorqueTraspaso").val(),
+        explicacionDisponilidad: $("#textDisponibilidad").val(),
+        importancia:[$("#checkVigente").val(), $("#checkVulnerable").val(), $("#checkMemoria").val() ],
+        nombreEstudiante : $("#nombreEstudiante").val()
       }
+      console.log(fichaRegistro);
+      await db.addFichaRegistro("newEvent333","2021",fichaRegistro,"otroiddd");
+      
     })
     $("#btnAddEvent").click(async (e) => {
       console.log("btn");

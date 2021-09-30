@@ -50,6 +50,9 @@ export class DATABASE {
       })
       .catch((error) => {
         console.error("Error adding document: ", error);
-      });
+      })
+      
+      console.log(fichaRegistro);
+      ;
   }
 }
