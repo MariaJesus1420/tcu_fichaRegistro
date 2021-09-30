@@ -150,7 +150,16 @@ export const HOME = {
       keyboard: false,
     });
 
+
+
     let db = new DATABASE();
+
+    $("#btnGuardarForm").click(async (e) =>{
+      e.preventDefault();
+      let fichaRegistro = {
+        nombreParticipante : $("#nombreParticipante").value
+      }
+    })
     $("#btnAddEvent").click(async (e) => {
       console.log("btn");
       let event = {
