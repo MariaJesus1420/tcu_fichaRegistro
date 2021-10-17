@@ -1,10 +1,38 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+
+const webpack = require('webpack')
 module.exports = {
   mode: "development",
   output: {
     clean: true,
+  },
+  target: "web",
+  resolve: {
+    fallback: {
+      assert: false,
+      fs: false,
+      tls: false,
+      net: false,
+      path: false,
+      zlib: false,
+      http: false,
+      https: false,
+      stream: false,
+      "BaseWorkerPool":false,
+      "jest-worker":false,
+      crypto: false,
+      "crypto-browserify": false,
+      util: false,
+      buffer: false,
+      vm: false,
+      os: false,
+      constants: false,
+      child_process: false,
+      worker_threads: false,
+      inspector: false,
+    },
   },
   module: {
     rules: [
@@ -13,12 +41,12 @@ module.exports = {
         loader: "html-loader",
         options: {
           minimize: false,
-          sources:false
+          sources: false,
         },
       },
       {
         test: /\.css$/,
-       
+
         use: ["style-loader", "css-loader"],
       },
       {
@@ -31,8 +59,8 @@ module.exports = {
           {
             loader: "file-loader",
             options: {
-              name:'[name].[ext]',
-              outputPath: 'assets',
+              name: "[name].[ext]",
+              outputPath: "assets",
             },
           },
         ],
@@ -40,13 +68,14 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+    }),
     new HtmlWebPackPlugin({
       template: "./src/index.html",
       filename: "./index.html",
-   
     }),
     new HtmlWebPackPlugin({
-  
       template: "./src/admin.html",
       filename: "./admin.html",
     }),

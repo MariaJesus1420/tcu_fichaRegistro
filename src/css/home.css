@@ -48,7 +48,9 @@ body {
 
 
 
-
+.contents{
+  margin: 30px;
+}
 .avisoCopy {
   margin-top: 30px;
   justify-self: center;

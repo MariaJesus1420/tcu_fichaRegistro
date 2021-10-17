@@ -47,18 +47,25 @@ export const HOME = {
       var calendar = new FullCalendar.Calendar(calendarEl, {
         eventClick: function (info) {
           eventoSeleccionado = info.event;
-         
-          $("#lblNombreEvento").text("Titulo del evento : "+eventoSeleccionado.title);
-          $("#lblDescripcion").text("Descripcion del evento : "+eventoSeleccionado.extendedProps.descripcion);
-          $("#lblOrganizacion").text("Organizacion que participa : "+eventoSeleccionado.extendedProps.organizacion);
-         
+
+          $("#lblNombreEvento").text(
+            "Titulo del evento : " + eventoSeleccionado.title
+          );
+          $("#lblDescripcion").text(
+            "Descripcion del evento : " +
+              eventoSeleccionado.extendedProps.descripcion
+          );
+          $("#lblOrganizacion").text(
+            "Organizacion que participa : " +
+              eventoSeleccionado.extendedProps.organizacion
+          );
+
           let options = {
             weekday: "long",
             year: "numeric",
             month: "long",
             day: "numeric",
           };
-
 
           $("#lblFecha").text(
             "Fecha del evento : " +
@@ -68,10 +75,7 @@ export const HOME = {
               )
           );
 
-
-         
-
-          options ={hour:"numeric",minute:"numeric",hourCycle:"h12"}
+          options = { hour: "numeric", minute: "numeric", hourCycle: "h12" };
           $("#lblHoraInicio").text(
             "Hora de inicio : " +
               new Date(eventoSeleccionado.start).toLocaleString(
@@ -82,10 +86,7 @@ export const HOME = {
 
           $("#lblHoraFin").text(
             "Hora de finalizacion : " +
-              new Date(eventoSeleccionado.end).toLocaleString(
-                "es-CR",
-                options
-              )
+              new Date(eventoSeleccionado.end).toLocaleString("es-CR", options)
           );
           myModal.hide();
         },
@@ -150,33 +151,30 @@ export const HOME = {
       keyboard: false,
     });
 
-
-
     let db = new DATABASE();
 
-    $("#btnGuardarForm").click(async (e) =>{
+    const generarPregunta = (descripcionPregunta,respuestas) => {
+      return {descripcionPregunta,respuestas}
+    };
+
+    $("#btnGuardarForm").click(async (e) => {
       e.preventDefault();
-      let fichaRegistro = {
-        nombreInformante : $("#formNombreInformante").val(),
-        edad: $("#formEdad").val(),
-        locacion: [$("#selectProvincia").val(),$("#selectCanton").val(), $("#selectDistrito").val()],
-        evento: $("#formSeleccionEvento").val(),
-        otroEvento: $("#formInputOtro").val(),
-        patrimonio: $("#formSeleccionEvento2").val(),
-        otroPatrimonio: $("#formInputOtro2").val(),
-        descManifestacionPatrimonial : $("#textDescripcionManifestacion").val(),
-        opcionImportancia : [$("#si1").val(), $("#no1").val()],
-        porqueContexto: $("#textPorqueContexto").val(),
-        opcionAprendido :[ $("#si2").val(),$("#no2").val() ],
-       explicacionTraspaso : $("#textPorqueTraspaso").val(),
-        explicacionDisponilidad: $("#textDisponibilidad").val(),
-        importancia:[$("#checkVigente").val(), $("#checkVulnerable").val(), $("#checkMemoria").val() ],
-        nombreEstudiante : $("#nombreEstudiante").val()
-      }
-      console.log(fichaRegistro);
-      await db.addFichaRegistro("newEvent333","2021",fichaRegistro,"otroiddd");
+      let newFichaRegistro = [
+        generarPregunta("Nombre del informante",$("#formNombreInformante").val()),
+        generarPregunta("Edad del participante",$("#formEdad").val()),
+        generarPregunta("Ubicacion",[ $("#selectProvincia").val(),$("#selectCanton").val(),$("#selectDistrito").val(),]),
+        generarPregunta("Tipo de patrimonio material",$("#selectPatrimonioMaterial").val()),
       
-    })
+      ]
+     
+      console.log(newFichaRegistro);
+      await db.addFichaRegistro(
+        "newEvent333",
+        "2021",
+        newFichaRegistro,
+        "otroiddd"
+      );
+    });
     $("#btnAddEvent").click(async (e) => {
       console.log("btn");
       let event = {
@@ -213,7 +211,6 @@ export const HOME = {
     });
 
     $("#btnVolver").click(async (e) => {
-
       $("#infoGeneral").show();
     });
   },

@@ -1,6 +1,7 @@
 import { FirebaseINIT } from "./firebaseInit";
 import { scriptsLoader } from "./scriptsLoader";
 import { linksLoader } from "./linksLoader";
+import { CleanPlugin } from "webpack";
 export const COMMON = {
   init: async () => {
 
@@ -28,7 +29,7 @@ export const COMMON = {
     ]);
   
     // Now do stuff with those scripts.
-
+    console.log("LOADING FIRESTORE");
     FirebaseINIT();
     console.log("FINISH COMMON");
 
