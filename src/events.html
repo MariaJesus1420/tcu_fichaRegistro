@@ -179,7 +179,7 @@
             style="margin-top: 30px; margin-left: 500px;">Guardar</button>
     </div>
     <div>
-        <button type="button" class="btn btn-secondary" id="btnGuardarForm" onclick="location.href = 'src/events.html'"
+        <button type="button" class="btn btn-secondary" id="btnGuardarForm" onClick="pageRedirect()"
             style="margin-top: 30px; margin-left: 500px;">Agregar Evento</button>
     </div>
  
@@ -235,5 +235,10 @@
 
 
 </body>
+<script>
+    function pageRedirect() {
+        window.location.href = "/src/events.html";
+    }      
+</script>
 
 </html>
