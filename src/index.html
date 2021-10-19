@@ -12,12 +12,30 @@
 
     <div class="container-fluid">
         <header class="row py-4 border-bottom header">
-            <a id="linkHeader">
-                <img id="imagenHeader" src="assets/img/firma-ucr-c.svg"></img>
-            </a>
-            <div><a href="#"
+            <div class="row"> 
+                <div class="col-10">
+                    <a id="linkHeader">
+                        <img id="imagenHeader" src="assets/img/firma-ucr-c.svg"></img>
+                    </a>
+                </div>
+                <div class="col-2">
+
+                    <div class="dropdown">
+                        <button onclick="myFunction()" class="dropbtn"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAK1JREFUaEPtlkEKwCAQxPT/j64/kIEwLNL07Ky7iWL3evzbj/e/HGDaoAY0AAl4hCBAHNcARggL/MLAByHR+BVyYsABoAINQIDdeHIHuh3A6g4AAeK4BjBCWCAx4EPWhKwBSDeJ41+JZJOxNckRGmsu2dgBEkrNNRpo0k1qJwZ8iROSlzX4HdDAtAG4fzeeXOJuB7C6A0CAOK4BjBAW0AAEiOMawAhhAQ1AgDh+AJfZDDGRtEaJAAAAAElFTkSuQmCC"/></button>
+                        <div id="myDropdown" class="dropdown-content">
+                          <a href="">Ver eventos</a>
+                          <a href="events.html">Agregar evento</a>
+                        </div>
+                      </div>
+                </div>
+
+            </div>
+
+
+            <!-- <div><a href="#"
                     style=" font-weight: normal; margin-top: 5px; background-color: #41ade7; border-color: #030303; font-size: 25px;"
-                    class="btn btn-info" id="btnSeleccion" role="button">Ver datos de eventos</a></div>
+                    class="btn btn-info" id="btnSeleccion" role="button">Ver datos de eventos</a></div> -->
+
 
             <!-- <p><a >Ver datos de eventos</a></p> -->
         </header>
@@ -211,10 +229,6 @@
                     <button type="button" class="btn btn-secondary" id="btnGuardarForm"
                         style="margin-top: 30px; margin-left: 500px;">Guardar</button>
                 </div>
-                <div>
-                    <button type="button" class="btn btn-secondary" id="btnGuardarForm"  onclick="location.href = 'events.html';"
-                        style="margin-top: 30px; margin-left: 500px;">Agregar Evento</button>
-                </div>
 
                
             </div>
@@ -268,5 +282,25 @@
     </div>
 
 </body>
+<script>
+
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
 
 </html>

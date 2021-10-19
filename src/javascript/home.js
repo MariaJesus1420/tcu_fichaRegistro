@@ -175,13 +175,14 @@ export const HOME = {
         "otroiddd"
       );
     });
+    
     $("#btnAddEvent").click(async (e) => {
       console.log("btn");
       let event = {
         id: "newEvent333",
-        start: "2021-09-09T12:30:00",
-        end: "2021-09-09T23:30:00",
-        title: "Este es un evento de prueba",
+        start:$("#fechaHoraInicial").val(),
+        end:$("#fechaHoraFinal").val(),
+        title: $("#nombreEvento").val()
       };
       await db.addEvent(event, "2021", "dg2g");
       let doc = await db.obtenerDocumento("Events", "2021");
