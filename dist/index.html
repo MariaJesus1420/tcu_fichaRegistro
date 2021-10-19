@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-<script defer src="main.js"></script></head>
+<script defer src="test.js"></script></head>
 
 <body id="start" class="home">
 
@@ -31,13 +31,28 @@
 
 
         <form>
-            <div class="item dropDowns container row shadow-sm p-3 mb-5 bg-body rounded">
-                <div class="contents">
-                    <div class="form-group">
-                        <label for="formGroupExampleInput2">Nombre del informante clave</label>
-                        <input type="text" class="form-control" id="formNombreInformante" placeholder="Introduzca el nombre"
-                            required />
-                    </div>
+            <div class="item simpleTextInput container">
+                <div class="contents row">
+
+                    <div class="contents-data">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                      </div>
+
+                </div>
+            </div>
+
+            <div class="item simpleTextInput container">
+                <div class="contents row">
+
+                    <div class="contents-data">
+                  
+                            <label for="formGroupExampleInput2">Nombre del informante clave</label>
+                            <input type="text" class="form-control" id="formNombreInformante" placeholder="Introduzca el nombre"
+                                required />
+                      
+                      </div>
 
                 </div>
             </div>
@@ -196,6 +211,12 @@
                     <button type="button" class="btn btn-secondary" id="btnGuardarForm"
                         style="margin-top: 30px; margin-left: 500px;">Guardar</button>
                 </div>
+                <div>
+                    <button type="button" class="btn btn-secondary" id="btnGuardarForm"  onclick="location.href = 'events.html';"
+                        style="margin-top: 30px; margin-left: 500px;">Agregar Evento</button>
+                </div>
+
+               
             </div>
 
         </form>

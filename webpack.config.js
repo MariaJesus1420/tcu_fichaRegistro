@@ -7,6 +7,7 @@ module.exports = {
   mode: "development",
   output: {
     clean: true,
+    filename: "test.js"
   },
   target: "web",
   resolve: {
@@ -72,12 +73,15 @@ module.exports = {
       process: 'process/browser',
     }),
     new HtmlWebPackPlugin({
-      template: "./src/index.html",
       filename: "./index.html",
+      template: "./src/index.html"
+      
     }),
+
     new HtmlWebPackPlugin({
-      template: "./src/admin.html",
-      filename: "./admin.html",
+      filename:"./events.html",
+      template: "./src/events.html"
+     
     }),
     new MiniCssExtractPlugin({
       filename: "[name].css",

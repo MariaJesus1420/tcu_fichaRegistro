@@ -1,5 +1,6 @@
 import { COMMON } from "./common";
 import { HOME } from "./home";
+import {EVENTS} from "./events"
 export const componentes = {
   common: {
     init: async () => {
@@ -19,4 +20,9 @@ export const componentes = {
       console.log("CATERGORY");
     },
   },
+  events:{
+    init: async ()=>{
+      await EVENTS.init();
+    }
+  }
 };
