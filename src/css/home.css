@@ -76,10 +76,10 @@ body {
     /* Dropdown Button */
 .dropbtn {
    background-color: #41ade7; 
- 
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAH9JREFUWEft1UsKgDAMANH05npypTsXtYOGQAvTbaikLx9bLHbaYvmECVFFFFKIBCi+VQ9d9JpkfIgxEzKhLr5VDyVb5N91hchtJnREROWknaPkHPuHyufF2EtWeYbfd8qIXKGMUOUOev2Puocye4jKXRJ3yohVIYVIgOL2EAndFg4LJcntgd8AAAAASUVORK5CYII=");
   justify-content: end;
   color: white;
-  padding: 16px;
+  padding: 18px;
   font-size: 16px;
   border: none;
   cursor: pointer;
