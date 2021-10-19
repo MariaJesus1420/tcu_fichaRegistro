@@ -6,7 +6,7 @@ export const EVENTS ={
     init: async () =>{
         console.log("HOLA");
 
-
+        let db = new DATABASE();
 
         $("#btnAddEvent").click(async (e) => {
             console.log("btn");
