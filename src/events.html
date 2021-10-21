@@ -15,7 +15,7 @@
             <a id="linkHeader">
                 <img id="imagenHeader" src="assets/img/firma-ucr-c.svg"></img>
             </a>
-           
+
             <!-- <p><a >Ver datos de eventos</a></p> -->
         </header>
     </div>
@@ -27,28 +27,50 @@
 
         <form>
 
-<div id="infoGeneral"  style="display:display" >
+            <div id="infoGeneral" style="display:display">
+                <div class="item simpleTextInput container">
+                    <div class="contents row">
 
-    <div class="form-group">
-        <label for="formGroupExampleInput2">Nombre del evento</label>
-        <input type="text" class="form-control" id="nombreEvento" placeholder="Introduzca el nombre" required/>
-    </div>
-    <div class="form-group">
-        <label for="formGroupExampleInput2">Fecha y hora de inicio</label>
-        <input type="datetime-local" class="form-control" id="fechaHoraInicial" placeholder=" " required />
-    </div>
-    <div class="form-group">
-        <label for="formGroupExampleInput2">Fecha y hora de finalizacion</label>
-        <input type="datetime-local" class="form-control" id="fechaHoraFinal" placeholder="" required />
-    </div>
+                        <div class="contents-data">
+                            <div class="form-group">
+                                <label for="formGroupExampleInput2">Nombre del evento</label>
+                                <input type="text" class="form-control" id="nombreEvento"
+                                    placeholder="Introduzca el nombre" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item simpleTextInput container">
+                    <div class="contents row">
 
+                        <div class="contents-data">
+                            <div class="form-group">
+                                <label for="formGroupExampleInput2">Fecha y hora de inicio</label>
+                                <input type="datetime-local" class="form-control" id="fechaHoraInicial" placeholder=" "
+                                    required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item simpleTextInput container">
+                    <div class="contents row">
 
-    <div>
-        <button type="button" class="btn btn-secondary" id="btnAddEvent"
-            style="margin-top: 30px; margin-left: 500px;">Guardar</button>
-    </div>
- 
-</div>
+                        <div class="contents-data">
+                            <div class="form-group">
+                                <label for="formGroupExampleInput2">Fecha y hora de finalizacion</label>
+                                <input type="datetime-local" class="form-control" id="fechaHoraFinal" placeholder=""
+                                    required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="button" class="btn btn-secondary" id="btnAddEvent"
+                        style="margin-top: 30px; margin-left: 500px;">Guardar</button>
+                </div>
+
+            </div>
 
         </form>
 
