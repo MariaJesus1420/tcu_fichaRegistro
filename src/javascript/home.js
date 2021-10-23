@@ -1,6 +1,7 @@
 import { locations } from "./locations";
 import "../css/home.css";
 import { DATABASE } from "./dataBase";
+import { collectAllQuestions } from "./questionCollector";
 export const HOME = {
   init: async () => {
     let selectProvincias = document.querySelector("#selectProvincia");
@@ -158,6 +159,7 @@ export const HOME = {
     };
 
     $("#btnGuardarForm").click(async (e) => {
+      collectAllQuestions()
       e.preventDefault();
       let newFichaRegistro = [
         generarPregunta("Nombre del informante",$("#formNombreInformante").val()),

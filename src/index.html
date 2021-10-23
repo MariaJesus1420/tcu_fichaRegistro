@@ -13,7 +13,7 @@
     <div class="container-fluid">
         <header class="row py-4 border-bottom header">
             <div class="row">
-                <div class="col-10">
+                <div class="col">
                     <a id="linkHeader">
                         <img id="imagenHeader" src="assets/img/firma-ucr-c.svg"></img>
                     </a>
@@ -43,55 +43,54 @@
     <h1 class="text-center" style="margin-top: 30px; margin-bottom: 30px;">
         Ficha de Registro TCU-374/486 Patrimonio y Cultura
     </h1>
-
-    <div class="container">
-
-
-
-        <form>
-
-            <div id="datosEvento" style="display:none" class="container  row shadow-sm p-3 mb-5 bg-body rounded ">
-                <h5 for="exampleFormControlTextarea1" style="margin-bottom: 20px;">Datos del evento</h5>
-
-                <h6 id="lblNombreEvento">Nombre del evento </h6>
-
-                <h6 id="lblDescripcion">Descripcion del evento</h6>
+    <div class="mainContentWrapper container">
+        <div class="container row  mainContent">
 
 
-                <h6>Organizacion que lo recibe</h6>
-                <h6 id="lblOrganizacion">Escuela Alto Castro</h6>
 
-                <h6 id="lblFecha">Fecha del evento : ...</h6>
+            <form>
 
-                <h6 id="lblHoraInicio">Hora de inicio : ...</h6>
+                <div id="datosEvento" style="display:none" class="container  row shadow-sm p-3 mb-5 bg-body rounded ">
+                    <h5 for="exampleFormControlTextarea1" style="margin-bottom: 20px;">Datos del evento</h5>
 
-                <h6 id="lblHoraFin">Hora de finalizacion : ...</h6>
+                    <h6 id="lblNombreEvento">Nombre del evento </h6>
 
-                <!-- <div class="col-1">
+                    <h6 id="lblDescripcion">Descripcion del evento</h6>
+
+
+                    <h6>Organizacion que lo recibe</h6>
+                    <h6 id="lblOrganizacion">Escuela Alto Castro</h6>
+
+                    <h6 id="lblFecha">Fecha del evento : ...</h6>
+
+                    <h6 id="lblHoraInicio">Hora de inicio : ...</h6>
+
+                    <h6 id="lblHoraFin">Hora de finalizacion : ...</h6>
+
+                    <!-- <div class="col-1">
                     <button id="btnSeleccion" class="btn btn-primary">Eventos</button>
                 </div> -->
-                <div class="col-1">
-                    <button id="btnVolver" class="btn btn-primary">Volver</button>
+                    <div class="col-1">
+                        <button id="btnVolver" class="btn btn-primary">Volver</button>
+                    </div>
+
                 </div>
 
-            </div>
-
-            <div id="infoGeneral" style="display:display">
 
 
-                <div class="item simpleTextInput container">
+                <div data-questionType="simpleTextInput" class="item  container col">
                     <div class="contents row">
 
                         <div class="contents-data">
                             <div class="form-group">
-                                <label for="formGroupExampleInput2">Nombre del informante clave</label>
+                                <label>Nombre del informante clave</label>
                                 <input type="text" class="form-control" id="formNombreInformante"
                                     placeholder="Introduzca el nombre" required />
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="item simpleTextInput container">
+                <div data-questionType="dd" class="item simpleTextInput container col">
                     <div class="contents row">
 
                         <div class="contents-data">
@@ -105,7 +104,7 @@
                     </div>
                 </div>
 
-                <div class="item simpleTextInput container">
+                <div class="item simpleTextInput container col">
                     <div class="contents row">
 
                         <div class="contents-data">
@@ -130,24 +129,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="item simpleTextInput container">
+                <div data-questionType="complexDropDown"class="item  container">
                     <div class="contents row">
                         <div class="contents-data">
                             <div class="form-group">
                                 <label for="formGroupExampleInput2">Patrimonio</label>
+
+                                <select class="form-select" aria-label="Default select example"
+                                    id="selectPatrimonioMaterial" required>
+                                    <option data-esRespuesta=true selected>Patrimonio Material</option>
+                                    <option data-esRespuesta=false value="1">Monumentos Sitios</option>
+                                    <option data-esRespuesta=false value="2">Artefactos Históricos</option>
+                                    <option data-esRespuesta=false value="3">Fotografías</option>
+                                    <option data-esRespuesta=false value="5">Conjunto Arquitectónico</option>
+                                    <option data-esRespuesta=false value="6">Otro</option>
+                                </select>
                             </div>
-                            <select class="form-select" aria-label="Default select example"
-                                id="selectPatrimonioMaterial" required>
-                                <option selected>Patrimonio Material</option>
-                                <option value="1">Monumentos Sitios</option>
-                                <option value="2">Artefactos Históricos</option>
-                                <option value="3">Fotografías</option>.
-                                <option value="5">Conjunto Arquitectónico</option>
-                                <option value="6">Otro</option>
-                            </select>
                             <div class="form-group">
                                 <label for="formGroupExampleInput2">Si digitó "Otro" ingrese cual</label>
-                                <input type="text" class="form-control" id="formInputOtro"
+                                <input data-esRespuesta="false" type="text" class="form-control" id="formInputOtro"
                                     placeholder="Introduzca el patrimonio " />
                             </div>
                         </div>
@@ -250,7 +250,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="item simpleTextInput container">
+                <div class="item simpleTextInput container col">
                     <div class="contents row">
 
                         <div class="contents-data">
@@ -279,7 +279,7 @@
                 </div>
 
 
-                <div class="item simpleTextInput container">
+                <div class="item simpleTextInput container col">
                     <div class="contents row">
 
                         <div class="contents-data">
@@ -293,12 +293,12 @@
                     </div>
                 </div>
 
-            </div>
 
-            <div>
-                <button type="button" class="btn btn-secondary" id="btnGuardarForm"
-                    style="margin-top: 30px; margin-left: 500px;">Guardar</button>
-            </div>
+
+                <div class="row seccionBotones">
+                    <button type="button" class="btn btn-secondary" id="btnGuardarForm">Guardar</button>
+                </div>
+        </div>
     </div>
     </form>
     </div>

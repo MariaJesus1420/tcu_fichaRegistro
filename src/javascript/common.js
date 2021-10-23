@@ -1,7 +1,7 @@
 import { FirebaseINIT } from "./firebaseInit";
 import { scriptsLoader } from "./scriptsLoader";
 import { linksLoader } from "./linksLoader";
-import { CleanPlugin } from "webpack";
+
 export const COMMON = {
   init: async () => {
 
