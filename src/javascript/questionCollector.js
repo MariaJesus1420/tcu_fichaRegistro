@@ -35,7 +35,8 @@ export async function collectAllQuestions() {
         });
 
         break;
-
+        case "SimpleTextInput":
+          break;
       default:
         break;
     }
