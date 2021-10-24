@@ -37,11 +37,11 @@ export async function collectAllQuestions() {
         break;
 
         case "SimpleTextInput":
-          let respuesta =question.querySelector("input").value;
+          let inputElement =question.querySelector("input");
+
           listaOpciones.push({
-            texto: questionText,
-            textoPregunta: respuesta,
-            esRespuesta: input.dataset.esrespuesta
+            texto: inputElement.value,
+            esRespuesta: inputElement.dataset.esrespuesta
           });
           
           break;
