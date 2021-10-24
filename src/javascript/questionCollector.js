@@ -36,7 +36,7 @@ export async function collectAllQuestions() {
 
         break;
 
-        case "SimpleTextInput":
+        case "simpleTextInput":
           let inputElement =question.querySelector("input");
 
           listaOpciones.push({
