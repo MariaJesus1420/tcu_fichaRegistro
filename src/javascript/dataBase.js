@@ -52,7 +52,7 @@ export class DATABASE {
         console.error("Error adding document: ", error);
       })
       
-      console.log(fichaRegistro);
-      ;
+      
+      
   }
 }

@@ -169,7 +169,7 @@ export const HOME = {
       
       ]
      
-      console.log(newFichaRegistro);
+   
       await db.addFichaRegistro(
         "newEvent333",
         "2021",
