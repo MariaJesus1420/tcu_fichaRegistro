@@ -19,8 +19,8 @@ export async function collectAllQuestions() {
             option.dataset.esrespuesta == "true" &&
             option.innerText == "Otro"
           ) {
-
-            let  respuestaAlternativaTexto =question.querySelector("input").value
+            let respuestaAlternativaTexto =
+              question.querySelector("input").value;
             listaOpciones.push({
               texto: respuestaAlternativaTexto,
               esRespuesta: option.dataset.esrespuesta,
@@ -35,16 +35,16 @@ export async function collectAllQuestions() {
         });
 
         break;
+      case "simpleTextInput":
+        let inputElement = question.querySelector("input");
 
-        case "simpleTextInput":
-          let inputElement =question.querySelector("input");
+        listaOpciones.push({
+          texto: inputElement.value,
+          esRespuesta: inputElement.dataset.esrespuesta,
+          textoPregunta: questionText,
+        });
 
-          listaOpciones.push({
-            texto: inputElement.value,
-            esRespuesta: inputElement.dataset.esrespuesta
-          });
-          
-          break;
+        break;
       default:
         break;
     }

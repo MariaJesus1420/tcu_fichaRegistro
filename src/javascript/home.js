@@ -166,6 +166,7 @@ export const HOME = {
         generarPregunta("Edad del participante",$("#formEdad").val()),
         generarPregunta("Ubicacion",[ $("#selectProvincia").val(),$("#selectCanton").val(),$("#selectDistrito").val(),]),
         generarPregunta("Tipo de patrimonio material",$("#selectPatrimonioMaterial").val()),
+        
       
       ]
      
