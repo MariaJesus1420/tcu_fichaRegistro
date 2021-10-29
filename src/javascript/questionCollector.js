@@ -1,64 +1,51 @@
 export async function collectAllQuestions() {
-    let allQuestionsArray = document.querySelectorAll(".item");
-    let allQuestionsOptions = [];
-    let listaPreguntas = [];
+  let allQuestionsArray = document.querySelectorAll(".item");
+  let listaPreguntas = [];
 
-    let questionType = "";
-    let questionText = "";
+  let questionType = "";
+  let questionText = "";
+  allQuestionsArray.forEach((question) => {
+    questionType = question.dataset.questiontype;
 
-    allQuestionsArray.forEach((question) => {
-        allQuestionsOptions = question.querySelectorAll("[data-esrespuesta]");
-        let indexFinal = allQuestionsOptions.length - 1
+    questionText = question.querySelector("label").innerText;
 
-        questionType = question.dataset.questiontype;
+    let listaOpciones = [];
+    switch (questionType) {
+      case "complexDropDown":
+        let selectTag = question.querySelector("select");
+        let optionsTags = selectTag.querySelectorAll("option");
+        optionsTags.forEach((option) => {
+          if (
+            option.dataset.esrespuesta == "true" &&
+            option.innerText == "Otro"
+          ) {
 
-        questionText = question.querySelector("label").innerText;
-
-        let listaOpciones = [];
-        switch (questionType) {
-            case "complexDropDown":
-                let esOtro = false;
-                let selectTag = question.querySelector("select");
-
-
-                for (let index = 0; index < allQuestionsOptions.length - 1; index++) {
-                    listaOpciones.push({
-                        texto: allQuestionsOptions[index].innerText,
-                        esRespuesta: allQuestionsOptions[index].dataset.esrespuesta,
-                    })
-
-                }
-
-                if (allQuestionsOptions[indexFinal - 1].dataset.esrespuesta == "true") {
-                    //La respuesta es OTRO
-
-                    listaOpciones.push({
-                        texto: allQuestionsOptions[indexFinal].value,
-                        esRespuesta: allQuestionsOptions[indexFinal].dataset.esrespuesta,
-                        esRespuestaAlternativa: true,
-                    });
-
-                }
-
-
-                break;
-            case "simpleTextInput":
-                listaOpciones.push({
-                    texto: allQuestionsOptions[indexFinal].value,
-                    esRespuesta: allQuestionsOptions[indexFinal].dataset.esrespuesta,
-                    textoPregunta: questionText,
-                });
-
-                break;
-            default:
-                break;
-        }
-
-        listaPreguntas.push({
-            textoPregunta: questionText,
-            tipoPregunta: questionType,
-            listaOpciones: listaOpciones,
+            let  respuestaAlternativaTexto =question.querySelector("input").value
+            listaOpciones.push({
+              texto: respuestaAlternativaTexto,
+              esRespuesta: option.dataset.esrespuesta,
+              esRespuestaAlternativa: true,
+            });
+          } else {
+            listaOpciones.push({
+              texto: option.innerText,
+              esRespuesta: option.dataset.esrespuesta,
+            });
+          }
         });
+
+        break;
+        case "SimpleTextInput":
+          break;
+      default:
+        break;
+    }
+
+    listaPreguntas.push({
+      textoPregunta: questionText,
+      tipoPregunta: questionType,
+      listaOpciones: listaOpciones,
     });
-    console.log(listaPreguntas);
+  });
+  return listaPreguntas;
 }

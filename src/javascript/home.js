@@ -2,226 +2,220 @@ import { locations } from "./locations";
 import "../css/home.css";
 import { DATABASE } from "./dataBase";
 import { collectAllQuestions } from "./questionCollector";
+import { v4 as uuidv4 } from 'uuid';
 export const HOME = {
-    init: async() => {
-        let selectProvincias = document.querySelector("#selectProvincia");
-        let selectCantones = document.querySelector("#selectCanton");
-        let selectDistritos = document.querySelector("#selectDistrito");
+  init: async () => {
+    let selectProvincias = document.querySelector("#selectProvincia");
+    let selectCantones = document.querySelector("#selectCanton");
+    let selectDistritos = document.querySelector("#selectDistrito");
 
-        let provincia;
+    let provincia;
 
-        const loadOptions = async() => {
-            let data = await locations.getProvincias();
-            locations.loadData(selectProvincias, data);
-            data = await locations.getCantones(1);
-            locations.loadData(selectCantones, data);
-            data = await locations.getDistritos(1, 1);
-            locations.loadData(selectDistritos, data);
-        };
+    const loadOptions = async () => {
+      let data = await locations.getProvincias();
+      locations.loadData(selectProvincias, data);
+      data = await locations.getCantones(1);
+      locations.loadData(selectCantones, data);
+      data = await locations.getDistritos(1, 1);
+      locations.loadData(selectDistritos, data);
+    };
 
-        await loadOptions();
+    await loadOptions();
 
-        const generateEventsList = (eventsDB) => {
-            let eventsList = [];
+    const generateEventsList = (eventsDB) => {
+      let eventsList = [];
 
-            console.log(Object.values(eventsDB));
-            let eventsDBArray = Object.values(eventsDB);
-            for (let index = 0; index < eventsDBArray.length; index++) {
-                eventsList.push({
-                    id: eventsDBArray[index].id,
-                    descripcion: eventsDBArray[index].descripcion,
-                    organizacion: eventsDBArray[index].organizacion,
-                    start: new Date(
-                        eventsDBArray[index].start.seconds * 1000
-                    ).toISOString(),
-                    end: new Date(eventsDBArray[index].end.seconds * 1000).toISOString(),
-                    title: eventsDBArray[index].title,
-                });
-            }
-
-            return eventsList;
-        };
-
-        let eventoSeleccionado;
-        const generateCalendar = (eventList) => {
-            var calendarEl = document.getElementById("calendar");
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                eventClick: function(info) {
-                    eventoSeleccionado = info.event;
-
-                    $("#lblNombreEvento").text(
-                        "Titulo del evento : " + eventoSeleccionado.title
-                    );
-                    $("#lblDescripcion").text(
-                        "Descripcion del evento : " +
-                        eventoSeleccionado.extendedProps.descripcion
-                    );
-                    $("#lblOrganizacion").text(
-                        "Organizacion que participa : " +
-                        eventoSeleccionado.extendedProps.organizacion
-                    );
-
-                    let options = {
-                        weekday: "long",
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                    };
-
-                    $("#lblFecha").text(
-                        "Fecha del evento : " +
-                        new Date(eventoSeleccionado.start).toLocaleString(
-                            "es-CR",
-                            options
-                        )
-                    );
-
-                    options = { hour: "numeric", minute: "numeric", hourCycle: "h12" };
-                    $("#lblHoraInicio").text(
-                        "Hora de inicio : " +
-                        new Date(eventoSeleccionado.start).toLocaleString(
-                            "es-CR",
-                            options
-                        )
-                    );
-
-                    $("#lblHoraFin").text(
-                        "Hora de finalizacion : " +
-                        new Date(eventoSeleccionado.end).toLocaleString("es-CR", options)
-                    );
-                    myModal.hide();
-                },
-                events: eventList,
-                eventOverlap: false,
-                themeSystem: "bootstrap",
-                height: 600,
-                navLinks: true,
-                locale: "es",
-                aspectRatio: 1.35,
-                expandRows: true,
-                initialView: "listMonth",
-
-                footerToolbar: {
-                    end: "listMonth",
-                },
-                headerToolbar: {
-                    start: "title",
-                    center: "today",
-                    end: "dayGridMonth timeGridWeek prev,next",
-                },
-                eventTimeFormat: {
-                    hour: "numeric",
-                    minute: "2-digit",
-                    meridiem: "short",
-                },
-                views: {
-                    timeGridWeek: {
-                        displayEventTime: true,
-                    },
-                    dayGridMonth: {
-                        displayEventEnd: true,
-                    },
-                },
-            });
-            calendar.render();
-            return calendar;
-        };
-
-        function getFirstProperty(obj) {
-            return obj[Object.keys(obj)[0]];
-        }
-
-        selectProvincias.addEventListener("change", async(event) => {
-            provincia = event.target.value;
-
-            let data = await locations.getCantones(provincia);
-            locations.loadData(selectCantones, data);
+      console.log(Object.values(eventsDB));
+      let eventsDBArray = Object.values(eventsDB);
+      for (let index = 0; index < eventsDBArray.length; index++) {
+        eventsList.push({
+          id: eventsDBArray[index].id,
+          descripcion: eventsDBArray[index].descripcion,
+          organizacion: eventsDBArray[index].organizacion,
+          start: new Date(
+            eventsDBArray[index].start.seconds * 1000
+          ).toISOString(),
+          end: new Date(eventsDBArray[index].end.seconds * 1000).toISOString(),
+          title: eventsDBArray[index].title,
         });
+      }
 
-        selectCantones.addEventListener("change", async(event) => {
-            let canton = event.target.value;
+      return eventsList;
+    };
 
-            let data = await locations.getDistritos(provincia, canton);
+    let eventoSeleccionado;
+    const generateCalendar = (eventList) => {
+      var calendarEl = document.getElementById("calendar");
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        eventClick: function (info) {
+          eventoSeleccionado = info.event;
 
-            locations.loadData(selectDistritos, data);
-        });
+          $("#lblNombreEvento").text(
+            "Titulo del evento : " + eventoSeleccionado.title
+          );
+          $("#lblDescripcion").text(
+            "Descripcion del evento : " +
+              eventoSeleccionado.extendedProps.descripcion
+          );
+          $("#lblOrganizacion").text(
+            "Organizacion que participa : " +
+              eventoSeleccionado.extendedProps.organizacion
+          );
 
-        let calendarObj;
-        var myModalEl = document.getElementById("myModal");
-        var myModal = new bootstrap.Modal(document.getElementById("myModal"), {
-            keyboard: false,
-        });
+          let options = {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          };
 
-        let db = new DATABASE();
-        const generarPregunta = (descripcionPregunta, respuestas) => {
-            return { descripcionPregunta, respuestas };
-        };
+          $("#lblFecha").text(
+            "Fecha del evento : " +
+              new Date(eventoSeleccionado.start).toLocaleString(
+                "es-CR",
+                options
+              )
+          );
 
-        $("#btnGuardarForm").click(async(e) => {
-            collectAllQuestions();
-            e.preventDefault();
-            let newFichaRegistro = [
-                generarPregunta(
-                    "Nombre del informante",
-                    $("#formNombreInformante").val()
-                ),
-                generarPregunta("Edad del participante", $("#foFFrmEdad").val()),
-                generarPregunta("Ubicacion", [
-                    $("#selectProvincia").val(),
-                    $("#selectCanton").val(),
-                    $("#selectDistrito").val(),
-                ]),
-                generarPregunta(
-                    "Tipo de patrimonio material",
-                    $("#selectPatrimonioMaterial").val()
-                ),
-            ];
+          options = { hour: "numeric", minute: "numeric", hourCycle: "h12" };
+          $("#lblHoraInicio").text(
+            "Hora de inicio : " +
+              new Date(eventoSeleccionado.start).toLocaleString(
+                "es-CR",
+                options
+              )
+          );
 
-            await db.addFichaRegistro(
-                "newEvent333",
-                "2021",
-                newFichaRegistro,
-                "otroiddd"
-            );
-        });
+          $("#lblHoraFin").text(
+            "Hora de finalizacion : " +
+              new Date(eventoSeleccionado.end).toLocaleString("es-CR", options)
+          );
+          myModal.hide();
+        },
+        events: eventList,
+        eventOverlap: false,
+        themeSystem: "bootstrap",
+        height: 600,
+        navLinks: true,
+        locale: "es",
+        aspectRatio: 1.35,
+        expandRows: true,
+        initialView: "listMonth",
 
-        $("#btnAddEvent").click(async(e) => {
-            console.log("btn");
-            let event = {
-                id: "newEvent333",
-                start: $("#fechaHoraInicial").val(),
-                end: $("#fechaHoraFinal").val(),
-                title: $("#nombreEvento").val(),
-            };
-            await db.addEvent(event, "2021", "dg2g");
-            let doc = await db.obtenerDocumento("Events", "2021");
-            console.log(
-                new Date(getFirstProperty(doc).end.seconds * 1000).toISOString()
-            );
-            var calendarEl = document.getElementById("calendar");
-            calendarObj.addEvent(event);
-        });
+        footerToolbar: {
+          end: "listMonth",
+        },
+        headerToolbar: {
+          start: "title",
+          center: "today",
+          end: "dayGridMonth timeGridWeek prev,next",
+        },
+        eventTimeFormat: {
+          hour: "numeric",
+          minute: "2-digit",
+          meridiem: "short",
+        },
+        views: {
+          timeGridWeek: {
+            displayEventTime: true,
+          },
+          dayGridMonth: {
+            displayEventEnd: true,
+          },
+        },
+      });
+      calendar.render();
+      return calendar;
+    };
 
-        $("#btnSeleccion").click(async(e) => {
-            console.log("CLICK");
-            e.preventDefault();
-            let eventsDB = await db.obtenerDocumento("Events", "2021");
+    function getFirstProperty(obj) {
+      return obj[Object.keys(obj)[0]];
+    }
 
-            myModal.show();
+    selectProvincias.addEventListener("change", async (event) => {
+      provincia = event.target.value;
 
-            myModalEl.addEventListener("shown.bs.modal", function(event) {
-                // do something...
+      let data = await locations.getCantones(provincia);
+      locations.loadData(selectCantones, data);
+    });
 
-                $("#calendar").css({ visibility: "hidden" });
-                calendarObj = generateCalendar(generateEventsList(eventsDB));
-                $("#calendar").css({ visibility: "visible" });
-                $("#datosEvento").show();
-                $("#infoGeneral").hide();
-            });
-        });
+    selectCantones.addEventListener("change", async (event) => {
+      let canton = event.target.value;
 
-        $("#btnVolver").click(async(e) => {
-            $("#infoGeneral").show();
-        });
-    },
+      let data = await locations.getDistritos(provincia, canton);
+
+      locations.loadData(selectDistritos, data);
+    });
+
+    let calendarObj;
+    var myModalEl = document.getElementById("myModal");
+    var myModal = new bootstrap.Modal(document.getElementById("myModal"), {
+      keyboard: false,
+    });
+
+    let db = new DATABASE();
+
+    const generarPregunta = (descripcionPregunta,respuestas) => {
+      return {descripcionPregunta,respuestas}
+    };
+
+    $("#btnGuardarForm").click(async (e) => {
+      let insert = await collectAllQuestions();
+      e.preventDefault();
+      let newFichaRegistro = [
+        generarPregunta("Nombre del informante",$("#formNombreInformante").val()),
+        generarPregunta("Edad del participante",$("#formEdad").val()),
+        generarPregunta("Ubicacion",[ $("#selectProvincia").val(),$("#selectCanton").val(),$("#selectDistrito").val(),]),
+        generarPregunta("Tipo de patrimonio material",$("#selectPatrimonioMaterial").val()),
+      
+      ]
+      
+   
+      await db.addFichaRegistro(
+        "newEvent333",
+        "2021",
+        insert,
+        uuidv4()
+      );
+    });
+    
+    $("#btnAddEvent").click(async (e) => {
+      console.log("btn");
+      let event = {
+        id: "newEvent333",
+        start:$("#fechaHoraInicial").val(),
+        end:$("#fechaHoraFinal").val(),
+        title: $("#nombreEvento").val()
+      };
+      await db.addEvent(event, "2021", "dg2g");
+      let doc = await db.obtenerDocumento("Events", "2021");
+      console.log(
+        new Date(getFirstProperty(doc).end.seconds * 1000).toISOString()
+      );
+      var calendarEl = document.getElementById("calendar");
+      calendarObj.addEvent(event);
+    });
+
+    $("#btnSeleccion").click(async (e) => {
+      console.log("CLICK");
+      e.preventDefault();
+      let eventsDB = await db.obtenerDocumento("Events", "2021");
+
+      myModal.show();
+
+      myModalEl.addEventListener("shown.bs.modal", function (event) {
+        // do something...
+
+        $("#calendar").css({ visibility: "hidden" });
+        calendarObj = generateCalendar(generateEventsList(eventsDB));
+        $("#calendar").css({ visibility: "visible" });
+        $("#datosEvento").show();
+        $("#infoGeneral").hide();
+      });
+    });
+
+    $("#btnVolver").click(async (e) => {
+      $("#infoGeneral").show();
+    });
+  },
 };
