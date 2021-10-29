@@ -159,8 +159,15 @@ export const HOME = {
       return {descripcionPregunta,respuestas}
     };
 
+     const cuestionarioBuilder = (listaPreguntas)=>{
+      let cuestionario = {
+        listaPreguntas : listaPreguntas
+      }
+    }
+
     $("#btnGuardarForm").click(async (e) => {
-      let insert = await collectAllQuestions();
+      let listaPreguntas = await collectAllQuestions();
+      let cuestionario = cuestionarioBuilder(listaPreguntas);
       e.preventDefault();
       let newFichaRegistro = [
         generarPregunta("Nombre del informante",$("#formNombreInformante").val()),
@@ -174,7 +181,7 @@ export const HOME = {
       await db.addFichaRegistro(
         "newEvent333",
         "2021",
-        insert,
+        cuestionario,
         uuidv4()
       );
     });

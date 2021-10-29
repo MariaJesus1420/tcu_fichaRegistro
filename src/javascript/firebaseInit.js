@@ -1,4 +1,5 @@
 export const FirebaseINIT = () => {
+  console.log("Firing initial config firebase")
   const firebaseConfig = {
     apiKey: "AIzaSyAgg0nJjChQ2R7TrmiRKT-wGcCVGM5ct7Y",
     authDomain: "tcu-374-486-7712e.firebaseapp.com",
