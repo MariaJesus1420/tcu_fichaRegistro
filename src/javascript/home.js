@@ -2,6 +2,7 @@ import { locations } from "./locations";
 import "../css/home.css";
 import { DATABASE } from "./dataBase";
 import { collectAllQuestions } from "./questionCollector";
+import { v4 as uuidv4 } from 'uuid';
 export const HOME = {
   init: async () => {
     let selectProvincias = document.querySelector("#selectProvincia");
@@ -159,7 +160,7 @@ export const HOME = {
     };
 
     $("#btnGuardarForm").click(async (e) => {
-      collectAllQuestions()
+      let insert = await collectAllQuestions();
       e.preventDefault();
       let newFichaRegistro = [
         generarPregunta("Nombre del informante",$("#formNombreInformante").val()),
@@ -168,13 +169,13 @@ export const HOME = {
         generarPregunta("Tipo de patrimonio material",$("#selectPatrimonioMaterial").val()),
       
       ]
-     
+      
    
       await db.addFichaRegistro(
         "newEvent333",
         "2021",
-        newFichaRegistro,
-        "otroiddd"
+        insert,
+        uuidv4()
       );
     });
     

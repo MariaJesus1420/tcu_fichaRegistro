@@ -47,5 +47,5 @@ export async function collectAllQuestions() {
       listaOpciones: listaOpciones,
     });
   });
-  console.log(listaPreguntas);
+  return listaPreguntas;
 }

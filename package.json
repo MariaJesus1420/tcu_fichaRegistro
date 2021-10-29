@@ -29,7 +29,8 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "fullcalendar": "^5.9.0"
+    "fullcalendar": "^5.9.0",
+    "uuid": "^8.3.2"
   },
   "repository": {
     "type": "git",
