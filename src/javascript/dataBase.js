@@ -39,6 +39,7 @@ export class DATABASE {
 
   async addFichaRegistro(eventoId,year, fichaRegistro,fichaRegistroId) {
     let eventoPath = `${eventoId}.fichasRegistro.${fichaRegistroId}`
+    console.log(fichaRegistro)
     this.db
       .collection("Events")
       .doc(year)

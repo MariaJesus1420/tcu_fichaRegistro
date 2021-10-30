@@ -46,6 +46,7 @@ export const HOME = {
     let eventoSeleccionado;
     const generateCalendar = (eventList) => {
       var calendarEl = document.getElementById("calendar");
+      console.log("Generando calendario")
       var calendar = new FullCalendar.Calendar(calendarEl, {
         eventClick: function (info) {
           eventoSeleccionado = info.event;
@@ -163,20 +164,15 @@ export const HOME = {
       let cuestionario = {
         listaPreguntas : listaPreguntas
       }
+      return cuestionario
     }
 
     $("#btnGuardarForm").click(async (e) => {
       let listaPreguntas = await collectAllQuestions();
       let cuestionario = cuestionarioBuilder(listaPreguntas);
       e.preventDefault();
-      let newFichaRegistro = [
-        generarPregunta("Nombre del informante",$("#formNombreInformante").val()),
-        generarPregunta("Edad del participante",$("#formEdad").val()),
-        generarPregunta("Ubicacion",[ $("#selectProvincia").val(),$("#selectCanton").val(),$("#selectDistrito").val(),]),
-        generarPregunta("Tipo de patrimonio material",$("#selectPatrimonioMaterial").val()),
-      
-      ]
-      
+ 
+      console.log(cuestionario)
    
       await db.addFichaRegistro(
         "newEvent333",

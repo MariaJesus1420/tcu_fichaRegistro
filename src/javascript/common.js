@@ -10,9 +10,8 @@ export const COMMON = {
       "https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js",
       "https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js",
       "https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js",
-
       "https://www.gstatic.com/firebasejs/8.6.7/firebase-firestore.js",
-      "https://cdn.jsdelivr.net/npm/fullcalendar/locales/es.js",
+    
     ];
 
     let listaDeLinks = [
@@ -22,16 +21,31 @@ export const COMMON = {
       "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css",
     ];
 
+    let promises = [];
+
+
+
     listaDeLinks.map(async (element) => {
-      scriptsLoader.loaded = new Set();
-      await linksLoader([element]);
+      linksLoader.loaded = new Set();
+    
+      promises.push(linksLoader([element]));
     });
 
     listaDeScripts.map(async (element) => {
+ 
       scriptsLoader.loaded = new Set();
-      await scriptsLoader([element]);
+      promises.push(scriptsLoader([element]));
     });
 
+    await Promise.all(promises).then(
+      (result) => {
+         scriptsLoader.loaded = new Set();
+        scriptsLoader(  "https://cdn.jsdelivr.net/npm/fullcalendar/locales/es.js")
+      },
+      (error) => {
+        console.log(error,"Error al cargar algo")
+      }
+    );
     // Now do stuff with those scripts.
     console.log("LOADING FIRESTORE");
     FirebaseINIT();

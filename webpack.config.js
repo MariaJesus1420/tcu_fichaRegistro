@@ -83,6 +83,12 @@ module.exports = {
       template: "./src/events.html"
      
     }),
+
+    new HtmlWebPackPlugin({
+      filename:"./formViewver.html",
+      template: "./src/formViewver.html"
+     
+    }),
     new MiniCssExtractPlugin({
       filename: "[name].css",
       ignoreOrder: true,

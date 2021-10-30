@@ -1,6 +1,7 @@
 import { COMMON } from "./common";
 import { HOME } from "./home";
 import {EVENTS} from "./events"
+import { FORMVIEWVER } from "./formViewver";
 export const componentes = {
   common: {
     init: async () => {
@@ -23,6 +24,11 @@ export const componentes = {
   events:{
     init: async ()=>{
       await EVENTS.init();
+    }
+  },
+  formViewver:{
+    init: async ()=>{
+      await FORMVIEWVER.init();
     }
   }
 };

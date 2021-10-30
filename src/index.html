@@ -25,6 +25,7 @@
                         <div id="myDropdown" class="dropdown-content">
                             <a href="">Ver eventos</a>
                             <a href="events.html">Agregar evento</a>
+                            <a href="formViewver.html">Ver fichas de registro</a>
                         </div>
                     </div>
                 </div>
@@ -90,14 +91,14 @@
                         </div>
                     </div>
                 </div>
-                <div data-questionType="notDefined" class="item simpleTextInput container col">
+                <div data-questionType="simpleTextInput" class="item  container col">
                     <div class="contents row">
 
                         <div class="contents-data">
 
                             <div class="form-group">
                                 <label for="formGroupExampleInput2">Edad</label>
-                                <input type="number" class="form-control" id="formEdad" placeholder="Introduzca la edad"
+                                <input type="number" data-esrespuesta=true class="form-control" id="formEdad" placeholder="Introduzca la edad"
                                     required />
                             </div>
                         </div>
@@ -180,7 +181,7 @@
                         </div>
                     </div>
                 </div>
-                <div data-questionType="notDefined" class="item  container">
+                <div data-questionType="simpleTextArea" class="item  container">
                     <div class="contents row">
 
                         <div class="contents-data">
@@ -188,7 +189,7 @@
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1">Descripción de la manifestación
                                     patrimonial</label>
-                                <textarea class="form-control" id="textDescripcionManifestacion" required
+                                <textarea class="form-control" data-esRespuesta=true id="textDescripcionManifestacion" required
                                     rows="3"></textarea>
                             </div>
                         </div>

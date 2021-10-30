@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body id="start" class="formViewver">
+
+    <div class="container-fluid">
+        <header class="row py-4 border-bottom header">
+            <div class="row">
+                <div class="col">
+                    <a id="linkHeader">
+                        <img id="imagenHeader" src="assets/img/firma-ucr-c.svg"></img>
+                    </a>
+                </div>
+                <div class="col-2">
+
+                    <div class="dropdown">
+                        <button onclick="myFunction()" class="dropbtn"></button>
+                        <div id="myDropdown" class="dropdown-content">
+                            <a href="">Ver eventos</a>
+                            <a href="events.html">Agregar evento</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- <div><a href="#"
+                    style=" font-weight: normal; margin-top: 5px; background-color: #41ade7; border-color: #030303; font-size: 25px;"
+                    class="btn btn-info" id="btnSeleccion" role="button">Ver datos de eventos</a></div> -->
+
+
+            <!-- <p><a >Ver datos de eventos</a></p> -->
+        </header>
+    </div>
+    <h1 class="text-center" style="margin-top: 30px; margin-bottom: 30px;">
+        ver Ficha de Registro TCU-374/486 Patrimonio y Cultura
+    </h1>
+    <div class="mainContentWrapper container">
+        <div class="container row  mainContent">
+
+
+
+            <form id="mainForm">
+
+             
+
+
+                <div class="row seccionBotones">
+                    <button type="button" class="btn btn-secondary" id="btnGuardarForm">Guardar</button>
+                </div>
+        </div>
+      </div>
+    </form>
+    </div>
+    <div class="container-fluid">
+        <footer class="row py-3 border-top " id="footer">
+            <div class="col-sm imagenFooter">
+                <img src="assets/img/ucr.svg">
+
+            </div>
+
+            <div class="col-sm imagenFooter">
+                <img src="assets/img/firma-vas-vertical.png">
+
+            </div>
+
+            <div class="col-sm imagenFooter">
+                <img src="assets/img/tcu-logo-vertical.png">
+
+            </div>
+            <P class="text-center avisoCopy">&copy;2021 Universidad de Costa Rica -Tel. 2511-4000. Aviso Legal. Última
+                actualización: agosto de 2021.</P>
+
+
+        </footer>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id='calendar'></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnAddEvent" class="btn btn-success">Add event</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function (event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
+
+</html>
