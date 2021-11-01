@@ -17,9 +17,6 @@ export async function collectAllQuestions() {
     let listaOpciones = [];
     switch (questionType) {
       case "complexDropDown":
-        let esOtro = false;
-        let selectTag = question.querySelector("select");
-
         for (let index = 0; index < optionsArray.length - 1; index++) {
           listaOpciones.push({
             texto: optionsArray[index].innerText,
