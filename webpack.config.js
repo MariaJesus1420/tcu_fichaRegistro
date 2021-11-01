@@ -5,9 +5,10 @@ const CopyPlugin = require("copy-webpack-plugin");
 const webpack = require('webpack')
 module.exports = {
   mode: "development",
+ 
   output: {
     clean: true,
-    filename: "test.js"
+    filename: "[name].js"
   },
   target: "web",
   resolve: {
@@ -41,7 +42,7 @@ module.exports = {
         test: /\.html$/,
         loader: "html-loader",
         options: {
-          minimize: false,
+          minimize: true,
           sources: false,
         },
       },
@@ -68,6 +69,7 @@ module.exports = {
       },
     ],
   },
+ 
   plugins: [
     new webpack.ProvidePlugin({
       process: 'process/browser',
