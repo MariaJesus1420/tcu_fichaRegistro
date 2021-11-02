@@ -2,7 +2,8 @@ import { locations } from "./locations";
 import "../css/home.css";
 import { DATABASE } from "./dataBase";
 import { collectAllQuestions } from "./questionCollector";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
+import { selectTagLogic } from "./logic";
 export const HOME = {
   init: async () => {
     let selectProvincias = document.querySelector("#selectProvincia");
@@ -22,6 +23,14 @@ export const HOME = {
 
     await loadOptions();
 
+  
+
+    let listOfSelectTags = document.querySelectorAll("select");
+    listOfSelectTags.forEach((selectTag) => {
+      let logicObject=  new selectTagLogic();
+      logicObject.getCurrentSelectedOption(selectTag);
+      logicObject.changeSelectedOption(selectTag);
+    });
     const generateEventsList = (eventsDB) => {
       let eventsList = [];
 
@@ -46,7 +55,7 @@ export const HOME = {
     let eventoSeleccionado;
     const generateCalendar = (eventList) => {
       var calendarEl = document.getElementById("calendar");
-      console.log("Generando calendario")
+      console.log("Generando calendario");
       var calendar = new FullCalendar.Calendar(calendarEl, {
         eventClick: function (info) {
           eventoSeleccionado = info.event;
@@ -156,39 +165,34 @@ export const HOME = {
 
     let db = new DATABASE();
 
-    const generarPregunta = (descripcionPregunta,respuestas) => {
-      return {descripcionPregunta,respuestas}
+    const generarPregunta = (descripcionPregunta, respuestas) => {
+      return { descripcionPregunta, respuestas };
     };
 
-     const cuestionarioBuilder = (listaPreguntas)=>{
+    const cuestionarioBuilder = (listaPreguntas) => {
       let cuestionario = {
-        listaPreguntas : listaPreguntas
-      }
-      return cuestionario
-    }
+        listaPreguntas: listaPreguntas,
+      };
+      return cuestionario;
+    };
 
     $("#btnGuardarForm").click(async (e) => {
       let listaPreguntas = await collectAllQuestions();
       let cuestionario = cuestionarioBuilder(listaPreguntas);
       e.preventDefault();
- 
-      console.log(cuestionario)
-   
-      await db.addFichaRegistro(
-        "newEvent333",
-        "2021",
-        cuestionario,
-        uuidv4()
-      );
+
+      console.log(cuestionario);
+
+      await db.addFichaRegistro("newEvent333", "2021", cuestionario, uuidv4());
     });
-    
+
     $("#btnAddEvent").click(async (e) => {
       console.log("btn");
       let event = {
         id: "newEvent333",
-        start:$("#fechaHoraInicial").val(),
-        end:$("#fechaHoraFinal").val(),
-        title: $("#nombreEvento").val()
+        start: $("#fechaHoraInicial").val(),
+        end: $("#fechaHoraFinal").val(),
+        title: $("#nombreEvento").val(),
       };
       await db.addEvent(event, "2021", "dg2g");
       let doc = await db.obtenerDocumento("Events", "2021");

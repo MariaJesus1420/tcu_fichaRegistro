@@ -21,18 +21,19 @@ export function buildAllQuestions(cuestionario) {
     form_group.append(titulo);
     switch (question.tipoPregunta) {
       case "simpleTextInput":
-      let input =generateInput(optionsArray[indexFinal].texto,"loca")
+      let input =generateInput(optionsArray[indexFinal].texto,"cambiar por placeholder dinamico")
       form_group.append(input)
       break;
       case "simpleTextArea":
       let textArea = generateTextArea(optionsArray[indexFinal].texto,"textArea")  
       form_group.append(textArea)
       break;
+
       default:
         break;
     }
 
-
+    
    
     contents_data.append(form_group);
     contents.append(contents_data);
