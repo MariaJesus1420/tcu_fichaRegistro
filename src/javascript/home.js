@@ -3,7 +3,9 @@ import "../css/home.css";
 import { DATABASE } from "./dataBase";
 import { collectAllQuestions } from "./questionCollector";
 import { v4 as uuidv4 } from "uuid";
-import { selectTagLogic } from "./logic";
+import { CheckBoxLogic,radioLogic, selectTagLogic } from "./logic";
+
+
 export const HOME = {
   init: async () => {
     let selectProvincias = document.querySelector("#selectProvincia");
@@ -23,13 +25,25 @@ export const HOME = {
 
     await loadOptions();
 
-  
+    let checkBoxList = document.querySelectorAll("input[type='checkbox']")
+    let checkBoxLogic = new CheckBoxLogic();
+    checkBoxLogic.changeSelectedCheckBox(checkBoxList)
+
+    //En lugar de enviar los radios, seleccionar todos los tipo de preguntas que tienen radios y seleccionar el div que los encierra
+    
+    let radioWrapperList = document.querySelectorAll("[data-questiontype=complexRadioInput]");
+    console.log(radioWrapperList)
+    radioWrapperList.forEach(wrapper => {
+      let radioWrapperLogic = new radioLogic();
+      radioWrapperLogic.changeSelectedRadio(wrapper)
+
+    });
 
     let listOfSelectTags = document.querySelectorAll("select");
     listOfSelectTags.forEach((selectTag) => {
-      let logicObject=  new selectTagLogic();
-      logicObject.getCurrentSelectedOption(selectTag);
-      logicObject.changeSelectedOption(selectTag);
+      let selectLogic = new selectTagLogic();
+      selectLogic.getCurrentSelectedOption(selectTag);
+      selectLogic.changeSelectedOption(selectTag);
     });
     const generateEventsList = (eventsDB) => {
       let eventsList = [];
