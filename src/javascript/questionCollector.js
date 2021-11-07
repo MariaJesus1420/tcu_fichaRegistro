@@ -1,3 +1,4 @@
+import { Opcion } from "./classes/Opcion";
 export async function collectAllQuestions() {
   let allQuestionsArray = document.querySelectorAll(".item");
   let optionsArray = [];
@@ -17,6 +18,11 @@ export async function collectAllQuestions() {
     let listaOpciones = [];
     switch (questionType) {
       case "complexDropDown":
+        optionsArray.forEach(opcion => {
+         
+          listaOpciones.push(new Opcion(opcion.dataset.esdefault,opcion.dataset.textoopcion,opcion.dataset.esrespuesta,opcion.dataset.escompleja,opcion.dataset.tipoopcion))
+        });
+
         for (let index = 0; index < optionsArray.length - 1; index++) {
           listaOpciones.push({
             texto: optionsArray[index].innerText,
@@ -45,10 +51,26 @@ export async function collectAllQuestions() {
         break;
       case "simpleTextArea":
         listaOpciones.push({
-            texto: optionsArray[indexFinal].value,
-            esRespuesta: optionsArray[indexFinal].dataset.esrespuesta,
-            textoPregunta: questionText,
+          texto: optionsArray[indexFinal].value,
+          esRespuesta: optionsArray[indexFinal].dataset.esrespuesta,
+          textoPregunta: questionText,
+        });
+        break;
+      case "complexRadio":
+        optionsArray.forEach((opcion) => {
+          if ((opcion.dataset.compleja = "true")) {
+            listaOpciones.push({
+              texto: optionsArray[index].innerText,
+              esRespuesta: optionsArray[index].dataset.esrespuesta,
+              compleja :true,
+            });
+          } else {
+          }
+          listaOpciones.push({
+            texto: optionsArray[index].innerText,
+            esRespuesta: optionsArray[index].dataset.esrespuesta,
           });
+        });
         break;
       default:
         break;

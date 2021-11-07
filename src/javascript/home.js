@@ -3,7 +3,12 @@ import "../css/home.css";
 import { DATABASE } from "./dataBase";
 import { collectAllQuestions } from "./questionCollector";
 import { v4 as uuidv4 } from "uuid";
-import { CheckBoxLogic,radioLogic, selectTagLogic } from "./logic";
+import { CheckBoxLogic } from "./classes/checkBoxLogic";
+import { RadioLogic } from "./classes/radioLogic";
+import { SelectTagLogic } from "./classes/selectLogic";
+import { Cuestionario } from "./classes/Cuestionario";
+import { Pregunta } from "./classes/Pregunta";
+
 
 
 export const HOME = {
@@ -34,14 +39,14 @@ export const HOME = {
     let radioWrapperList = document.querySelectorAll("[data-questiontype=complexRadioInput]");
     console.log(radioWrapperList)
     radioWrapperList.forEach(wrapper => {
-      let radioWrapperLogic = new radioLogic();
+      let radioWrapperLogic = new RadioLogic();
       radioWrapperLogic.changeSelectedRadio(wrapper)
 
     });
 
     let listOfSelectTags = document.querySelectorAll("select");
     listOfSelectTags.forEach((selectTag) => {
-      let selectLogic = new selectTagLogic();
+      let selectLogic = new SelectTagLogic();
       selectLogic.getCurrentSelectedOption(selectTag);
       selectLogic.changeSelectedOption(selectTag);
     });
@@ -190,10 +195,17 @@ export const HOME = {
       return cuestionario;
     };
 
+    const createDummyCuestionario = ()=>{
+      let listaOpciones = []
+      
+      new Pregunta("Pregunta1","simpleTextInput",listaOpciones)
+      new Cuestionario()
+    }
+
     $("#btnGuardarForm").click(async (e) => {
       let listaPreguntas = await collectAllQuestions();
       let cuestionario = cuestionarioBuilder(listaPreguntas);
-      e.preventDefault();
+      e.preventDefault()
 
       console.log(cuestionario);
 
