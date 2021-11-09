@@ -17,7 +17,7 @@ export class RadioLogic {
         
         this.currentRadio.dataset.esrespuesta = true;
       //Hay que decicidr como marcar la opcion que va a hacer triger a la otra
-        if (this.currentRadio.dataset.compleja == "true") {
+        if (this.currentRadio.dataset.escompleja == "true") {
           this.changeRquired(true);
         } else {
           this.changeRquired(false);
@@ -27,14 +27,6 @@ export class RadioLogic {
     });
   };
 
-  findSelected = () => {
-    this.radioList.forEach((radio) => {
-      if (radio.checked == true) {
-        return radio;
-      }
-    });
-    return null;
-  };
 
   changeRquired = (required) => {
     this.textAreaList.forEach((textArea) => {
@@ -43,7 +35,9 @@ export class RadioLogic {
       if(!required){
           console.log("delete text")
           textArea.value= "";
-      }
+          textArea.style.display ="none"
+      }else
+      textArea.style.display ="block"
     });
   };
 }

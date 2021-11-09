@@ -44,12 +44,13 @@ export const HOME = {
 
     });
 
-    let listOfSelectTags = document.querySelectorAll("select");
-    listOfSelectTags.forEach((selectTag) => {
+    let selectWrapperList = document.querySelectorAll("[data-questiontype=complexDropDown]");
+    selectWrapperList.forEach(wrapper =>{
       let selectLogic = new SelectTagLogic();
-      selectLogic.getCurrentSelectedOption(selectTag);
-      selectLogic.changeSelectedOption(selectTag);
-    });
+      selectLogic.changeSelectedOption(wrapper)
+    })
+
+  
     const generateEventsList = (eventsDB) => {
       let eventsList = [];
 
