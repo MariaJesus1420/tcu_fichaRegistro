@@ -35,7 +35,7 @@ export const HOME = {
     checkBoxLogic.changeSelectedCheckBox(checkBoxList)
 
     //En lugar de enviar los radios, seleccionar todos los tipo de preguntas que tienen radios y seleccionar el div que los encierra
-    
+
     let radioWrapperList = document.querySelectorAll("[data-questiontype=complexRadioInput]");
     console.log(radioWrapperList)
     radioWrapperList.forEach(wrapper => {
@@ -45,12 +45,23 @@ export const HOME = {
     });
 
     let selectWrapperList = document.querySelectorAll("[data-questiontype=complexDropDown]");
-    selectWrapperList.forEach(wrapper =>{
+    selectWrapperList.forEach(wrapper => {
       let selectLogic = new SelectTagLogic();
       selectLogic.changeSelectedOption(wrapper)
     })
 
-  
+    let selectList = document.querySelectorAll("select");
+    selectList.forEach(select => {
+      select.dispatchEvent(new Event("change"));
+
+    })
+
+    let radiotList = document.querySelectorAll("input[type='radio']");
+    radiotList.forEach(radio => {
+      radio.dispatchEvent(new Event("change"));
+
+    })
+
     const generateEventsList = (eventsDB) => {
       let eventsList = [];
 
@@ -85,11 +96,11 @@ export const HOME = {
           );
           $("#lblDescripcion").text(
             "Descripcion del evento : " +
-              eventoSeleccionado.extendedProps.descripcion
+            eventoSeleccionado.extendedProps.descripcion
           );
           $("#lblOrganizacion").text(
             "Organizacion que participa : " +
-              eventoSeleccionado.extendedProps.organizacion
+            eventoSeleccionado.extendedProps.organizacion
           );
 
           let options = {
@@ -101,24 +112,24 @@ export const HOME = {
 
           $("#lblFecha").text(
             "Fecha del evento : " +
-              new Date(eventoSeleccionado.start).toLocaleString(
-                "es-CR",
-                options
-              )
+            new Date(eventoSeleccionado.start).toLocaleString(
+              "es-CR",
+              options
+            )
           );
 
           options = { hour: "numeric", minute: "numeric", hourCycle: "h12" };
           $("#lblHoraInicio").text(
             "Hora de inicio : " +
-              new Date(eventoSeleccionado.start).toLocaleString(
-                "es-CR",
-                options
-              )
+            new Date(eventoSeleccionado.start).toLocaleString(
+              "es-CR",
+              options
+            )
           );
 
           $("#lblHoraFin").text(
             "Hora de finalizacion : " +
-              new Date(eventoSeleccionado.end).toLocaleString("es-CR", options)
+            new Date(eventoSeleccionado.end).toLocaleString("es-CR", options)
           );
           myModal.hide();
         },
@@ -196,10 +207,10 @@ export const HOME = {
       return cuestionario;
     };
 
-    const createDummyCuestionario = ()=>{
+    const createDummyCuestionario = () => {
       let listaOpciones = []
-      
-      new Pregunta("Pregunta1","simpleTextInput",listaOpciones)
+
+      new Pregunta("Pregunta1", "simpleTextInput", listaOpciones)
       new Cuestionario()
     }
 

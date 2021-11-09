@@ -3,11 +3,12 @@ export class SelectTagLogic {
   lastSelectedOption;
   selectList;
   inputList;
+  extra;
   constructor() {}
 
   changeSelectedOption = (selectWrapper) => {
     this.selectList = selectWrapper.querySelectorAll("select");
-    this.inputList = selectWrapper.querySelectorAll("input");
+    this.inputList = selectWrapper.querySelectorAll(".extra");
 
     this.selectList.forEach((select) => {
       select.addEventListener("change", (e) => {
@@ -40,7 +41,7 @@ export class SelectTagLogic {
       input.disabled = !required;
       if (!required) {
         console.log("delete text");
-        input.value = "";
+        //input.value = "";
         input.style.display = "none";
       } else input.style.display = "block";
     });
