@@ -203,6 +203,7 @@ export const HOME = {
     const cuestionarioBuilder = (listaPreguntas) => {
       let cuestionario = {
         listaPreguntas: listaPreguntas,
+        
       };
       return cuestionario;
     };

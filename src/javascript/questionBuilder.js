@@ -21,18 +21,18 @@ export function buildAllQuestions(cuestionario) {
     form_group.append(titulo);
     switch (question.tipoPregunta) {
       case "simpleTextInput":
-        let input = generateInput(optionsArray[indexFinal].texto, "cambiar por placeholder dinamico")
+        let input = generateInput("", optionsArray[indexFinal].textoOpcion)
         form_group.append(input)
         break;
       case "simpleTextArea":
-        let textArea = generateTextArea(optionsArray[indexFinal].texto, "textArea")
+        let textArea = generateTextArea(optionsArray[indexFinal].textoOpcion, "textArea")
         form_group.append(textArea)
         break;
       case "complexDropDown":
-        let select = generateSelect(optionsArray[indexFinal].texto, "select")
+        let select = generateSelect(optionsArray[indexFinal].textoOpcion, "select")
         for (let index = 0; index < optionsArray.length; index++) {
           if(optionsArray[index].tipoOpcion=="option"){
-            let result =generateOptions(index,optionsArray[index].texto)
+            let result =generateOptions(index,optionsArray[index].textoOpcion)
             select.options[index]=result
             console.log(optionsArray)
           }
@@ -62,7 +62,7 @@ const generateInput = (value, placeHolder) => {
   input.classList.add("form-control")
   input.value = value
   input.disabled = true
-
+  console.log(input)
   return input
 }
 
