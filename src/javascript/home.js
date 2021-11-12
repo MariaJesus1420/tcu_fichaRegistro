@@ -50,7 +50,11 @@ export const HOME = {
       selectLogic.changeSelectedOption(wrapper)
     })
 
+
+   
   
+   
+      
     const generateEventsList = (eventsDB) => {
       let eventsList = [];
 
