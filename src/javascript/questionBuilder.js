@@ -67,32 +67,50 @@ export function buildAllQuestions(cuestionario) {
             dbInputDropwdown.placeHolder,
             dbInputDropwdown
           );
-          
-     
+
+
           extraOptions.push(input)
-  
+
           form_group.append(createExtra(extraOptions));
         }
         break;
 
       case "complexRadioInput":
         {
+
+
           let extraOptions = []
           let radioOptions = findAllOptionTypes(optionsArray, "radio");
           let radioWrapper = document.createElement("div");
           radioWrapper.classList.add("custom-control", "custom-radio");
           form_group.append(radioWrapper);
           let groupName = uuidv4();
+          let label;
           radioOptions.forEach((dbRadio) => {
             let radio = generateRadio(dbRadio);
-            let label = generateLabel(radio.id, dbRadio.textoOpcion);
+            label = generateLabel(radio.id, dbRadio.textoOpcion);
             radio.name = groupName;
             radioWrapper.append(radio);
             radioWrapper.append(label);
             radioWrapper.append(document.createElement("br"));
-          });
 
+          });
+          let dbTextArea = findAllOptionTypes(optionsArray, "textArea");
+          dbTextArea.forEach((option)=>{
+            let textArea = generateTextArea(
+              option.textoOpcion,
+              option.placeholder,
+              option
+            );
+            extraOptions.push(textArea)
+            form_group.append(createExtra(extraOptions));
+          })
           
+        console.log(extraOptions, "ESTOY")
+     
+
+
+
         }
         break;
 
@@ -108,7 +126,7 @@ export function buildAllQuestions(cuestionario) {
 }
 
 
-const createExtra = (options)=>{
+const createExtra = (options) => {
   let extraDiv = document.createElement("div")
   extraDiv.classList.add("extra")
 
