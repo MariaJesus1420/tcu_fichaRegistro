@@ -10,7 +10,10 @@
   margin: auto;
   
 }
-
+.extra{
+  margin-top: 10px;
+  width: 100%;
+}
 .form-group {
   display: flex;
   flex-direction: column;
@@ -19,6 +22,7 @@
   align-items: flex-start;
   font-weight: bold;
   margin-bottom: 10px;
+  
 }
 
 .form-group label{
@@ -33,12 +37,16 @@ div[data-questionType="complexDropDown"] div.contents-data{
   row-gap: 10px;
 }
 
-.custom-select {
-  
-}
+
 .custom-control {
   
   font-weight: normal;
+  
+}
+
+.custom-control-input{
+  margin-top: 5px;
+  margin-right: 5px;
 }
 .form-check {
   font-weight: normal;

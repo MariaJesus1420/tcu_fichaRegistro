@@ -37,7 +37,7 @@ export const HOME = {
     //En lugar de enviar los radios, seleccionar todos los tipo de preguntas que tienen radios y seleccionar el div que los encierra
 
     let radioWrapperList = document.querySelectorAll("[data-questiontype=complexRadioInput]");
-    console.log(radioWrapperList)
+
     radioWrapperList.forEach(wrapper => {
       let radioWrapperLogic = new RadioLogic();
       radioWrapperLogic.changeSelectedRadio(wrapper)

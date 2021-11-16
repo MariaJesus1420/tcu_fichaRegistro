@@ -12,7 +12,7 @@ export class SelectTagLogic {
 
     this.selectList.forEach((select) => {
       select.addEventListener("change", (e) => {
-        console.log(e)
+   
         this.getCurrentSelectedOption(e.target);
 
         if (this.lastSelectedOption == null) {
@@ -40,8 +40,8 @@ export class SelectTagLogic {
       input.required = required;
       input.disabled = !required;
       if (!required) {
-        console.log("delete text");
-        //input.value = "";
+    
+        
         input.style.display = "none";
       } else input.style.display = "block";
     });

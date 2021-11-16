@@ -7,6 +7,7 @@ export class RadioLogic {
 
   changeSelectedRadio = (radioWrapper) => {
     this.radioList = radioWrapper.querySelectorAll("input[type='radio']");
+    console.log(this.radioList)
     this.textAreaList = radioWrapper.querySelectorAll("textarea");
     this.radioList.forEach((radio) => {
       radio.addEventListener("change", (e) => {
@@ -33,7 +34,7 @@ export class RadioLogic {
       textArea.required = required;
       textArea.disabled = !required;
       if(!required){
-          console.log("delete text")
+  
           textArea.value= "";
           textArea.style.display ="none"
       }else
