@@ -44,6 +44,7 @@ export const FORMVIEWVER = {
         let radiotList = document.querySelectorAll("input[type='radio']");
         radiotList.forEach(radio => {
           radio.dispatchEvent(new Event("change"));
+         
     
         })
     }

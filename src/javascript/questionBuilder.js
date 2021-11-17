@@ -103,9 +103,10 @@ export function buildAllQuestions(cuestionario) {
               option
             );
             extraOptions.push(textArea)
-            form_group.append(createExtra(extraOptions));
+           
           })
-          
+
+          form_group.append(createExtra(extraOptions));
         console.log(extraOptions, "ESTOY")
      
 
@@ -129,11 +130,12 @@ export function buildAllQuestions(cuestionario) {
 const createExtra = (options) => {
   let extraDiv = document.createElement("div")
   extraDiv.classList.add("extra")
-
+  options=options.reverse();
   let optionsWrapper = document.createElement("div")
   optionsWrapper.classList.add("form-group")
 
   options.forEach(option => {
+    option.classList.add("extra-element")
     optionsWrapper.prepend(option)
   });
 
@@ -215,7 +217,7 @@ const generateTextArea = (value, placeHolder, dbTextArea) => {
   textArea.placeholder = placeHolder;
   textArea.classList.add("form-control");
   textArea.value = value;
-  textArea.disabled = true;
+//  textArea.disabled = true;
   textArea.rows = "3";
   return textArea;
 };

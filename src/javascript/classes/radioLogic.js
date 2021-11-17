@@ -7,10 +7,10 @@ export class RadioLogic {
 
   changeSelectedRadio = (radioWrapper) => {
     this.radioList = radioWrapper.querySelectorAll("input[type='radio']");
-    console.log(this.radioList)
-    this.textAreaList = radioWrapper.querySelectorAll("textarea");
+    this.textAreaList = radioWrapper.querySelectorAll(".extra");
     this.radioList.forEach((radio) => {
       radio.addEventListener("change", (e) => {
+        console.log(this.textAreaList)
         this.currentRadio = e.target;
         if (this.lastSelectedRadio != null) {
           this.lastSelectedRadio.dataset.esrespuesta = false;
@@ -19,6 +19,8 @@ export class RadioLogic {
         this.currentRadio.dataset.esrespuesta = true;
       //Hay que decicidr como marcar la opcion que va a hacer triger a la otra
         if (this.currentRadio.dataset.escompleja == "true") {
+          console.log(this.currentRadio.dataset.escompleja == "true")
+          console.log(this.currentRadio.dataset.escompleja)
           this.changeRquired(true);
         } else {
           this.changeRquired(false);
