@@ -1,13 +1,14 @@
-import { locations } from "./locations";
+
 import "../css/home.css";
 import { DATABASE } from "./dataBase";
 import { collectAllQuestions } from "./questionCollector";
 import { v4 as uuidv4 } from "uuid";
-import { CheckBoxLogic } from "./classes/checkBoxLogic";
-import { RadioLogic } from "./classes/radioLogic";
-import { SelectTagLogic } from "./classes/selectLogic";
+import { CheckBoxLogic } from "./classes/CheckBoxLogic";
+import { RadioLogic } from "./classes/RadioLogic";
+import { SelectTagLogic } from "./classes/SelectLogic";
 import { Cuestionario } from "./classes/Cuestionario";
 import { Pregunta } from "./classes/Pregunta";
+import { LocationLogic } from "./classes/LocationLogic";
 
 
 
@@ -17,22 +18,14 @@ export const HOME = {
     let selectCantones = document.querySelector("#selectCanton");
     let selectDistritos = document.querySelector("#selectDistrito");
 
-    let provincia;
+    let  locationLogic = new LocationLogic();
 
-    const loadOptions = async () => {
-      let data = await locations.getProvincias();
-      locations.loadData(selectProvincias, data);
-      data = await locations.getCantones(1);
-      locations.loadData(selectCantones, data);
-      data = await locations.getDistritos(1, 1);
-      locations.loadData(selectDistritos, data);
-    };
-
-    await loadOptions();
+    await locationLogic.loadOptions(selectProvincias,selectCantones,selectDistritos)
 
     let checkBoxList = document.querySelectorAll("input[type='checkbox']")
     let checkBoxLogic = new CheckBoxLogic();
     checkBoxLogic.changeSelectedCheckBox(checkBoxList)
+
 
     //En lugar de enviar los radios, seleccionar todos los tipo de preguntas que tienen radios y seleccionar el div que los encierra
 
@@ -172,21 +165,6 @@ export const HOME = {
     function getFirstProperty(obj) {
       return obj[Object.keys(obj)[0]];
     }
-
-    selectProvincias.addEventListener("change", async (event) => {
-      provincia = event.target.value;
-
-      let data = await locations.getCantones(provincia);
-      locations.loadData(selectCantones, data);
-    });
-
-    selectCantones.addEventListener("change", async (event) => {
-      let canton = event.target.value;
-
-      let data = await locations.getDistritos(provincia, canton);
-
-      locations.loadData(selectDistritos, data);
-    });
 
     let calendarObj;
     var myModalEl = document.getElementById("myModal");

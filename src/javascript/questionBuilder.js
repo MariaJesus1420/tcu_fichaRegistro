@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import { LocationLogic } from "./classes/LocationLogic";
 export function buildAllQuestions(cuestionario) {
   let allQuestionsArray = cuestionario.listaPreguntas.reverse();
 
@@ -44,11 +45,9 @@ export function buildAllQuestions(cuestionario) {
         break;
       case "complexDropDown":
         {
-          let extraOptions = []
+          let extraOptions = [];
           let select = generateSelect(
-            optionsArray[indexFinal].textoOpcion,
-            "select"
-          );
+            optionsArray[indexFinal].textoOpcion);
 
           for (let index = 0; index < optionsArray.length; index++) {
             if (optionsArray[index].tipoOpcion == "option") {
@@ -68,8 +67,7 @@ export function buildAllQuestions(cuestionario) {
             dbInputDropwdown
           );
 
-
-          extraOptions.push(input)
+          extraOptions.push(input);
 
           form_group.append(createExtra(extraOptions));
         }
@@ -77,9 +75,7 @@ export function buildAllQuestions(cuestionario) {
 
       case "complexRadioInput":
         {
-
-
-          let extraOptions = []
+          let extraOptions = [];
           let radioOptions = findAllOptionTypes(optionsArray, "radio");
           let radioWrapper = document.createElement("div");
           radioWrapper.classList.add("custom-control", "custom-radio");
@@ -93,28 +89,54 @@ export function buildAllQuestions(cuestionario) {
             radioWrapper.append(radio);
             radioWrapper.append(label);
             radioWrapper.append(document.createElement("br"));
-
           });
           let dbTextArea = findAllOptionTypes(optionsArray, "textArea");
-          dbTextArea.forEach((option)=>{
+          dbTextArea.forEach((option) => {
             let textArea = generateTextArea(
               option.textoOpcion,
               option.placeholder,
               option
             );
-            extraOptions.push(textArea)
-           
-          })
+            extraOptions.push(textArea);
+          });
 
           form_group.append(createExtra(extraOptions));
-        console.log(extraOptions, "ESTOY")
-     
-
-
-
         }
         break;
+      case "simpleCheckbox":
+        {
+          let label;
+          let checkBoxWrapper = document.createElement("div");
+          checkBoxWrapper.classList.add("form-check");
 
+          optionsArray.forEach((dbCheckBox) => {
+            console.log(dbCheckBox)
+            let checkBox = generateCheckBox(dbCheckBox);
+            label = generateLabel(checkBox.id, dbCheckBox.textoOpcion);
+            checkBoxWrapper.append(checkBox);
+            checkBoxWrapper.append(label);
+            checkBoxWrapper.append(document.createElement("br"));
+          });
+          form_group.append(checkBoxWrapper);
+        }
+        break;
+        case "location":
+          {
+            let selectProvincia = generateSelect(optionsArray[0])
+            let selectCanton = generateSelect(optionsArray[1])
+            let selectDistrito = generateSelect(optionsArray[2])
+            let locationLogic = new LocationLogic();
+            
+            let locationWrapper = document.createElement("div")
+            locationWrapper.classList.add("form-location")
+            
+            locationLogic.loadOptions(selectProvincia,selectCanton,selectDistrito)
+            locationWrapper.append(selectProvincia)
+            locationWrapper.append(selectCanton)
+            locationWrapper.append(selectDistrito)
+            form_group.append(locationWrapper)
+          }
+          break;
       default:
         break;
     }
@@ -126,22 +148,21 @@ export function buildAllQuestions(cuestionario) {
   });
 }
 
-
 const createExtra = (options) => {
-  let extraDiv = document.createElement("div")
-  extraDiv.classList.add("extra")
-  options=options.reverse();
-  let optionsWrapper = document.createElement("div")
-  optionsWrapper.classList.add("form-group")
+  let extraDiv = document.createElement("div");
+  extraDiv.classList.add("extra");
+  options = options.reverse();
+  let optionsWrapper = document.createElement("div");
+  optionsWrapper.classList.add("form-group");
 
-  options.forEach(option => {
-    option.classList.add("extra-element")
-    optionsWrapper.prepend(option)
+  options.forEach((option) => {
+    option.classList.add("extra-element");
+    optionsWrapper.prepend(option);
   });
 
-  extraDiv.append(optionsWrapper)
-  return extraDiv
-}
+  extraDiv.append(optionsWrapper);
+  return extraDiv;
+};
 const findAllOptionTypes = (optionArray, optionTypes) => {
   let result = [];
   optionArray.forEach((option) => {
@@ -162,13 +183,24 @@ const findOptionType = (optionArray, optionType) => {
   return result;
 };
 
+const generateCheckBox = (dbCheckBox) => {
+  let checkBox = document.createElement("input");
+  setProperties(checkBox, dbCheckBox);
+  checkBox.type = "checkbox";
+  checkBox.id = uuidv4();
+  checkBox.classList.add("form-check-input");
+  checkBox.checked = dbCheckBox.esRespuesta;
+
+  return checkBox;
+};
+
 const generateInput = (value, placeHolder, dbInput) => {
   let input = document.createElement("input");
   setProperties(input, dbInput);
   input.type = "text";
   input.required = true;
   input.placeholder = placeHolder;
-  console.log(placeHolder)
+
   input.classList.add("form-control");
   input.value = value;
 
@@ -192,10 +224,9 @@ const generateRadio = (dbRadio) => {
   return radio;
 };
 
-const generateSelect = (value, placeHolder) => {
+const generateSelect = (value) => {
   let select = document.createElement("select");
   select.required = true;
-  select.placeholder = placeHolder;
   select.classList.add("form-select");
   select.value = value;
 
@@ -217,7 +248,7 @@ const generateTextArea = (value, placeHolder, dbTextArea) => {
   textArea.placeholder = placeHolder;
   textArea.classList.add("form-control");
   textArea.value = value;
-//  textArea.disabled = true;
+  //  textArea.disabled = true;
   textArea.rows = "3";
   return textArea;
 };

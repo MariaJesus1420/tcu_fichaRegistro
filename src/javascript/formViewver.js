@@ -1,8 +1,8 @@
 import { buildAllQuestions } from "./questionBuilder";
 import { DATABASE } from "./dataBase";
-import { CheckBoxLogic } from "./classes/checkBoxLogic";
-import { RadioLogic } from "./classes/radioLogic";
-import { SelectTagLogic } from "./classes/selectLogic";
+import { CheckBoxLogic } from "./classes/CheckBoxLogic";
+import { RadioLogic } from "./classes/RadioLogic";
+import { SelectTagLogic } from "./classes/SelectLogic";
 import "../css/home.css";
 export const FORMVIEWVER = {
     init: async() =>{
@@ -22,7 +22,7 @@ export const FORMVIEWVER = {
         //En lugar de enviar los radios, seleccionar todos los tipo de preguntas que tienen radios y seleccionar el div que los encierra
     
         let radioWrapperList = document.querySelectorAll("[data-questiontype=complexRadioInput]");
-        console.log(radioWrapperList)
+      
         radioWrapperList.forEach(wrapper => {
           let radioWrapperLogic = new RadioLogic();
           radioWrapperLogic.changeSelectedRadio(wrapper)

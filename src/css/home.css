@@ -44,6 +44,18 @@ div[data-questionType="complexDropDown"] div.contents-data{
   
 }
 
+.form-location{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.form-location > select+select{
+  margin-left: 20px;
+
+}
+
 .custom-control-input{
   margin-top: 5px;
   margin-right: 5px;
