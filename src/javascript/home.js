@@ -3,6 +3,7 @@ import "../css/home.css";
 import "../css/events.css";
 import { DATABASE } from "./dataBase";
 import { v4 as uuidv4 } from "uuid";
+import { Card } from "./classes/Card";
 
 
 
@@ -31,12 +32,20 @@ export const HOME = {
       return eventsList;
     };
 
-    const eventoClick = (info)=>{
+    const eventoClick = async (info)=>{
       let cuestionariosWrapper = document.querySelector("#cuestionariosWrapper")
       let clickedEvent = info.event
       let db = new DATABASE()
-      let eventListDB=db.obtenerDocumento("Events","2021")
-      console.log(eventListDB[clickedEvent.id])
+      let eventListDB=await db.obtenerDocumento("Events","2021")
+      let id = clickedEvent.id
+    
+      for (let index = 0; index < eventListDB[id].cuestionarios.length; index++) {
+        let cuestionario= eventListDB[id].cuestionarios[index];
+        let cuestionarioDB = await db.obtenerDocumento("Cuestionarios",cuestionario)
+        console.log(cuestionarioDB)
+        cuestionariosWrapper.append(new Card("Cuestionario sobre patrimonio",cuestionarioDB.newForm.descripcion,cuestionario).generateCard())
+      }
+   
     }
 
     let eventoSeleccionado;
@@ -44,51 +53,7 @@ export const HOME = {
       var calendarEl = document.getElementById("calendar");
       console.log("Generando calendario");
       var calendar = new FullCalendar.Calendar(calendarEl, {
-        eventClick: function (info) {
-          eventoSeleccionado = info.event;
-          console.log( eventoSeleccionado.title)
-          $("#lblNombreEvento").text(
-            "Titulo del evento : " + eventoSeleccionado.title
-          );
-          $("#lblDescripcion").text(
-            "Descripcion del evento : " +
-            eventoSeleccionado.extendedProps.descripcion
-          );
-          $("#lblOrganizacion").text(
-            "Organizacion que participa : " +
-            eventoSeleccionado.extendedProps.organizacion
-          );
-
-          let options = {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          };
-
-          $("#lblFecha").text(
-            "Fecha del evento : " +
-            new Date(eventoSeleccionado.start).toLocaleString(
-              "es-CR",
-              options
-            )
-          );
-
-          options = { hour: "numeric", minute: "numeric", hourCycle: "h12" };
-          $("#lblHoraInicio").text(
-            "Hora de inicio : " +
-            new Date(eventoSeleccionado.start).toLocaleString(
-              "es-CR",
-              options
-            )
-          );
-
-          $("#lblHoraFin").text(
-            "Hora de finalizacion : " +
-            new Date(eventoSeleccionado.end).toLocaleString("es-CR", options)
-          );
-          myModal.hide();
-        },
+        eventClick: eventoClick,
         events: eventList,
         eventOverlap: false,
         themeSystem: "bootstrap",
