@@ -38,12 +38,19 @@ export const HOME = {
       let db = new DATABASE()
       let eventListDB=await db.obtenerDocumento("Events","2021")
       let id = clickedEvent.id
+      
     
       for (let index = 0; index < eventListDB[id].cuestionarios.length; index++) {
         let cuestionario= eventListDB[id].cuestionarios[index];
         let cuestionarioDB = await db.obtenerDocumento("Cuestionarios",cuestionario)
         console.log(cuestionarioDB)
-        cuestionariosWrapper.append(new Card("Cuestionario sobre patrimonio",cuestionarioDB.newForm.descripcion,cuestionario).generateCard())
+        let object = {
+          listaPreguntas :cuestionarioDB.listaPreguntas,
+          descripcion : cuestionarioDB.descripcion,
+          titulo: "Ficha de Registro"
+      }
+    //    await db.addForm(object);
+        cuestionariosWrapper.append(new Card("Cuestionario sobre patrimonio",cuestionarioDB.descripcion,cuestionario).generateCard())
       }
    
     }

@@ -18,6 +18,21 @@ export class DATABASE {
         console.error("Error adding document: ", error);
       });
   }
+
+
+  async addForm(cuestionario) {
+    this.db.collection("Cuestionarios").add(
+      cuestionario
+  )
+  .then((docRef) => {
+      console.log("Document written with ID: ", docRef.id);
+  })
+  .catch((error) => {
+      console.error("Error adding document: ", error);
+  });
+  }
+
+
   async obtenerDocumento(coleccion, documento) {
     var docRef = this.db.collection(coleccion).doc(documento);
     let result;
