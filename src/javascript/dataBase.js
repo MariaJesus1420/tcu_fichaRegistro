@@ -27,6 +27,7 @@ export class DATABASE {
       .then((doc) => {
         if (doc.exists) {
           result = doc.data();
+  
         } else {
           console.log("No such document!");
         }

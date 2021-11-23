@@ -1,60 +1,15 @@
 
 import "../css/home.css";
+import "../css/events.css";
 import { DATABASE } from "./dataBase";
-import { collectAllQuestions } from "./questionCollector";
 import { v4 as uuidv4 } from "uuid";
-import { CheckBoxLogic } from "./classes/CheckBoxLogic";
-import { RadioLogic } from "./classes/RadioLogic";
-import { SelectTagLogic } from "./classes/SelectLogic";
-import { Cuestionario } from "./classes/Cuestionario";
-import { Pregunta } from "./classes/Pregunta";
-import { LocationLogic } from "./classes/LocationLogic";
+
 
 
 
 export const HOME = {
   init: async () => {
-    let selectProvincias = document.querySelector("#selectProvincia");
-    let selectCantones = document.querySelector("#selectCanton");
-    let selectDistritos = document.querySelector("#selectDistrito");
-
-    let  locationLogic = new LocationLogic();
-
-    await locationLogic.loadOptions(selectProvincias,selectCantones,selectDistritos)
-
-    let checkBoxList = document.querySelectorAll("input[type='checkbox']")
-    let checkBoxLogic = new CheckBoxLogic();
-    checkBoxLogic.changeSelectedCheckBox(checkBoxList)
-
-
-    //En lugar de enviar los radios, seleccionar todos los tipo de preguntas que tienen radios y seleccionar el div que los encierra
-
-    let radioWrapperList = document.querySelectorAll("[data-questiontype=complexRadioInput]");
-
-    radioWrapperList.forEach(wrapper => {
-      let radioWrapperLogic = new RadioLogic();
-      radioWrapperLogic.changeSelectedRadio(wrapper)
-
-    });
-
-    let selectWrapperList = document.querySelectorAll("[data-questiontype=complexDropDown]");
-    selectWrapperList.forEach(wrapper => {
-      let selectLogic = new SelectTagLogic();
-      selectLogic.changeSelectedOption(wrapper)
-    })
-
-    let selectList = document.querySelectorAll("select");
-    selectList.forEach(select => {
-      select.dispatchEvent(new Event("change"));
-
-    })
-
-    let radiotList = document.querySelectorAll("input[type='radio']");
-    radiotList.forEach(radio => {
-      radio.dispatchEvent(new Event("change"));
-
-    })
-
+   
     const generateEventsList = (eventsDB) => {
       let eventsList = [];
 
@@ -76,6 +31,14 @@ export const HOME = {
       return eventsList;
     };
 
+    const eventoClick = (info)=>{
+      let cuestionariosWrapper = document.querySelector("#cuestionariosWrapper")
+      let clickedEvent = info.event
+      let db = new DATABASE()
+      let eventListDB=db.obtenerDocumento("Events","2021")
+      console.log(eventListDB[clickedEvent.id])
+    }
+
     let eventoSeleccionado;
     const generateCalendar = (eventList) => {
       var calendarEl = document.getElementById("calendar");
@@ -83,7 +46,7 @@ export const HOME = {
       var calendar = new FullCalendar.Calendar(calendarEl, {
         eventClick: function (info) {
           eventoSeleccionado = info.event;
-
+          console.log( eventoSeleccionado.title)
           $("#lblNombreEvento").text(
             "Titulo del evento : " + eventoSeleccionado.title
           );
@@ -174,24 +137,7 @@ export const HOME = {
 
     let db = new DATABASE();
 
-    const generarPregunta = (descripcionPregunta, respuestas) => {
-      return { descripcionPregunta, respuestas };
-    };
-
-    const cuestionarioBuilder = (listaPreguntas) => {
-      let cuestionario = {
-        listaPreguntas: listaPreguntas,
-        
-      };
-      return cuestionario;
-    };
-
-    const createDummyCuestionario = () => {
-      let listaOpciones = []
-
-      new Pregunta("Pregunta1", "simpleTextInput", listaOpciones)
-      new Cuestionario()
-    }
+    
 
     $("#btnGuardarForm").click(async (e) => {
       let listaPreguntas = await collectAllQuestions();
@@ -202,29 +148,16 @@ export const HOME = {
 
       await db.addFichaRegistro("newEvent333", "2021", cuestionario, uuidv4());
     });
+    let eventsDB = await db.obtenerDocumento("Events", "2021");
+    calendarObj = generateCalendar(generateEventsList(eventsDB));
 
-    $("#btnAddEvent").click(async (e) => {
-      console.log("btn");
-      let event = {
-        id: "newEvent333",
-        start: $("#fechaHoraInicial").val(),
-        end: $("#fechaHoraFinal").val(),
-        title: $("#nombreEvento").val(),
-      };
-      await db.addEvent(event, "2021", "dg2g");
-      let doc = await db.obtenerDocumento("Events", "2021");
-      console.log(
-        new Date(getFirstProperty(doc).end.seconds * 1000).toISOString()
-      );
-      var calendarEl = document.getElementById("calendar");
-      calendarObj.addEvent(event);
-    });
 
-    $("#btnSeleccion").click(async (e) => {
-      console.log("CLICK");
+
+    $("#btnVerEventos").click(async (e) => {
+
       e.preventDefault();
       let eventsDB = await db.obtenerDocumento("Events", "2021");
-
+      console.log(eventsDB)
       myModal.show();
 
       myModalEl.addEventListener("shown.bs.modal", function (event) {

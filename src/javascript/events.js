@@ -1,6 +1,7 @@
 import { locations } from "./locations";
 import "../css/home.css";
 import { DATABASE } from "./dataBase";
+import { v4 as uuidv4 } from "uuid";
 
 export const EVENTS ={
     init: async () =>{
@@ -11,18 +12,13 @@ export const EVENTS ={
         $("#btnAddEvent").click(async (e) => {
             console.log("btn");
             let event = {
-              id: "777777777777",
+              id: uuidv4(),
               start:$("#fechaHoraInicial").val(),
               end:$("#fechaHoraFinal").val(),
               title: $("#nombreEvento").val()
             };
-            await db.addEvent(event, "2021", "fffff");
-            let doc = await db.obtenerDocumento("Events", "2021");
-            console.log(
-              new Date(getFirstProperty(doc).end.seconds * 1000).toISOString()
-            );
-            var calendarEl = document.getElementById("calendar");
-            calendarObj.addEvent(event);
+            await db.addEvent(event, "2021", event.id);
+          
           });
       
     }
