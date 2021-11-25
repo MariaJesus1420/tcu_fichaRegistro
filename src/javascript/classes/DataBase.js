@@ -5,6 +5,7 @@ export class DATABASE {
   async addEvent(event, year, id) {
     event.start = new Date(event.start);
     event.end = new Date(event.end);
+    let respuuestaUser = `Respuestas.${id}`
     this.db
       .collection("Events")
       .doc(year)
@@ -72,4 +73,6 @@ export class DATABASE {
       
       
   }
+
+  
 }

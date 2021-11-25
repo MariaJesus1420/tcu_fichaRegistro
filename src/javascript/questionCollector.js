@@ -18,6 +18,7 @@ export async function collectAllQuestions() {
     let listaOpciones = [];
     switch (questionType) {
       case "complexDropDown":
+        
         optionsArray.forEach(opcion => {
          
           listaOpciones.push(new Opcion(opcion.dataset.esdefault,opcion.dataset.textoopcion,opcion.dataset.esrespuesta,opcion.dataset.escompleja,opcion.dataset.tipoopcion))

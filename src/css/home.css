@@ -65,7 +65,7 @@ div[data-questionType="complexDropDown"] div.contents-data{
   padding-bottom: 20px;
 }
 .cuestionariosWrapper{
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 .calendarWrapper{
   margin-top: 10px;

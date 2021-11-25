@@ -1,5 +1,5 @@
 import { buildAllQuestions } from "./questionBuilder";
-import { DATABASE } from "./dataBase";
+import { DATABASE } from "./classes/DataBase";
 import { CheckBoxLogic } from "./classes/CheckBoxLogic";
 import { RadioLogic } from "./classes/RadioLogic";
 import { SelectTagLogic } from "./classes/SelectLogic";
