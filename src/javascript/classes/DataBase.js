@@ -5,7 +5,6 @@ export class DATABASE {
   async addEvent(event, year, id) {
     event.start = new Date(event.start);
     event.end = new Date(event.end);
-    let respuuestaUser = `Respuestas.${id}`
     this.db
       .collection("Events")
       .doc(year)
@@ -20,6 +19,21 @@ export class DATABASE {
       });
   }
 
+  async getAnswers(respuestas, id) {
+    let respuestaUser = `Respuestas.${id}`
+    this.db
+      .collection("Cuestionarios")
+      .doc(id)
+      .update({
+        [respuestaUser]: respuestas,
+      })
+      .then((docRef) => {
+        console.log("Document written with ID: ");
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
+  }
 
   async addForm(cuestionario) {
     this.db.collection("Cuestionarios").add(
