@@ -1,7 +1,7 @@
 
 import "../css/home.css";
 import "../css/events.css";
-import { DATABASE } from "./dataBase";
+import { DATABASE } from "./classes/DataBase";
 import { v4 as uuidv4 } from "uuid";
 import { Card } from "./classes/Card";
 
