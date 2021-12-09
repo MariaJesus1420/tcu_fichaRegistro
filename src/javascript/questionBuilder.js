@@ -254,7 +254,7 @@ const generateTextArea = (value, placeHolder, dbTextArea) => {
 };
 
 const setProperties = (htmlElement, dbElement) => {
-  htmlElement.dataset.esrepuesta = dbElement.esRespuesta;
+  htmlElement.dataset.esrespuesta = dbElement.esRespuesta;
   htmlElement.dataset.esdefault = dbElement.esDefault;
   htmlElement.dataset.escompleja = dbElement.esCompleja;
   htmlElement.dataset.tipoopcion = dbElement.tipoOpcion;

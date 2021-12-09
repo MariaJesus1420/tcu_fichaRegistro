@@ -4,6 +4,7 @@ import { CheckBoxLogic } from "./classes/CheckBoxLogic";
 import { RadioLogic } from "./classes/RadioLogic";
 import { SelectTagLogic } from "./classes/SelectLogic";
 import "../css/home.css";
+import { collectAllQuestions } from "./questionCollector";
 export const FORMVIEWVER = {
     init: async() =>{
         console.log("INIT FORM")
@@ -13,7 +14,7 @@ export const FORMVIEWVER = {
     
         //  .newEvent333.fichasRegistro['2f3e3e68-a3f4-4a84-9c1c-80e167ae5a1d']
 
-       db.getAnswers(cuestionarioId);
+       
         
         buildAllQuestions(cuestionario);
 
@@ -49,5 +50,11 @@ export const FORMVIEWVER = {
          
     
         })
+
+        
+
+        $("#btnGuardarForm").click(async (e) => {
+          collectAllQuestions();
+        });
     }
 }
