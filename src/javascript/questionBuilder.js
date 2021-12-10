@@ -63,7 +63,7 @@ export function buildAllQuestions(cuestionario) {
           let dbInputDropwdown = findOptionType(optionsArray, "input");
           let input = generateInput(
             dbInputDropwdown.textoOpcion,
-            dbInputDropwdown.placeHolder,
+            dbInputDropwdown.placeholder,
             dbInputDropwdown
           );
 
