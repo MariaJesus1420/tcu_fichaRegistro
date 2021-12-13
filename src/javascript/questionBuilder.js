@@ -1,11 +1,17 @@
 import { v4 as uuidv4 } from "uuid";
 import { LocationLogic } from "./classes/LocationLogic";
-export function buildAllQuestions(cuestionario) {
+export function buildAllQuestions(cuestionario,answerId,isQuestionBuilder) {
   let allQuestionsArray = cuestionario.listaPreguntas.reverse();
 
+  let answersArray = cuestionario.Respuestas[answerId].listaPreguntas.reverse()
+   
+  console.log("questiosn are ",allQuestionsArray)
+  console.log("answers are",answersArray)
   let optionsArray = [];
 
-  allQuestionsArray.forEach((question) => {
+  allQuestionsArray.forEach((question,index) => {
+    let currentAnswer = answersArray[index]
+
     optionsArray = question.listaOpciones;
     let indexFinal = optionsArray.length - 1;
     let item = document.createElement("div");
@@ -22,11 +28,14 @@ export function buildAllQuestions(cuestionario) {
     titulo.innerText = question.textoPregunta;
 
     form_group.append(titulo);
+    console.log("Tipo es",question.tipoPregunta)
     switch (question.tipoPregunta) {
       case "simpleTextInput":
         {
+          console.log("answer is ",currentAnswer)
+          console.log("question is ",question)
           let input = generateInput(
-            optionsArray[indexFinal].textoOpcion,
+            currentAnswer.listaOpciones[0].valor,
             optionsArray[indexFinal].placeholder,
             optionsArray[indexFinal]
           );
@@ -77,6 +86,7 @@ export function buildAllQuestions(cuestionario) {
         {
           let extraOptions = [];
           let radioOptions = findAllOptionTypes(optionsArray, "radio");
+      
           let radioWrapper = document.createElement("div");
           radioWrapper.classList.add("custom-control", "custom-radio");
           form_group.append(radioWrapper);
@@ -100,6 +110,7 @@ export function buildAllQuestions(cuestionario) {
             extraOptions.push(textArea);
           });
 
+        
           form_group.append(createExtra(extraOptions));
         }
         break;
@@ -110,7 +121,7 @@ export function buildAllQuestions(cuestionario) {
           checkBoxWrapper.classList.add("form-check");
 
           optionsArray.forEach((dbCheckBox) => {
-            console.log(dbCheckBox)
+  
             let checkBox = generateCheckBox(dbCheckBox);
             label = generateLabel(checkBox.id, dbCheckBox.textoOpcion);
             checkBoxWrapper.append(checkBox);
@@ -125,6 +136,10 @@ export function buildAllQuestions(cuestionario) {
             let selectProvincia = generateSelect(optionsArray[0])
             let selectCanton = generateSelect(optionsArray[1])
             let selectDistrito = generateSelect(optionsArray[2])
+
+            selectProvincia.id ="provincias"
+            selectCanton.id="cantones"
+            selectDistrito.id="distritos"
             let locationLogic = new LocationLogic();
             
             let locationWrapper = document.createElement("div")

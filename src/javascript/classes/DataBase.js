@@ -19,6 +19,23 @@ export class DATABASE {
       });
   }
 
+
+  async addAnwsers(cuestionario, id,respuestas) {
+    let userAnswerPath = `Respuestas.${id}.listaPreguntas`
+    this.db
+      .collection("Cuestionarios")
+      .doc(cuestionario)
+      .update({
+        [userAnswerPath]: respuestas,
+      })
+      .then((docRef) => {
+        console.log("Document written with ID: ");
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
+  }
+
   async getAnswers(respuestas, id) {
     let respuestaUser = `Respuestas.${id}`
     this.db
