@@ -32,13 +32,18 @@ export class SelectTagLogic {
   };
 
   getCurrentSelectedOption = (selectTag) => {
+ 
     this.currentOption = selectTag.options[selectTag.selectedIndex];
+    
   };
 
   changeRquired = (required) => {
     this.inputList.forEach((input) => {
       input.required = required;
       input.disabled = !required;
+      input.querySelectorAll("input").forEach(element => {  
+        element.dataset.esrespuesta=required
+      });
       if (!required) {
     
         

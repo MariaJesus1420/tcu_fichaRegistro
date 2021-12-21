@@ -39,6 +39,10 @@ export class RadioLogic {
     this.textAreaList.forEach((textArea) => {
       textArea.required = required;
       textArea.disabled = !required;
+      textArea.querySelectorAll("textarea").forEach(element => {
+        
+        element.dataset.esrespuesta=required
+      });
       if(!required){
   
           textArea.value= "";
