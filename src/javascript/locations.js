@@ -27,7 +27,7 @@ export const locations = {
       return response.json();
     },
   
-    loadData: (selectControl, data) => {
+    loadData: async (selectControl, data) => {
       let objectData = Object.entries(data);
       while (selectControl.firstChild) {
         selectControl.removeChild(selectControl.firstChild);
