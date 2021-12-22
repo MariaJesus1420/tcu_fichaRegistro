@@ -15,8 +15,13 @@ export class RadioLogic {
         if (this.lastSelectedRadio != null) {
           this.lastSelectedRadio.dataset.esrespuesta = false;
         }
+        if(this.currentRadio.checked == true){
+          
+        }else{
+          this.currentRadio.dataset.esrespuesta = false;
+        }
         
-        this.currentRadio.dataset.esrespuesta = true;
+       
       //Hay que decicidr como marcar la opcion que va a hacer triger a la otra
         if (this.currentRadio.dataset.escompleja == "true") {
       
@@ -34,6 +39,10 @@ export class RadioLogic {
     this.textAreaList.forEach((textArea) => {
       textArea.required = required;
       textArea.disabled = !required;
+      textArea.querySelectorAll("textarea").forEach(element => {
+        
+        element.dataset.esrespuesta=required
+      });
       if(!required){
   
           textArea.value= "";

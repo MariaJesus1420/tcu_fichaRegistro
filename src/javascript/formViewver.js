@@ -3,6 +3,7 @@ import { DATABASE } from "./classes/DataBase";
 import { CheckBoxLogic } from "./classes/CheckBoxLogic";
 import { RadioLogic } from "./classes/RadioLogic";
 import { SelectTagLogic } from "./classes/SelectLogic";
+import { v4 as uuidv4 } from "uuid";
 import "../css/home.css";
 import { collectAllQuestions } from "./questionCollector";
 export const FORMVIEWVER = {
@@ -16,7 +17,7 @@ export const FORMVIEWVER = {
 
        
         
-        buildAllQuestions(cuestionario);
+        buildAllQuestions(cuestionario,"d284d7ae-8054-4843-a8db-50b7dc8a6a12");
 
         let checkBoxList = document.querySelectorAll("input[type='checkbox']")
         let checkBoxLogic = new CheckBoxLogic();
@@ -54,7 +55,8 @@ export const FORMVIEWVER = {
         
 
         $("#btnGuardarForm").click(async (e) => {
-          collectAllQuestions();
+          let respuestas = await collectAllQuestions();
+          await db.addAnwsers(cuestionarioId,uuidv4(),respuestas)
         });
     }
 }

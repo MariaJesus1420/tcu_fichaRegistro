@@ -1,11 +1,21 @@
 import { v4 as uuidv4 } from "uuid";
 import { LocationLogic } from "./classes/LocationLogic";
-export function buildAllQuestions(cuestionario) {
+export  async function buildAllQuestions(cuestionario, answerId, isQuestionBuilder) {
   let allQuestionsArray = cuestionario.listaPreguntas.reverse();
 
+  let answersArray = cuestionario.Respuestas[answerId].listaPreguntas.reverse();
+
+  console.log("questiosn are ", allQuestionsArray);
+  console.log("answers are", answersArray);
   let optionsArray = [];
 
-  allQuestionsArray.forEach((question) => {
+  for (const [index, question] of allQuestionsArray.entries()) {
+    
+  
+
+  
+    let currentAnswer = answersArray[index];
+
     optionsArray = question.listaOpciones;
     let indexFinal = optionsArray.length - 1;
     let item = document.createElement("div");
@@ -22,11 +32,12 @@ export function buildAllQuestions(cuestionario) {
     titulo.innerText = question.textoPregunta;
 
     form_group.append(titulo);
+
     switch (question.tipoPregunta) {
       case "simpleTextInput":
         {
           let input = generateInput(
-            optionsArray[indexFinal].textoOpcion,
+            currentAnswer.listaOpciones[0].valor,
             optionsArray[indexFinal].placeholder,
             optionsArray[indexFinal]
           );
@@ -45,9 +56,9 @@ export function buildAllQuestions(cuestionario) {
         break;
       case "complexDropDown":
         {
+         
           let extraOptions = [];
-          let select = generateSelect(
-            optionsArray[indexFinal].textoOpcion);
+          let select = generateSelect(optionsArray[indexFinal].textoOpcion);
 
           for (let index = 0; index < optionsArray.length; index++) {
             if (optionsArray[index].tipoOpcion == "option") {
@@ -56,9 +67,14 @@ export function buildAllQuestions(cuestionario) {
                 optionsArray[index].textoOpcion,
                 optionsArray[index]
               );
+
+              if (currentAnswer.listaOpciones[0].valor == index) {
+                result.dataset.esrespuesta = true;
+              }
               select.options[index] = result;
             }
           }
+          select.selectedIndex = currentAnswer.listaOpciones[0].valor;
           form_group.append(select);
           let dbInputDropwdown = findOptionType(optionsArray, "input");
           let input = generateInput(
@@ -77,6 +93,7 @@ export function buildAllQuestions(cuestionario) {
         {
           let extraOptions = [];
           let radioOptions = findAllOptionTypes(optionsArray, "radio");
+
           let radioWrapper = document.createElement("div");
           radioWrapper.classList.add("custom-control", "custom-radio");
           form_group.append(radioWrapper);
@@ -110,7 +127,6 @@ export function buildAllQuestions(cuestionario) {
           checkBoxWrapper.classList.add("form-check");
 
           optionsArray.forEach((dbCheckBox) => {
-            console.log(dbCheckBox)
             let checkBox = generateCheckBox(dbCheckBox);
             label = generateLabel(checkBox.id, dbCheckBox.textoOpcion);
             checkBoxWrapper.append(checkBox);
@@ -120,23 +136,41 @@ export function buildAllQuestions(cuestionario) {
           form_group.append(checkBoxWrapper);
         }
         break;
-        case "location":
-          {
-            let selectProvincia = generateSelect(optionsArray[0])
-            let selectCanton = generateSelect(optionsArray[1])
-            let selectDistrito = generateSelect(optionsArray[2])
-            let locationLogic = new LocationLogic();
-            
-            let locationWrapper = document.createElement("div")
-            locationWrapper.classList.add("form-location")
-            
-            locationLogic.loadOptions(selectProvincia,selectCanton,selectDistrito)
-            locationWrapper.append(selectProvincia)
-            locationWrapper.append(selectCanton)
-            locationWrapper.append(selectDistrito)
-            form_group.append(locationWrapper)
-          }
-          break;
+      case "location":
+        {
+
+          console.log("answer is ", currentAnswer);
+          console.log("question is ", question);
+
+
+          let selectProvincia = generateSelect(optionsArray[0]);
+          let selectCanton = generateSelect(optionsArray[1]);
+          let selectDistrito = generateSelect(optionsArray[2]);
+
+          selectProvincia.id = "provincias";
+          selectCanton.id = "cantones";
+          selectDistrito.id = "distritos";
+          let locationLogic = new LocationLogic();
+
+          let locationWrapper = document.createElement("div");
+          locationWrapper.classList.add("form-location");
+
+          await locationLogic.loadOptions(
+            selectProvincia,
+            selectCanton,
+            selectDistrito
+          );
+          selectProvincia.selectedIndex = currentAnswer.listaOpciones[0].valor;
+          selectCanton.selectedIndex = currentAnswer.listaOpciones[1].valor;
+          selectDistrito.selectedIndex = currentAnswer.listaOpciones[2].valor;
+
+          console.log(selectProvincia.selectedIndex)
+          locationWrapper.append(selectProvincia);
+          locationWrapper.append(selectCanton);
+          locationWrapper.append(selectDistrito);
+          form_group.append(locationWrapper);
+        }
+        break;
       default:
         break;
     }
@@ -145,7 +179,7 @@ export function buildAllQuestions(cuestionario) {
     contents.append(contents_data);
     item.append(contents);
     document.querySelector("#mainForm").prepend(item);
-  });
+  };
 }
 
 const createExtra = (options) => {
