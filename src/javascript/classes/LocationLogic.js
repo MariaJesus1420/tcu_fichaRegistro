@@ -13,19 +13,26 @@ export class LocationLogic {
     locations.loadData(selectDistritos, data);
 
     selectProvincias.addEventListener("change", async (event) => {
-      this.provincia = event.target.value;
-
-      let data = await locations.getCantones(this.provincia);
-      locations.loadData(selectCantones, data);
-      console.log( locations.loadData(selectCantones, data))
+      await this.selectProvinciasFunction(event.target.value, selectCantones);
     });
 
     selectCantones.addEventListener("change", async (event) => {
-      let canton = event.target.value;
-
-      let data = await locations.getDistritos(this.provincia, canton);
-
-      locations.loadData(selectDistritos, data);
+      await this.selectCantonesFunction(event.target.value, selectDistritos);
     });
+  };
+
+  selectProvinciasFunction = async (provincia, selectCantones) => {
+    this.provincia = provincia;
+
+    let data = await locations.getCantones(this.provincia);
+    locations.loadData(selectCantones, data);
+    console.log("Done select provincias evnto");
+  };
+
+  selectCantonesFunction = async (canton, selectDistritos) => {
+ 
+    let data = await locations.getDistritos(this.provincia, canton);
+    locations.loadData(selectDistritos, data);
+    console.log("Done select cantones evnto");
   };
 }

@@ -1,6 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
 import { LocationLogic } from "./classes/LocationLogic";
-export  async function buildAllQuestions(cuestionario, answerId, isQuestionBuilder) {
+export async function buildAllQuestions(
+  cuestionario,
+  answerId,
+  isQuestionBuilder
+) {
   let allQuestionsArray = cuestionario.listaPreguntas.reverse();
 
   let answersArray = cuestionario.Respuestas[answerId].listaPreguntas.reverse();
@@ -10,10 +14,6 @@ export  async function buildAllQuestions(cuestionario, answerId, isQuestionBuild
   let optionsArray = [];
 
   for (const [index, question] of allQuestionsArray.entries()) {
-    
-  
-
-  
     let currentAnswer = answersArray[index];
 
     optionsArray = question.listaOpciones;
@@ -47,7 +47,7 @@ export  async function buildAllQuestions(cuestionario, answerId, isQuestionBuild
       case "simpleTextArea":
         {
           let textArea = generateTextArea(
-            optionsArray[indexFinal].textoOpcion,
+            currentAnswer.listaOpciones[0].valor,
             optionsArray[indexFinal].placeholder,
             optionsArray[indexFinal]
           );
@@ -56,7 +56,8 @@ export  async function buildAllQuestions(cuestionario, answerId, isQuestionBuild
         break;
       case "complexDropDown":
         {
-         
+          let optionElements = [];
+
           let extraOptions = [];
           let select = generateSelect(optionsArray[indexFinal].textoOpcion);
 
@@ -68,9 +69,6 @@ export  async function buildAllQuestions(cuestionario, answerId, isQuestionBuild
                 optionsArray[index]
               );
 
-              if (currentAnswer.listaOpciones[0].valor == index) {
-                result.dataset.esrespuesta = true;
-              }
               select.options[index] = result;
             }
           }
@@ -82,7 +80,9 @@ export  async function buildAllQuestions(cuestionario, answerId, isQuestionBuild
             dbInputDropwdown.placeholder,
             dbInputDropwdown
           );
-
+          if (currentAnswer.listaOpciones[1] != undefined) {
+            input.value = currentAnswer.listaOpciones[1].valor;
+          }
           extraOptions.push(input);
 
           form_group.append(createExtra(extraOptions));
@@ -94,15 +94,21 @@ export  async function buildAllQuestions(cuestionario, answerId, isQuestionBuild
           let extraOptions = [];
           let radioOptions = findAllOptionTypes(optionsArray, "radio");
 
+          let optionElements = [];
+
           let radioWrapper = document.createElement("div");
           radioWrapper.classList.add("custom-control", "custom-radio");
           form_group.append(radioWrapper);
           let groupName = uuidv4();
           let label;
-          radioOptions.forEach((dbRadio) => {
+
+          radioOptions.forEach((dbRadio, index) => {
             let radio = generateRadio(dbRadio);
+
             label = generateLabel(radio.id, dbRadio.textoOpcion);
             radio.name = groupName;
+
+            optionElements.push(radio);
             radioWrapper.append(radio);
             radioWrapper.append(label);
             radioWrapper.append(document.createElement("br"));
@@ -114,9 +120,19 @@ export  async function buildAllQuestions(cuestionario, answerId, isQuestionBuild
               option.placeholder,
               option
             );
+            optionElements.push(textArea);
             extraOptions.push(textArea);
           });
 
+          currentAnswer.listaOpciones.forEach((opcion) => {
+            if (opcion.tipo == "radio") {
+              optionElements[opcion.contador].checked = opcion.valor;
+            } else {
+              if (opcion.tipo == "textArea") {
+                optionElements[opcion.contador].value = opcion.valor;
+              }
+            }
+          });
           form_group.append(createExtra(extraOptions));
         }
         break;
@@ -126,23 +142,28 @@ export  async function buildAllQuestions(cuestionario, answerId, isQuestionBuild
           let checkBoxWrapper = document.createElement("div");
           checkBoxWrapper.classList.add("form-check");
 
-          optionsArray.forEach((dbCheckBox) => {
+          let checkBoxElements = [];
+          optionsArray.forEach((dbCheckBox, index) => {
             let checkBox = generateCheckBox(dbCheckBox);
+
             label = generateLabel(checkBox.id, dbCheckBox.textoOpcion);
+
+            checkBoxElements.push(checkBox);
             checkBoxWrapper.append(checkBox);
             checkBoxWrapper.append(label);
             checkBoxWrapper.append(document.createElement("br"));
+          });
+
+          currentAnswer.listaOpciones.forEach((opcion) => {
+            if (opcion.tipo == "checkbox") {
+              checkBoxElements[opcion.contador].checked = opcion.valor;
+            }
           });
           form_group.append(checkBoxWrapper);
         }
         break;
       case "location":
         {
-
-          console.log("answer is ", currentAnswer);
-          console.log("question is ", question);
-
-
           let selectProvincia = generateSelect(optionsArray[0]);
           let selectCanton = generateSelect(optionsArray[1]);
           let selectDistrito = generateSelect(optionsArray[2]);
@@ -160,11 +181,24 @@ export  async function buildAllQuestions(cuestionario, answerId, isQuestionBuild
             selectCanton,
             selectDistrito
           );
-          selectProvincia.selectedIndex = currentAnswer.listaOpciones[0].valor;
-          selectCanton.selectedIndex = currentAnswer.listaOpciones[1].valor;
-          selectDistrito.selectedIndex = currentAnswer.listaOpciones[2].valor;
+          selectProvincia.value = currentAnswer.listaOpciones[0].valor;
 
-          console.log(selectProvincia.selectedIndex)
+          await locationLogic.selectProvinciasFunction(
+            selectProvincia.value,
+            selectCanton
+          );
+
+          selectCanton.value = currentAnswer.listaOpciones[1].valor;
+
+          await locationLogic.selectCantonesFunction(
+            selectCanton.value,
+            selectDistrito
+          );
+
+          console.log("Updated select canton");
+          selectDistrito.value = currentAnswer.listaOpciones[2].valor;
+
+          console.log(selectCanton.value);
           locationWrapper.append(selectProvincia);
           locationWrapper.append(selectCanton);
           locationWrapper.append(selectDistrito);
@@ -179,7 +213,7 @@ export  async function buildAllQuestions(cuestionario, answerId, isQuestionBuild
     contents.append(contents_data);
     item.append(contents);
     document.querySelector("#mainForm").prepend(item);
-  };
+  }
 }
 
 const createExtra = (options) => {
@@ -223,7 +257,6 @@ const generateCheckBox = (dbCheckBox) => {
   checkBox.type = "checkbox";
   checkBox.id = uuidv4();
   checkBox.classList.add("form-check-input");
-  checkBox.checked = dbCheckBox.esRespuesta;
 
   return checkBox;
 };

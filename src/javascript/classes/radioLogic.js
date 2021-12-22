@@ -10,45 +10,42 @@ export class RadioLogic {
     this.textAreaList = radioWrapper.querySelectorAll(".extra");
     this.radioList.forEach((radio) => {
       radio.addEventListener("change", (e) => {
-
         this.currentRadio = e.target;
         if (this.lastSelectedRadio != null) {
-          this.lastSelectedRadio.dataset.esrespuesta = false;
+          if (this.lastSelectedRadio.checkde == false) {
+            this.lastSelectedRadio.dataset.esrespuesta = false;
+          }
         }
-        if(this.currentRadio.checked == true){
-          
-        }else{
+        if (this.currentRadio.checked == true) {
+          this.currentRadio.dataset.esrespuesta = true;
+          if (this.currentRadio.dataset.escompleja == "true") {
+            console.log("WORKING?");
+            this.changeRquired(true);
+          } else {
+            this.changeRquired(false);
+          }
+        } else {
           this.currentRadio.dataset.esrespuesta = false;
         }
-        
-       
-      //Hay que decicidr como marcar la opcion que va a hacer triger a la otra
-        if (this.currentRadio.dataset.escompleja == "true") {
-      
-          this.changeRquired(true);
-        } else {
-          this.changeRquired(false);
-        }
+
+        //Hay que decicidr como marcar la opcion que va a hacer triger a la otra
+
         this.lastSelectedRadio = this.currentRadio;
       });
     });
   };
 
-
   changeRquired = (required) => {
     this.textAreaList.forEach((textArea) => {
       textArea.required = required;
       textArea.disabled = !required;
-      textArea.querySelectorAll("textarea").forEach(element => {
-        
-        element.dataset.esrespuesta=required
+      textArea.querySelectorAll("textarea").forEach((element) => {
+        element.dataset.esrespuesta = required;
       });
-      if(!required){
-  
-          textArea.value= "";
-          textArea.style.display ="none"
-      }else
-      textArea.style.display ="block"
+      if (!required) {
+        textArea.value = "";
+        textArea.style.display = "none";
+      } else textArea.style.display = "block";
     });
   };
 }

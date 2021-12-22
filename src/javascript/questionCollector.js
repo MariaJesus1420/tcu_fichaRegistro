@@ -20,13 +20,13 @@ export async function collectAllQuestions() {
       selectIds.forEach((id) => {
         let select = question.querySelector(`#${id}`);
         let opcion = {
-          valor: select.selectedIndex,
+          valor: select.value,
           tipo: "option",
         };
         listaOpciones.push(opcion);
       });
     } else {
-      optionsArray.forEach((option) => {
+      optionsArray.forEach((option,index) => {
         if (option.dataset.esrespuesta == "true") {
           let valor;
 
@@ -45,6 +45,7 @@ export async function collectAllQuestions() {
               break;
             case "radio":
               valor = option.checked;
+              
               break;
             default:
               break;
@@ -53,6 +54,7 @@ export async function collectAllQuestions() {
           let opcion = {
             valor: valor,
             tipo: option.dataset.tipoopcion,
+            contador: index
           };
 
           listaOpciones.push(opcion);
