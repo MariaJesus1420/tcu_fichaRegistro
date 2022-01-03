@@ -8,15 +8,14 @@ export class ComplexRadioInput extends Item {
 
   async createContents(hasAnswers) {
     let extraOptions = [];
-    let value=0
+    let value = 0;
     let radioOptions = this.findAllOptionTypes(this.optionsList, "radio");
-
+    let disabled = true;
     let optionElements = [];
     if (hasAnswers) {
-      value = this.answersList[0].valor
+      value = this.answersList[0].valor;
     } else {
-      radio.disabled = false;
-      textArea.disabled = false;
+      disabled = false;
     }
     let radioWrapper = document.createElement("div");
     radioWrapper.classList.add("custom-control", "custom-radio");
@@ -25,7 +24,7 @@ export class ComplexRadioInput extends Item {
     let label;
 
     radioOptions.forEach((dbRadio, index) => {
-      let radio = this.generateRadio(dbRadio);
+      let radio = this.generateRadio(dbRadio, disabled);
 
       label = this.generateLabel(radio.id, dbRadio.textoOpcion);
       radio.name = groupName;
@@ -40,21 +39,25 @@ export class ComplexRadioInput extends Item {
       let textArea = this.generateTextArea(
         option.textoOpcion,
         option.placeholder,
-        option
+        option,
+        disabled
       );
       optionElements.push(textArea);
       extraOptions.push(textArea);
     });
 
-    this.answersList.forEach((opcion) => {
-      if (opcion.tipo == "radio") {
-        optionElements[opcion.contador].checked = opcion.valor;
-      } else {
-        if (opcion.tipo == "textArea") {
-          optionElements[opcion.contador].value = opcion.valor;
+    if (hasAnswers) {
+      this.answersList.forEach((opcion) => {
+        if (opcion.tipo == "radio") {
+          optionElements[opcion.contador].checked = opcion.valor;
+        } else {
+          if (opcion.tipo == "textArea") {
+            optionElements[opcion.contador].value = opcion.valor;
+          }
         }
-      }
-    });
+      });
+    }
+
     this.htmlFormGroup.append(this.createExtra(extraOptions));
   }
 }

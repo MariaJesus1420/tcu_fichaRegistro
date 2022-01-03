@@ -6,9 +6,22 @@ export class LocationSelector extends Item {
   }
 
   async createContents(hasAnswers) {
-    let selectProvincia = this.generateSelect(this.optionsList[0]);
-    let selectCanton = this.generateSelect(this.optionsList[1]);
-    let selectDistrito = this.generateSelect(this.optionsList[2]);
+    let provinciaValue = 1
+    let cantonValue = 1
+    let distritoValue = 1
+
+    let disabled = true
+    if(hasAnswers){
+      provinciaValue = this.answersList[0].valor;
+      cantonValue = this.answersList[1].valor;
+      distritoValue = this.answersList[2].valor;
+    }else{
+      disabled = false
+    }
+    console.log("disabled = ",disabled)
+    let selectProvincia = this.generateSelect(this.optionsList[0],disabled);
+    let selectCanton = this.generateSelect(this.optionsList[1],disabled);
+    let selectDistrito = this.generateSelect(this.optionsList[2],disabled);
 
     selectProvincia.id = "provincias";
     selectCanton.id = "cantones";
@@ -23,21 +36,21 @@ export class LocationSelector extends Item {
       selectCanton,
       selectDistrito
     );
-    selectProvincia.value = this.answersList[0].valor;
+    selectProvincia.value = provinciaValue;
 
     await locationLogic.selectProvinciasFunction(
       selectProvincia.value,
       selectCanton
     );
 
-    selectCanton.value = this.answersList[1].valor;
+    selectCanton.value = cantonValue;
 
     await locationLogic.selectCantonesFunction(
       selectCanton.value,
       selectDistrito
     );
 
-    selectDistrito.value = this.answersList[2].valor;
+    selectDistrito.value = distritoValue;
 
     locationWrapper.append(selectProvincia);
     locationWrapper.append(selectCanton);

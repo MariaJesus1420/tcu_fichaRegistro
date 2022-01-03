@@ -8,15 +8,17 @@ export class SimpleTextArea extends Item {
 
   createContents(hasAnswers) {
     let value = "";
+    let disabled = true;
     if (hasAnswers) {
       value = this.answersList[0].valor;
-    }else{
-      textArea.disabled=false;
+    } else {
+      disabled = false;
     }
     let textArea = this.generateTextArea(
       value,
       this.optionsList[0].placeholder,
-      this.optionsList[0]
+      this.optionsList[0],
+      disabled
     );
     this.htmlFormGroup.append(textArea);
   }

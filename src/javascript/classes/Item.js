@@ -80,23 +80,23 @@ export class Item {
     return result;
   };
 
-  generateCheckBox = (dbCheckBox) => {
+  generateCheckBox = (dbCheckBox,disabled) => {
     let checkBox = document.createElement("input");
     this.setProperties(checkBox, dbCheckBox);
     checkBox.type = "checkbox";
     checkBox.id = uuidv4();
     checkBox.classList.add("form-check-input");
-    checkBox.disabled=true;
+    checkBox.disabled=disabled;
     return checkBox;
   };
 
-  generateInput = (value, placeHolder, dbInput) => {
+  generateInput = (value, placeHolder, dbInput,disabled) => {
     let input = document.createElement("input");
     this.setProperties(input, dbInput);
     input.type = "text";
     input.required = true;
     input.placeholder = placeHolder;
-    input.disabled=true;
+    input.disabled=disabled;
     input.classList.add("form-control");
     input.value = value;
 
@@ -112,22 +112,22 @@ export class Item {
     return label;
   };
 
-  generateRadio = (dbRadio) => {
+  generateRadio = (dbRadio,disabled) => {
     let radio = document.createElement("input");
     radio.type = "radio";
     this.setProperties(radio, dbRadio);
     radio.classList.add("custom-control-input");
     radio.id = uuidv4();
-    radio.disabled=true;
+    radio.disabled=disabled;
     return radio;
   };
 
-  generateSelect = (value) => {
+  generateSelect = (value,disabled) => {
     let select = document.createElement("select");
     select.required = true;
     select.classList.add("form-select");
     select.value = value;
-    select.disabled=true;
+    select.disabled=disabled;
     return select;
   };
 
@@ -136,18 +136,18 @@ export class Item {
     this.setProperties(option, dbOption);
     option.text = text;
     option.value = value;
-    option.disabled=true;
+  
 
     return option;
   };
-  generateTextArea = (value, placeHolder, dbTextArea) => {
+  generateTextArea = (value, placeHolder, dbTextArea,disabled) => {
     let textArea = document.createElement("textArea");
     this.setProperties(textArea, dbTextArea);
     textArea.required = true;
     textArea.placeholder = placeHolder;
     textArea.classList.add("form-control");
     textArea.value = value;
-    textArea.disabled=true;
+    textArea.disabled=disabled;
     textArea.rows = "3";
     return textArea;
   };

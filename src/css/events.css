@@ -2,3 +2,14 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.card-body-btns>a{
+    margin: auto;
+    margin-bottom: 5px;
+}
+
+.card-body-btns{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}

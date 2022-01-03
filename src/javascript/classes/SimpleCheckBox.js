@@ -2,23 +2,24 @@ import { Item } from "./Item";
 
 export class SimpleCheckBox extends Item {
   constructor(questionType, questionText, optionsList, answersList) {
-
     super(questionType, questionText, optionsList, answersList);
   }
 
   createContents(hasAnswers) {
     let label;
-    let value= 0
+    let value = 0;
     let checkBoxWrapper = document.createElement("div");
+
+    let disabled = true
     checkBoxWrapper.classList.add("form-check");
     if (hasAnswers) {
-      value = this.answersList[0].valor
+      value = this.answersList[0].valor;
     } else {
-      checkBox.disabled = false;
+      disabled = false
     }
     let checkBoxElements = [];
     this.optionsList.forEach((dbCheckBox, index) => {
-      let checkBox = this.generateCheckBox(dbCheckBox);
+      let checkBox = this.generateCheckBox(dbCheckBox,disabled);
 
       label = this.generateLabel(checkBox.id, dbCheckBox.textoOpcion);
 
@@ -28,11 +29,14 @@ export class SimpleCheckBox extends Item {
       checkBoxWrapper.append(document.createElement("br"));
     });
 
-    this.answersList.forEach((opcion) => {
-      if (opcion.tipo == "checkbox") {
-        checkBoxElements[opcion.contador].checked = opcion.valor;
-      }
-    });
+    if (hasAnswers) {
+      this.answersList.forEach((opcion) => {
+        if (opcion.tipo == "checkbox") {
+          checkBoxElements[opcion.contador].checked = opcion.valor;
+        }
+      });
+    }
+
     this.htmlFormGroup.append(checkBoxWrapper);
   }
 }

@@ -14,8 +14,11 @@
         <header class="row py-4 border-bottom header">
             <div class="row">
                 <div class="col">
-                    <a id="linkHeader">
-                        <img id="imagenHeader" src="assets/img/firma-ucr-c.svg"></img>
+                    <a id="linkHeader"> 
+                        <!-- src="assets/img/firma-ucr-c.svg"-->
+                        
+                       
+                        <img id="imagenHeader" ></img>
                     </a>
                 </div>
                 <div class="col-2">
@@ -55,7 +58,7 @@
                 </h2>
                 <div class="infoContent row"> 
                     <div class="infoWrapper col-3">Info...</div>
-                <div id="cuestionariosWrapper"class="cuestionariosWrapper col-9 row">
+                <div id=""class=" col-9 row">
                  
                       
                   
@@ -107,6 +110,25 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalEvent" tabindex="-1" aria-labelledby="modalEventLabelTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalEventLabelTitle">Informacion acerca del evento</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <hr/>
+              <div class="row cuestionariosWrapper" id="cuestionariosWrapper"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+             
+            </div>
+          </div>
+        </div>
+      </div>
 
 </body>
 <script>

@@ -39,7 +39,11 @@ export const HOME = {
       let eventListDB=await db.obtenerDocumento("Events","2021")
       let id = clickedEvent.id
       
-    
+      let modalEvent = new bootstrap.Modal(document.getElementById("modalEvent"), {
+        keyboard: false,
+      });
+
+      modalEvent.show()
       for (let index = 0; index < eventListDB[id].cuestionarios.length; index++) {
         let cuestionario= eventListDB[id].cuestionarios[index];
         let cuestionarioDB = await db.obtenerDocumento("Cuestionarios",cuestionario)
@@ -67,17 +71,21 @@ export const HOME = {
         height: 600,
         navLinks: true,
         locale: "es",
-        aspectRatio: 1.35,
-        expandRows: true,
+        aspectRatio: 2,
+        expandRows: false,
+     
         initialView: "listMonth",
-
+        buttonText:{
+          listMonth:"Lista"
+        },
         footerToolbar: {
-          end: "listMonth",
+          start:"today",
+          end: "prev,next",
         },
         headerToolbar: {
-          start: "title",
-          center: "today",
-          end: "dayGridMonth timeGridWeek prev,next",
+          left: "title",
+          end: "dayGridMonth listMonth",
+         
         },
         eventTimeFormat: {
           hour: "numeric",

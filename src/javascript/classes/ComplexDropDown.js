@@ -9,7 +9,7 @@ export class ComplexDropDown extends Item {
   async createContents(hasAnswers) {
     let selectedIndexValue = 0;
     let inputValue = "";
-
+    let disabled= true;
     let indexFinal = this.optionsList.length - 1;
   
     if (hasAnswers) {
@@ -18,13 +18,12 @@ export class ComplexDropDown extends Item {
         inputValue = this.answersList[1].valor;
       }
     }else{
-      select.disabled=false;
-      input.disabled=false;
+      disabled = false;
     }
     let optionElements = [];
 
     let extraOptions = [];
-    let select = this.generateSelect(this.optionsList[indexFinal].textoOpcion);
+    let select = this.generateSelect(this.optionsList[indexFinal].textoOpcion,disabled);
 
     for (let index = 0; index < this.optionsList.length; index++) {
       if (this.optionsList[index].tipoOpcion == "option") {
@@ -43,7 +42,7 @@ export class ComplexDropDown extends Item {
     let input = this.generateInput(
       dbInputDropwdown.textoOpcion,
       dbInputDropwdown.placeHolder,
-      dbInputDropwdown
+      dbInputDropwdown,disabled
     );
 
     input.value = inputValue;

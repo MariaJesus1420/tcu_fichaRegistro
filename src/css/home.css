@@ -103,10 +103,11 @@ div[data-questionType="complexDropDown"] div.contents-data{
 .imagenFooter {
   text-align: center;
 }
-#imagenHeader {
+
+#imagenHeader99 {
   max-width: none;
 }
-#linkHeader {
+#linkHeader99 {
   width: 650px;
   overflow: hidden;
 }

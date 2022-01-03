@@ -7,14 +7,19 @@ import { SimpleTextInput } from "./Classes/SimpleTextInput";
 
 export async function generateQuestions(cuestionario, respuestaId) {
   let allQuestionsArray = cuestionario.listaPreguntas.reverse();
-
-  let answersArray =
-    cuestionario.Respuestas[respuestaId].listaPreguntas.reverse();
+  let answersArray = [];
+  if (respuestaId) {
+    answersArray =
+      cuestionario.Respuestas[respuestaId].listaPreguntas.reverse();
+  }
 
   let optionsArray = [];
+  let answersList = [];
   for (const [index, question] of allQuestionsArray.entries()) {
     let currentAnswer = answersArray[index];
-
+    if (respuestaId) {
+      answersList = currentAnswer.listaOpciones;
+    }
     optionsArray = question.listaOpciones;
 
     let item;
@@ -26,11 +31,10 @@ export async function generateQuestions(cuestionario, respuestaId) {
             question.tipoPregunta,
             question.textoPregunta,
             optionsArray,
-            currentAnswer.listaOpciones
+            answersList
           );
 
-          item.createContents(true);
-       
+          item.createContents(respuestaId);
         }
         break;
       case "simpleTextArea":
@@ -39,10 +43,10 @@ export async function generateQuestions(cuestionario, respuestaId) {
             question.tipoPregunta,
             question.textoPregunta,
             optionsArray,
-            currentAnswer.listaOpciones
+            answersList
           );
 
-          item.createContents(true);
+          item.createContents(respuestaId);
         }
         break;
       case "complexDropDown":
@@ -51,10 +55,10 @@ export async function generateQuestions(cuestionario, respuestaId) {
             question.tipoPregunta,
             question.textoPregunta,
             optionsArray,
-            currentAnswer.listaOpciones
+            answersList
           );
 
-          item.createContents(true);
+          item.createContents(respuestaId);
         }
         break;
 
@@ -64,10 +68,10 @@ export async function generateQuestions(cuestionario, respuestaId) {
             question.tipoPregunta,
             question.textoPregunta,
             optionsArray,
-            currentAnswer.listaOpciones
+            answersList
           );
 
-          item.createContents(true);
+          item.createContents(respuestaId);
         }
         break;
       case "simpleCheckbox":
@@ -76,10 +80,10 @@ export async function generateQuestions(cuestionario, respuestaId) {
             question.tipoPregunta,
             question.textoPregunta,
             optionsArray,
-            currentAnswer.listaOpciones
+            answersList
           );
 
-          item.createContents(true);
+          item.createContents(respuestaId);
         }
         break;
       case "location":
@@ -88,16 +92,15 @@ export async function generateQuestions(cuestionario, respuestaId) {
             question.tipoPregunta,
             question.textoPregunta,
             optionsArray,
-            currentAnswer.listaOpciones
+            answersList
           );
 
-          item.createContents(true);
+          item.createContents(respuestaId);
         }
         break;
       default:
         break;
     }
     document.querySelector("#mainForm").prepend(item.htmlItem);
-
   }
 }
