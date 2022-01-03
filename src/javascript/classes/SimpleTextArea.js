@@ -10,6 +10,8 @@ export class SimpleTextArea extends Item {
     let value = "";
     if (hasAnswers) {
       value = this.answersList[0].valor;
+    }else{
+      textArea.disabled=false;
     }
     let textArea = this.generateTextArea(
       value,

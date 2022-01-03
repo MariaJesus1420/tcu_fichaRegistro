@@ -11,12 +11,15 @@ export class ComplexDropDown extends Item {
     let inputValue = "";
 
     let indexFinal = this.optionsList.length - 1;
-
+  
     if (hasAnswers) {
       selectedIndexValue = this.answersList[0].valor;
       if (this.answersList[1]!= undefined) {
         inputValue = this.answersList[1].valor;
       }
+    }else{
+      select.disabled=false;
+      input.disabled=false;
     }
     let optionElements = [];
 

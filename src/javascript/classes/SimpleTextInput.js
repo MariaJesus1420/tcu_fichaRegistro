@@ -10,6 +10,8 @@ export class SimpleTextInput extends Item {
     let value= ""
     if(hasAnswers){
         value =this.answersList[0].valor
+    }else{
+      input.disabled=false;
     }
     let input = this.generateInput(
       value,

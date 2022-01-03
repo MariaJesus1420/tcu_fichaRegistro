@@ -6,12 +6,18 @@ export class ComplexRadioInput extends Item {
     super(questionType, questionText, optionsList, answersList);
   }
 
- async createContents(hasAnswers) {
+  async createContents(hasAnswers) {
     let extraOptions = [];
+    let value=0
     let radioOptions = this.findAllOptionTypes(this.optionsList, "radio");
 
     let optionElements = [];
-
+    if (hasAnswers) {
+      value = this.answersList[0].valor
+    } else {
+      radio.disabled = false;
+      textArea.disabled = false;
+    }
     let radioWrapper = document.createElement("div");
     radioWrapper.classList.add("custom-control", "custom-radio");
     this.htmlFormGroup.append(radioWrapper);

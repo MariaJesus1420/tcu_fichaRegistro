@@ -86,7 +86,7 @@ export class Item {
     checkBox.type = "checkbox";
     checkBox.id = uuidv4();
     checkBox.classList.add("form-check-input");
-
+    checkBox.disabled=true;
     return checkBox;
   };
 
@@ -96,7 +96,7 @@ export class Item {
     input.type = "text";
     input.required = true;
     input.placeholder = placeHolder;
-
+    input.disabled=true;
     input.classList.add("form-control");
     input.value = value;
 
@@ -108,6 +108,7 @@ export class Item {
     label.classList.add("custom-control-label");
     label.htmlFor = id;
     label.innerHTML = text;
+    label.disabled=true;
     return label;
   };
 
@@ -117,6 +118,7 @@ export class Item {
     this.setProperties(radio, dbRadio);
     radio.classList.add("custom-control-input");
     radio.id = uuidv4();
+    radio.disabled=true;
     return radio;
   };
 
@@ -125,7 +127,7 @@ export class Item {
     select.required = true;
     select.classList.add("form-select");
     select.value = value;
-
+    select.disabled=true;
     return select;
   };
 
@@ -134,6 +136,7 @@ export class Item {
     this.setProperties(option, dbOption);
     option.text = text;
     option.value = value;
+    option.disabled=true;
 
     return option;
   };
@@ -144,7 +147,7 @@ export class Item {
     textArea.placeholder = placeHolder;
     textArea.classList.add("form-control");
     textArea.value = value;
-    //  textArea.disabled = true;
+    textArea.disabled=true;
     textArea.rows = "3";
     return textArea;
   };
