@@ -1,9 +1,9 @@
 
 import "../css/home.css";
 import "../css/events.css";
-import { DATABASE } from "./classes/DataBase";
+import { DATABASE } from "./Classes/DataBase";
 import { v4 as uuidv4 } from "uuid";
-import { Card } from "./classes/Card";
+import { Card } from "./Classes/Card";
 
 
 
