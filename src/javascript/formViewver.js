@@ -6,6 +6,7 @@ import { SelectTagLogic } from "./classes/SelectLogic";
 import { v4 as uuidv4 } from "uuid";
 import "../css/home.css";
 import { collectAllQuestions } from "./questionCollector";
+import { generateQuestions } from "./questionCreator";
 export const FORMVIEWVER = {
     init: async() =>{
         console.log("INIT FORM")
@@ -17,8 +18,8 @@ export const FORMVIEWVER = {
 
        
         
-        buildAllQuestions(cuestionario,"1eeff9dc-02ff-4890-925e-1887332007c5");
-
+       // buildAllQuestions(cuestionario,"1eeff9dc-02ff-4890-925e-1887332007c5");
+        generateQuestions(cuestionario,"1eeff9dc-02ff-4890-925e-1887332007c5")
         let checkBoxList = document.querySelectorAll("input[type='checkbox']")
         let checkBoxLogic = new CheckBoxLogic();
         checkBoxLogic.changeSelectedCheckBox(checkBoxList)

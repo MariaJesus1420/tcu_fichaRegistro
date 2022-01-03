@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { LocationLogic } from "./classes/LocationLogic";
+import { LocationLogic } from "./Classes/LocationLogic";
 export async function buildAllQuestions(
   cuestionario,
   answerId,
