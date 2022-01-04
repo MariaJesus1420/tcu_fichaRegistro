@@ -44,7 +44,7 @@ export const HOME = {
       let cuestionarioCard = document.querySelector(".cuestionarioCard")
       cuestionariosWrapper2.forEach(cuestionarioCard => cuestionarioCard.remove())
       for (let index = 0; index < eventListDB[id].cuestionarios.length; index++) {
-        let cuestionario = eventListDB[id].cuestionarios[index];
+        let cuestionario = eventListDB[id].cuestionarios[index];1
         let cuestionarioDB = await db.obtenerDocumento("Cuestionarios", cuestionario)
         console.log(cuestionarioDB)
         let object = {
@@ -53,11 +53,11 @@ export const HOME = {
           titulo: "Ficha de Registro"
         }
         //    await db.addForm(object);
-        cuestionariosWrapper.append(new Card("Cuestionario sobre patrimonio", cuestionarioDB.descripcion, cuestionario).generateCard())
+        cuestionariosWrapper.append(new Card("Cuestionario sobre patrimonio", cuestionarioDB.descripcion, cuestionario).generateCard(cuestionario, cuestionarioDB))
       }
     }
 
- 
+
     
     let eventoSeleccionado;
     const generateCalendar = (eventList) => {

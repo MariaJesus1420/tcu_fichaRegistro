@@ -1,3 +1,5 @@
+import { Modals } from "./Modals";
+
 export class Card {
   title;
   description;
@@ -9,7 +11,7 @@ export class Card {
     this.href = href;
   }
 
-  generateCard() {
+  generateCard(cuestionario, cuestionarioDB) {
     let cardWrapper = document.createElement("div");
     cardWrapper.classList.add("col-lg-4");
     let card = document.createElement("div");
@@ -39,15 +41,19 @@ export class Card {
 
     cardBodyBtns.append(href);
     participantes.addEventListener("click",()=>{
-
-      
+      let cuestionariosWrapper = document.querySelectorAll("#respuestasWrapper");
+      let table = document.querySelector(".table table-hover table-striped table-sm");
+      let id=0;
       console.log("CLICK RESPUESTAS")
       $('#modalEvent').modal('hide');
+      cuestionariosWrapper.forEach(cuestionariosWrapper => cuestionariosWrapper.append(new Modals(id,cuestionarioDB.listaPreguntas[9].textoOpcion, href).generateModal()), id++);
       $('#modalRespuestas').modal('show');
-
+      
+      
       $("#btnVolverRespuestas").click(()=>{
       
         $('#modalRespuestas').modal('hide');
+        // cuestionariosWrapper.forEach(table => table.remove());
         $('#modalEvent').modal('show');
       })
     })
