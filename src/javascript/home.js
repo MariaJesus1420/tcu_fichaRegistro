@@ -10,7 +10,7 @@ import { Card } from "./Classes/Card";
 
 export const HOME = {
   init: async () => {
-   
+
     const generateEventsList = (eventsDB) => {
       let eventsList = [];
 
@@ -32,33 +32,40 @@ export const HOME = {
       return eventsList;
     };
 
-    const eventoClick = async (info)=>{
+    const eventoClick = async (info) => {
       let cuestionariosWrapper = document.querySelector("#cuestionariosWrapper")
       let clickedEvent = info.event
       let db = new DATABASE()
-      let eventListDB=await db.obtenerDocumento("Events","2021")
+      let eventListDB = await db.obtenerDocumento("Events", "2021")
       let id = clickedEvent.id
-      
+
       let modalEvent = new bootstrap.Modal(document.getElementById("modalEvent"), {
         keyboard: false,
       });
 
       modalEvent.show()
       for (let index = 0; index < eventListDB[id].cuestionarios.length; index++) {
-        let cuestionario= eventListDB[id].cuestionarios[index];
-        let cuestionarioDB = await db.obtenerDocumento("Cuestionarios",cuestionario)
+        let cuestionario = eventListDB[id].cuestionarios[index];
+        let cuestionarioDB = await db.obtenerDocumento("Cuestionarios", cuestionario)
         console.log(cuestionarioDB)
         let object = {
-          listaPreguntas :cuestionarioDB.listaPreguntas,
-          descripcion : cuestionarioDB.descripcion,
+          listaPreguntas: cuestionarioDB.listaPreguntas,
+          descripcion: cuestionarioDB.descripcion,
           titulo: "Ficha de Registro"
+        }
+        //    await db.addForm(object);
+        cuestionariosWrapper.append(new Card("Cuestionario sobre patrimonio", cuestionarioDB.descripcion, cuestionario).generateCard())
       }
-    //    await db.addForm(object);
-        cuestionariosWrapper.append(new Card("Cuestionario sobre patrimonio",cuestionarioDB.descripcion,cuestionario).generateCard())
-      }
-   
     }
 
+    modalEvent.addEventListener('hidden.bs.modal', function (event) {
+      let cuestionariosWrapper = document.querySelectorAll(".col-lg-4")
+      let cuestionarioCard = document.querySelector(".cuestionarioCard")
+      cuestionariosWrapper.forEach(cuestionarioCard => cuestionarioCard.remove())
+
+      console.log('removed')
+    })
+    
     let eventoSeleccionado;
     const generateCalendar = (eventList) => {
       var calendarEl = document.getElementById("calendar");
@@ -73,19 +80,19 @@ export const HOME = {
         locale: "es",
         aspectRatio: 2,
         expandRows: false,
-     
+
         initialView: "listMonth",
-        buttonText:{
-          listMonth:"Lista"
+        buttonText: {
+          listMonth: "Lista"
         },
         footerToolbar: {
-          start:"today",
+          start: "today",
           end: "prev,next",
         },
         headerToolbar: {
           left: "title",
           end: "dayGridMonth listMonth",
-         
+
         },
         eventTimeFormat: {
           hour: "numeric",
@@ -117,7 +124,7 @@ export const HOME = {
 
     let db = new DATABASE();
 
-    
+
 
     $("#btnGuardarForm").click(async (e) => {
       let listaPreguntas = await collectAllQuestions();

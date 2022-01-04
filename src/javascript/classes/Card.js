@@ -50,4 +50,5 @@ export class Card {
     });
     return cardWrapper;
   }
+
 }
