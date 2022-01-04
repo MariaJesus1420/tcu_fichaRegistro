@@ -14,11 +14,11 @@
         <header class="row py-4 border-bottom header">
             <div class="row">
                 <div class="col">
-                    <a id="linkHeader"> 
+                    <a id="linkHeader">
                         <!-- src="assets/img/firma-ucr-c.svg"-->
-                        
-                       
-                        <img id="imagenHeader" ></img>
+
+
+                        <img id="imagenHeader"></img>
                     </a>
                 </div>
                 <div class="col-2">
@@ -36,7 +36,7 @@
             </div>
 
 
-          
+
         </header>
     </div>
     <h1 class="text-center" style="margin-top: 30px; margin-bottom: 30px;">
@@ -46,27 +46,27 @@
 
     <div class="mainContentWrapper container">
         <div class="container row  mainContent">
-      
+
             <div class="sombreado calendarWrapper col-12">
                 <div id='calendar'></div>
             </div>
 
             <div class="sombreado infoEventoWrapper">
-                <h2 class="text-center" >
+                <h2 class="text-center">
                     Información del evento
-            
+
                 </h2>
-                <div class="infoContent row"> 
+                <div class="infoContent row">
                     <div class="infoWrapper col-3">Info...</div>
-                <div id=""class=" col-9 row">
-                 
-                      
-                  
+                    <div id="" class=" col-9 row">
+
+
+
+                    </div>
                 </div>
+
             </div>
-               
-            </div>
-            
+
         </div>
     </div>
 
@@ -100,7 +100,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="btnAddEvent" class="btn btn-success">Add event</button>
@@ -113,22 +113,79 @@
 
     <div class="modal fade" id="modalEvent" tabindex="-1" aria-labelledby="modalEventLabelTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="modalEventLabelTitle">Informacion acerca del evento</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEventLabelTitle">Informacion acerca del evento</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <hr />
+                    <div class="row cuestionariosWrapper" id="cuestionariosWrapper"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+
+                </div>
             </div>
-            <div class="modal-body">
-            <hr/>
-              <div class="row cuestionariosWrapper" id="cuestionariosWrapper"></div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-             
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
+
+    <div class="modal fade" id="modalRespuestas" tabindex="-1" aria-labelledby="modalRespuestasLabelTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalRespuestasLabelTitle">Lista de respuestas obtenidas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row respuestasWrapper" id="respuestasWrapper">
+                        <table class="table table-hover table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Usuario</th>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col" class="text-end">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td class="text-end">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <button type="button" class="btn btn-success"><i class="bi bi-eye-fill"></i></button>
+                                            <button type="button" class="btn btn-danger"><i class="bi bi-x"></i></button>
+                                            
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td colspan="2">Larry the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnVolverRespuestas" type="button" class="btn btn-primary"
+                        data-bs-dismiss="modal">Volver</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 <script>

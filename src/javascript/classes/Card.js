@@ -38,6 +38,19 @@ export class Card {
     card_body.append(card_text);
 
     cardBodyBtns.append(href);
+    participantes.addEventListener("click",()=>{
+
+      
+      console.log("CLICK RESPUESTAS")
+      $('#modalEvent').modal('hide');
+      $('#modalRespuestas').modal('show');
+
+      $("#btnVolverRespuestas").click(()=>{
+      
+        $('#modalRespuestas').modal('hide');
+        $('#modalEvent').modal('show');
+      })
+    })
     cardBodyBtns.append(participantes);
     card_body.append(cardBodyBtns);
 

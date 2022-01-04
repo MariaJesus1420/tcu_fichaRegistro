@@ -39,11 +39,10 @@ export const HOME = {
       let eventListDB = await db.obtenerDocumento("Events", "2021")
       let id = clickedEvent.id
 
-      let modalEvent = new bootstrap.Modal(document.getElementById("modalEvent"), {
-        keyboard: false,
-      });
-
-      modalEvent.show()
+      $('#modalEvent').modal('show');
+      let cuestionariosWrapper2 = document.querySelectorAll(".col-lg-4")
+      let cuestionarioCard = document.querySelector(".cuestionarioCard")
+      cuestionariosWrapper2.forEach(cuestionarioCard => cuestionarioCard.remove())
       for (let index = 0; index < eventListDB[id].cuestionarios.length; index++) {
         let cuestionario = eventListDB[id].cuestionarios[index];
         let cuestionarioDB = await db.obtenerDocumento("Cuestionarios", cuestionario)
@@ -58,13 +57,7 @@ export const HOME = {
       }
     }
 
-    modalEvent.addEventListener('hidden.bs.modal', function (event) {
-      let cuestionariosWrapper = document.querySelectorAll(".col-lg-4")
-      let cuestionarioCard = document.querySelector(".cuestionarioCard")
-      cuestionariosWrapper.forEach(cuestionarioCard => cuestionarioCard.remove())
-
-      console.log('removed')
-    })
+ 
     
     let eventoSeleccionado;
     const generateCalendar = (eventList) => {
