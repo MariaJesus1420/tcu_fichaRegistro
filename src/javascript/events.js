@@ -15,7 +15,9 @@ export const EVENTS ={
               id: uuidv4(),
               start:$("#fechaHoraInicial").val(),
               end:$("#fechaHoraFinal").val(),
-              title: $("#nombreEvento").val()
+              title: $("#nombreEvento").val(),
+              descripcion : $("#descipcion").val()
+
             };
             await db.addEvent(event, "2021", event.id);
           

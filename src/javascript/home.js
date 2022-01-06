@@ -46,11 +46,13 @@ export const HOME = {
       for (let index = 0; index < eventListDB[id].cuestionarios.length; index++) {
         let cuestionario = eventListDB[id].cuestionarios[index];1
         let cuestionarioDB = await db.obtenerDocumento("Cuestionarios", cuestionario)
+        
         console.log(cuestionarioDB)
         let object = {
           listaPreguntas: cuestionarioDB.listaPreguntas,
           descripcion: cuestionarioDB.descripcion,
-          titulo: "Ficha de Registro"
+          titulo: "Ficha de Registro",
+          usuario: cuestionarioDB.usuario
         }
         //    await db.addForm(object);
         cuestionariosWrapper.append(new Card("Cuestionario sobre patrimonio", cuestionarioDB.descripcion, cuestionario).generateCard(cuestionario, cuestionarioDB))

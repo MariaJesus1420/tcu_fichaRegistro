@@ -43,10 +43,11 @@ export class Card {
     participantes.addEventListener("click",()=>{
       let cuestionariosWrapper = document.querySelectorAll("#respuestasWrapper");
       let table = document.querySelector(".table table-hover table-striped table-sm");
+      
       let id=0;
       console.log("CLICK RESPUESTAS")
       $('#modalEvent').modal('hide');
-      cuestionariosWrapper.forEach(cuestionariosWrapper => cuestionariosWrapper.append(new Modals(id,cuestionarioDB.listaPreguntas[9].textoOpcion, href).generateModal()), id++);
+      cuestionariosWrapper.forEach(table => table.append(new Modals(id,cuestionarioDB.usuario).generateModal()), id++);
       $('#modalRespuestas').modal('show');
       
       

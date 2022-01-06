@@ -13,17 +13,14 @@
     <div class="container-fluid">
         <header class="row py-4 border-bottom header">
             <div class="row">
-                <div class="col">
+                <div class="col-10">
                     <a id="linkHeader">
-                        <!-- src="assets/img/firma-ucr-c.svg"-->
-
-
-                        <img id="imagenHeader"></img>
+                        <img id="imagenHeader" src="assets/img/firma-ucr-c.svg"></img>
                     </a>
                 </div>
-                <div class="col-2">
+                <!-- <div class="col-2">
 
-                    <div class="dropdown">
+                    <div class="dropdown" style="margin-top: 10px;">
                         <button onclick="myFunction()" class="dropbtn"></button>
                         <div id="myDropdown" class="dropdown-content">
                             <a href="">Ver eventos</a>
@@ -31,7 +28,7 @@
                             <a href="formViewver.html">Ver fichas de registro</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
             </div>
 
@@ -43,14 +40,17 @@
         Calendario de eventos TCU-374/486 Patrimonio y Cultura
 
     </h1>
+    
 
     <div class="mainContentWrapper container">
+       
         <div class="container row  mainContent">
-
             <div class="sombreado calendarWrapper col-12">
                 <div id='calendar'></div>
             </div>
-
+            <div >
+                <button type="button" onclick="addEvent()" id="btnAddEvent" class="btn btn-success" style="margin-top: 5px; margin-bottom: 15px;" >Agregar Evento</button>
+            </div>
             <div class="sombreado infoEventoWrapper">
                 <h2 class="text-center">
                     Información del evento
@@ -203,7 +203,9 @@
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
     }
-
+    function addEvent() {
+        location.href = "events.html";
+    }
     // Close the dropdown menu if the user clicks outside of it
     window.onclick = function (event) {
         if (!event.target.matches('.dropbtn')) {
