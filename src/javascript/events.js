@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from "uuid";
 
 export const EVENTS ={
     init: async () =>{
-        console.log("HOLA");
 
         let db = new DATABASE();
 

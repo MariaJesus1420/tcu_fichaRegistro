@@ -78,7 +78,7 @@ export const HOME = {
 
         initialView: "listMonth",
         buttonText: {
-          listMonth: "Lista"
+          listMonth: "Agenda"
         },
         footerToolbar: {
           start: "today",

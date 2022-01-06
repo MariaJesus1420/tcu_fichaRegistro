@@ -11,6 +11,8 @@ export class Modals {
   generateModal() {
     let div = document.createElement("div");
     div.classList.add("modal-superior");
+    let div2 = document.createElement("div");
+    div2.classList.add("modal-superior-segundo");
     let table = document.createElement("table");
     table.classList.add("table", "table-hover", "table-striped", "table-sm");
     let thead = document.createElement("thead");
@@ -65,14 +67,15 @@ export class Modals {
     tbody.append(trBody);
     table.append(thead);
     table.append(tbody);
-   // div.append(table);
+    div2.append(table);
+    div.append(div2);
 
    btnVer.addEventListener("click", (e) => {
     e.preventDefault();
     sessionStorage.cuestionarioId = this.action;
     location.href = "formViewver.html";
   });
-    return table;
+    return div;
 
   }
 

@@ -43,7 +43,7 @@ export class Card {
     participantes.addEventListener("click",()=>{
       let cuestionariosWrapper = document.querySelectorAll("#respuestasWrapper");
       let table = document.querySelector(".table table-hover table-striped table-sm");
-      
+
       let id=0;
       console.log("CLICK RESPUESTAS")
       $('#modalEvent').modal('hide');
@@ -51,12 +51,15 @@ export class Card {
       $('#modalRespuestas').modal('show');
       
       
-      $("#btnVolverRespuestas").click(()=>{
-      
-        $('#modalRespuestas').modal('hide');
-        // cuestionariosWrapper.forEach(table => table.remove());
-        $('#modalEvent').modal('show');
-      })
+     
+    })
+    $("#btnVolverRespuestas").click(()=>{
+      let div = document.querySelectorAll(".modal-superior");
+      let div2 = document.querySelector(".modal-superior-segundo");
+      $('#modalRespuestas').modal('hide');
+      div.forEach(div2 => div2.remove());
+      console.log("removed")
+      $('#modalEvent').modal('show');
     })
     cardBodyBtns.append(participantes);
     card_body.append(cardBodyBtns);
