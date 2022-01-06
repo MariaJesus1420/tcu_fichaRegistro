@@ -20,6 +20,7 @@ export const EVENTS ={
 
             };
             await db.addEvent(event, "2021", event.id);
+            $('#succes').modal('show');
           
           });
       
