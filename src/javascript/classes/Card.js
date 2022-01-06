@@ -42,23 +42,18 @@ export class Card {
     cardBodyBtns.append(href);
     participantes.addEventListener("click",()=>{
       let cuestionariosWrapper = document.querySelectorAll("#respuestasWrapper");
-      let table = document.querySelector(".table table-hover table-striped table-sm");
-
+      let div = document.querySelector(".modal-superior");
       let id=0;
       console.log("CLICK RESPUESTAS")
       $('#modalEvent').modal('hide');
-      cuestionariosWrapper.forEach(table => table.append(new Modals(id,cuestionarioDB.usuario).generateModal()), id++);
+      cuestionariosWrapper.forEach(div => div.append(new Modals(id,cuestionarioDB.usuario).generateModal()), id++);
       $('#modalRespuestas').modal('show');
-      
-      
-     
     })
     $("#btnVolverRespuestas").click(()=>{
       let div = document.querySelectorAll(".modal-superior");
       let div2 = document.querySelector(".modal-superior-segundo");
       $('#modalRespuestas').modal('hide');
       div.forEach(div2 => div2.remove());
-      console.log("removed")
       $('#modalEvent').modal('show');
     })
     cardBodyBtns.append(participantes);
