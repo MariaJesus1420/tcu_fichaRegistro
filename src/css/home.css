@@ -5,6 +5,7 @@
   margin: auto;
 }
 .mainContent{
+  min-height: calc(100vh - 4rem);
   align-content: center;
   flex-direction: column;
   margin: auto;

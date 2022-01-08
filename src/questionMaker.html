@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body id="start" class="questionMaker">
+
+    <div class="container-fluid">
+        <header class="row py-4 border-bottom header">
+            <div class="row">
+                <div class="col">
+                    <a id="linkHeader">
+                        <img id="imagenHeader" src="assets/img/firma-ucr-c.svg"></img>
+                    </a>
+                </div>
+                <div class="col-2">
+
+                    <div class="dropdown">
+                        <button onclick="myFunction()" class="dropbtn"></button>
+                        <div id="myDropdown" class="dropdown-content">
+                            <a href="">Ver eventos</a>
+                            <a href="events.html">Agregar evento</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- <div><a href="#"
+                    style=" font-weight: normal; margin-top: 5px; background-color: #41ade7; border-color: #030303; font-size: 25px;"
+                    class="btn btn-info" id="btnSeleccion" role="button">Ver datos de eventos</a></div> -->
+
+
+            <!-- <p><a >Ver datos de eventos</a></p> -->
+        </header>
+    </div>
+    <h1 class="text-center" style="margin-top: 30px; margin-bottom: 30px;">
+        Question Maker
+    </h1>
+    <div class="mainContentWrapper container">
+        <div class="container row  mainContent">
+
+            <div class="row seccionBotones">
+                <button  class="col-1 btn btn-success" id="btnAgregarPregunta"><i class="bi bi-plus-circle" id="btnAgregarIcon"></i></button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid">
+        <footer class="row py-3 border-top " id="footer">
+            <div class="col-sm imagenFooter">
+                <img src="assets/img/ucr.svg">
+
+            </div>
+
+            <div class="col-sm imagenFooter">
+                <img src="assets/img/firma-vas-vertical.png">
+
+            </div>
+
+            <div class="col-sm imagenFooter">
+                <img src="assets/img/tcu-logo-vertical.png">
+
+            </div>
+            <P class="text-center avisoCopy">&copy;2021 Universidad de Costa Rica -Tel. 2511-4000. Aviso Legal. Última
+                actualización: agosto de 2021.</P>
+
+
+        </footer>
+    </div>
+  
+
+</body>
+<script>
+
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function (event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
+
+</html>
