@@ -96,6 +96,12 @@ module.exports = {
       ignoreOrder: true,
     }),
 
+    new HtmlWebPackPlugin({
+      filename:"./questionMaker.html",
+      template: "./src/questionMaker.html"
+     
+    }),
+
     new CopyPlugin({
       patterns: [{ from: "src/assets/", to: "assets/" }],
     }),
