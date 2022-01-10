@@ -7,42 +7,144 @@ export class Item {
   htmlContents;
   htmlContents_Data;
   htmlFormGroup;
-  constructor(questionType, questionText, optionsList,answersList) {
+
+  _questionType;
+  _htmlQuestionContent;
+  _isQuestionMaker;
+
+  constructor(
+    questionType,
+    questionText,
+    optionsList,
+    answersList,
+    isQuestionMaker
+  ) {
+    this._isQuestionMaker = isQuestionMaker;
     this._optionList = optionsList;
     this._answersList = answersList;
-
-
+    this._questionType = questionType;
     this._htmlItem = document.createElement("div");
     this._htmlItem.classList.add("item", "container");
     this._htmlItem.dataset.questiontype = questionType;
+    let titulo;
 
+    titulo = this.titleMaker(isQuestionMaker, questionText);
+    this.htmlQuestionContent = document.createElement("div");
+    this.htmlQuestionContent.classList.add("form-group", "questionContent");
+    this.htmlQuestionContent.append(titulo);
     this.htmlContents = document.createElement("div");
     this.htmlContents.classList.add("contents", "row");
     this.htmlContents_Data = document.createElement("div");
     this.htmlContents_Data.classList.add("contents-data");
     this.htmlFormGroup = document.createElement("div");
     this.htmlFormGroup.classList.add("form-group");
-    let titulo = document.createElement("label");
-    titulo.innerText = questionText;
-    this.htmlFormGroup.append(titulo);
- 
+
+    this.htmlFormGroup.append();
   }
 
- async createContents(hasAnswers) {}
+  async createContents(hasAnswers) {}
 
-  get htmlItem() {
+  titleMaker(isQuestionMaker, questionText) {
+    let titulo;
+    if (isQuestionMaker) {
+      titulo = this.generateInput("", questionText);
+      titulo.classList.add("tituloInput");
+    } else {
+      titulo = document.createElement("label");
+      titulo.innerText = questionText;
+    }
+
+    return titulo;
+  }
+
+  get isQuestionMaker() {
+    return this._isQuestionMaker;
+  }
+
+  set htmlQuestionContent(htmlQuestionContent) {
+    this._htmlQuestionContent = htmlQuestionContent;
+  }
+
+  get htmlQuestionContent() {
+    return this._htmlQuestionContent;
+  }
+
+  get questionType() {
+    return this._questionType;
+  }
+
+  set questionType(questionType) {
+    this._questionType = questionType;
+  }
+
+  generateItem() {
+    this.htmlFormGroup.append(this.htmlQuestionContent);
     this.htmlContents_Data.append(this.htmlFormGroup);
     this.htmlContents.append(this.htmlContents_Data);
     this._htmlItem.append(this.htmlContents);
+  }
+
+  get htmlItem() {
     return this._htmlItem;
   }
 
-  get optionsList(){
-    return this._optionList
+  itemQuestionMaker() {
+    let questionSelector = this.generateSelect("", false);
+    questionSelector.classList.add("questionSelector");
+    let deleteQuestionButton = this.generateButtonWithIcon("btn-danger",["bi","bi-trash"])
+
+    this.generateSelectOptions(questionSelector);
+    let selectorWrapper = document.createElement("div");
+    selectorWrapper.classList.add("selectorWrapper");
+    selectorWrapper.append(questionSelector);
+    selectorWrapper.append(deleteQuestionButton)
+    this.htmlFormGroup.prepend(selectorWrapper);
+    return questionSelector;
   }
 
-  get answersList(){
-    return this._answersList
+  generateButtonWithIcon(boostrapClassColor,iconClass) {
+    let button = document.createElement("button");
+    button.classList.add("btn",boostrapClassColor);
+    
+    let buttonIcon = document.createElement("i")
+    iconClass.forEach(element => {
+      buttonIcon.classList.add(element)
+    });
+    
+    button.append(buttonIcon)
+    return button
+  }
+
+  generateSelectOptions(select) {
+    let questionTypesList = {
+      simpleCheckBox: "Selección Múliple",
+      complrexRadioInput: "Selección Única",
+      location: "Ubicación",
+      simpleTextInput: "Texto corto",
+      simpleTextArea: "Texto largo",
+      complexDropDown: "Lista desplegable",
+    };
+
+    let opList = [];
+    for (var key in questionTypesList) {
+      let opt = document.createElement("option");
+      opt.value = key;
+      opt.innerHTML = questionTypesList[key];
+      opList.push(opt);
+    }
+
+    opList.forEach((option, index) => {
+      select.options[index] = option;
+    });
+    return opList;
+  }
+
+  get optionsList() {
+    return this._optionList;
+  }
+
+  get answersList() {
+    return this._answersList;
   }
 
   createExtra = (options) => {
@@ -80,23 +182,26 @@ export class Item {
     return result;
   };
 
-  generateCheckBox = (dbCheckBox,disabled) => {
+  generateCheckBox = (dbCheckBox, disabled) => {
     let checkBox = document.createElement("input");
     this.setProperties(checkBox, dbCheckBox);
     checkBox.type = "checkbox";
     checkBox.id = uuidv4();
     checkBox.classList.add("form-check-input");
-    checkBox.disabled=disabled;
+    checkBox.disabled = disabled;
     return checkBox;
   };
 
-  generateInput = (value, placeHolder, dbInput,disabled) => {
+  generateInput = (value, placeHolder, dbInput, disabled) => {
     let input = document.createElement("input");
-    this.setProperties(input, dbInput);
+    if (dbInput) {
+      this.setProperties(input, dbInput);
+    }
+
     input.type = "text";
     input.required = true;
     input.placeholder = placeHolder;
-    input.disabled=disabled;
+    input.disabled = disabled;
     input.classList.add("form-control");
     input.value = value;
 
@@ -108,26 +213,26 @@ export class Item {
     label.classList.add("custom-control-label");
     label.htmlFor = id;
     label.innerHTML = text;
-    label.disabled=true;
+    label.disabled = true;
     return label;
   };
 
-  generateRadio = (dbRadio,disabled) => {
+  generateRadio = (dbRadio, disabled) => {
     let radio = document.createElement("input");
     radio.type = "radio";
     this.setProperties(radio, dbRadio);
     radio.classList.add("custom-control-input");
     radio.id = uuidv4();
-    radio.disabled=disabled;
+    radio.disabled = disabled;
     return radio;
   };
 
-  generateSelect = (value,disabled) => {
+  generateSelect = (value, disabled) => {
     let select = document.createElement("select");
     select.required = true;
     select.classList.add("form-select");
     select.value = value;
-    select.disabled=disabled;
+    select.disabled = disabled;
     return select;
   };
 
@@ -136,18 +241,17 @@ export class Item {
     this.setProperties(option, dbOption);
     option.text = text;
     option.value = value;
-  
 
     return option;
   };
-  generateTextArea = (value, placeHolder, dbTextArea,disabled) => {
+  generateTextArea = (value, placeHolder, dbTextArea, disabled) => {
     let textArea = document.createElement("textArea");
     this.setProperties(textArea, dbTextArea);
     textArea.required = true;
     textArea.placeholder = placeHolder;
     textArea.classList.add("form-control");
     textArea.value = value;
-    textArea.disabled=disabled;
+    textArea.disabled = disabled;
     textArea.rows = "3";
     return textArea;
   };

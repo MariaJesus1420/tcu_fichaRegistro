@@ -1,8 +1,8 @@
 import { buildAllQuestions } from "./questionBuilder";
-import { DATABASE } from "./classes/DataBase";
-import { CheckBoxLogic } from "./classes/CheckBoxLogic";
-import { RadioLogic } from "./classes/RadioLogic";
-import { SelectTagLogic } from "./classes/SelectLogic";
+import { DATABASE } from "./Classes/DataBase";
+import { CheckBoxLogic } from "./Classes/CheckBoxLogic";
+import { RadioLogic } from "./Classes/RadioLogic";
+import { SelectTagLogic } from "./Classes/SelectLogic";
 import { v4 as uuidv4 } from "uuid";
 import "../css/home.css";
 import { collectAllQuestions } from "./questionCollector";

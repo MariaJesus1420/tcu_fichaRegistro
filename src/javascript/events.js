@@ -1,6 +1,6 @@
 import { locations } from "./locations";
 import "../css/home.css";
-import { DATABASE } from "./classes/DataBase";
+import { DATABASE } from "./Classes/DataBase";
 import { v4 as uuidv4 } from "uuid";
 
 export const EVENTS ={

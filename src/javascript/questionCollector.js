@@ -1,4 +1,4 @@
-import { Opcion } from "./classes/Opcion";
+
 export async function collectAllQuestions() {
   let allQuestionsArray = document.querySelectorAll(".item");
   let optionsArray = [];

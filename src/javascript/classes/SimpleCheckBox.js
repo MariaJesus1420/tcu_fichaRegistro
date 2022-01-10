@@ -37,6 +37,6 @@ export class SimpleCheckBox extends Item {
       });
     }
 
-    this.htmlFormGroup.append(checkBoxWrapper);
+    this.htmlQuestionContent.append(checkBoxWrapper);
   }
 }

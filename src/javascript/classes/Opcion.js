@@ -4,13 +4,14 @@ export class Opcion {
   _esRespuesta;
   _esCompleja;
   _tipoOpcion;
-
-  constructor(esDefault = false, textoOpcion, esRespuesta = false, esCompleja = false, tipoOpcion) {
+  _placeHolder;
+  constructor(esDefault = false, textoOpcion, esRespuesta = false, esCompleja = false, tipoOpcion,placeHolder) {
     this._esDefault = esDefault;
     this._textoOpcion = textoOpcion;
     this._esRespuesta = esRespuesta;
     this._esCompleja = esCompleja;
     this._tipoOpcion = tipoOpcion;
+    this._placeHolder = placeHolder
   }
 
   get esDefault() {
@@ -29,6 +30,10 @@ export class Opcion {
   }
   get tipoOpcion() {
     return this._tipoOpcion;
+  }
+
+  get placeHolder(){
+    return this._placeHolder
   }
 
   set esDefault(esDefault){

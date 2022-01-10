@@ -1,8 +1,8 @@
 import { Item } from "./Item";
 
 export class SimpleTextInput extends Item {
-  constructor(questionType, questionText, optionsList, answersList) {
-    super(questionType, questionText, optionsList, answersList);
+  constructor(questionType, questionText, optionsList, answersList,isQuestionMaker) {
+    super(questionType, questionText, optionsList, answersList,isQuestionMaker);
   }
 
   async createContents(hasAnswers) {
@@ -15,10 +15,12 @@ export class SimpleTextInput extends Item {
     }
     let input = this.generateInput(
       value,
-      this.optionsList[0].placeholder,
+      this.optionsList[0].placeHolder,
       this.optionsList[0],
       disabled
     );
-    this.htmlFormGroup.append(input);
+   
+    this.htmlQuestionContent.append(input);
+
   }
 }

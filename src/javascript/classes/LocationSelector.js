@@ -1,8 +1,8 @@
 import { Item } from "./Item";
 import { LocationLogic } from "./LocationLogic";
 export class LocationSelector extends Item {
-  constructor(questionType, questionText, optionsList, answersList) {
-    super(questionType, questionText, optionsList, answersList);
+  constructor(questionType, questionText, optionsList, answersList,isQuestionMaker) {
+    super(questionType, questionText, optionsList, answersList,isQuestionMaker);
   }
 
   async createContents(hasAnswers) {
@@ -18,7 +18,7 @@ export class LocationSelector extends Item {
     }else{
       disabled = false
     }
-    console.log("disabled = ",disabled)
+   
     let selectProvincia = this.generateSelect(this.optionsList[0],disabled);
     let selectCanton = this.generateSelect(this.optionsList[1],disabled);
     let selectDistrito = this.generateSelect(this.optionsList[2],disabled);
@@ -55,6 +55,6 @@ export class LocationSelector extends Item {
     locationWrapper.append(selectProvincia);
     locationWrapper.append(selectCanton);
     locationWrapper.append(selectDistrito);
-    this.htmlFormGroup.append(locationWrapper);
+    this.htmlQuestionContent.append(locationWrapper);
   }
 }

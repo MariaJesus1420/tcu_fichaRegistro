@@ -20,6 +20,6 @@ export class SimpleTextArea extends Item {
       this.optionsList[0],
       disabled
     );
-    this.htmlFormGroup.append(textArea);
+    this.htmlQuestionContent.append(textArea);
   }
 }

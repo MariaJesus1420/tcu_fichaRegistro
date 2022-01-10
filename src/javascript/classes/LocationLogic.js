@@ -26,13 +26,13 @@ export class LocationLogic {
 
     let data = await locations.getCantones(this.provincia);
     locations.loadData(selectCantones, data);
-    console.log("Done select provincias evnto");
+    
   };
 
   selectCantonesFunction = async (canton, selectDistritos) => {
  
     let data = await locations.getDistritos(this.provincia, canton);
     locations.loadData(selectDistritos, data);
-    console.log("Done select cantones evnto");
+
   };
 }

@@ -1,29 +1,82 @@
-#btnAgregarPregunta{
-  
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    
-    
-    
-   
+.seccionBotones {
+  display: flex;
+  justify-content: center;
+}
+button {
+  padding: 0;
+}
+.circularBtn {
+  width: 40px;
+  height: 40px;
+  background: #009578;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  border: none;
+  text-decoration: none;
+  transition: background 0.2s;
+  font-size: 2rem;
 }
 
-.seccionBotones{
-    justify-content: center;
+.circularBtn:hover {
+  background: #00866c;
 }
 
-#btnAgregarIcon{
-    font-size: 34px;
-    margin-top: 1px;
-    margin-bottom: 1.6px;
-    margin-left: 1.3px;
-    margin-right: 1px;
+.selectorWrapper {
+  margin-left: auto;
+}
+.questionContent {
+  width: 100%;
 }
 
-.questionSelector{
-    
+.tituloInput {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.selectColWrapper {
+  display: flex;
+  padding-left: 0px;
+  padding-right: 0px;
+  width: 96%;
+}
+
+.newDeleteButtonsWrapper {
+  display: flex;
+  padding-left: 0px;
+  padding-right: 0px;
+  justify-content: flex-end;
+  width: 4%;
+}
+
+.newDeleteButtonsWrapper > button{
+  margin-left: 3px;
+}
+.buttonsWrapper {
+  display: flex;
+
+  justify-content: flex-end;
+}
+
+.buttonsWrapper > button {
+  margin-left: 3px;
+  margin-right: 3px;
+}
+.buttonsWrapper > label {
+  margin-bottom: 0px;
+}
+.optionInputWrapper {
+  display: flex;
+  margin-bottom: 3px;
+}
+
+
+
+#complexDropDownSelect {
+  width: 100%;
+  margin-left: 0px;
+  justify-content: space-between;
 }

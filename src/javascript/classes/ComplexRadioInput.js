@@ -19,7 +19,7 @@ export class ComplexRadioInput extends Item {
     }
     let radioWrapper = document.createElement("div");
     radioWrapper.classList.add("custom-control", "custom-radio");
-    this.htmlFormGroup.append(radioWrapper);
+    this.htmlQuestionContent.append(radioWrapper);
     let groupName = uuidv4();
     let label;
 
@@ -58,6 +58,6 @@ export class ComplexRadioInput extends Item {
       });
     }
 
-    this.htmlFormGroup.append(this.createExtra(extraOptions));
+    this.htmlQuestionContent.append(this.createExtra(extraOptions));
   }
 }

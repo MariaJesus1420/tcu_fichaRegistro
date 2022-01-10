@@ -34,7 +34,7 @@ export async function generateQuestions(cuestionario, respuestaId) {
             answersList
           );
 
-          item.createContents(respuestaId);
+          
         }
         break;
       case "simpleTextArea":
@@ -46,7 +46,7 @@ export async function generateQuestions(cuestionario, respuestaId) {
             answersList
           );
 
-          item.createContents(respuestaId);
+   
         }
         break;
       case "complexDropDown":
@@ -58,7 +58,7 @@ export async function generateQuestions(cuestionario, respuestaId) {
             answersList
           );
 
-          item.createContents(respuestaId);
+         
         }
         break;
 
@@ -71,7 +71,7 @@ export async function generateQuestions(cuestionario, respuestaId) {
             answersList
           );
 
-          item.createContents(respuestaId);
+    
         }
         break;
       case "simpleCheckbox":
@@ -83,7 +83,6 @@ export async function generateQuestions(cuestionario, respuestaId) {
             answersList
           );
 
-          item.createContents(respuestaId);
         }
         break;
       case "location":
@@ -95,12 +94,13 @@ export async function generateQuestions(cuestionario, respuestaId) {
             answersList
           );
 
-          item.createContents(respuestaId);
         }
         break;
       default:
         break;
     }
+    item.createContents(respuestaId);
+    item.generateItem()
     document.querySelector("#mainForm").prepend(item.htmlItem);
   }
 }
