@@ -26,7 +26,13 @@ button {
 }
 
 .selectorWrapper {
-  margin-left: auto;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.selectorWrapper > select {
+  width: 30%;
 }
 .questionContent {
   width: 100%;
@@ -72,11 +78,52 @@ button {
   display: flex;
   margin-bottom: 3px;
 }
+.simpleCheckBoxDeleteButtonWrapper{
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+
+}
+
+
+.complexRadioInputDelButtonWrapper{
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+
+.complexRadioInputAddButtonWrapper{
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+  margin-bottom: 5px;
+}
+
+.simpleCheckBoxAddButtonWrapper{
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+  margin-bottom: 5px;
+}
 
 
 
-#complexDropDownSelect {
+.elementsWrapper > .form-check{
+  padding-left: 0px;
+}
+div >.elementsWrapper{
+  margin-bottom: 5px;
   width: 100%;
   margin-left: 0px;
-  justify-content: space-between;
+  padding-right: 0px;
+}
+div > .checkboxArea{
+  margin-left: 0px;
+}
+
+div > .inputArea {
+  width: 100%;
+  margin-left: 0px;
+  
 }

@@ -1,9 +1,9 @@
 import { Item } from "./Item";
 
 export class SimpleTextArea extends Item {
-  constructor(questionType, questionText, optionsList, answersList) {
+  constructor(questionType, questionText, optionsList, answersList,isQuestionMaker) {
     console.log(answersList);
-    super(questionType, questionText, optionsList, answersList);
+    super(questionType, questionText, optionsList, answersList,isQuestionMaker);
   }
 
   createContents(hasAnswers) {
@@ -16,7 +16,7 @@ export class SimpleTextArea extends Item {
     }
     let textArea = this.generateTextArea(
       value,
-      this.optionsList[0].placeholder,
+      this.optionsList[0].placeHolder,
       this.optionsList[0],
       disabled
     );

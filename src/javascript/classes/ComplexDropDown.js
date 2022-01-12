@@ -114,8 +114,8 @@ export class ComplexDropDown extends Item {
     select.selectedIndex = selectedIndexValue;
 
     let selectWrapper = document.createElement("div");
-    selectWrapper.classList.add("complexDropDownSelect", "row", "g-0");
-    selectWrapper.id = "complexDropDownSelect";
+    selectWrapper.classList.add("inputArea", "row", "g-0");
+    selectWrapper.id = "inputArea";
 
     selectWrapper = this.questionMaker(selectWrapper, select);
     this.htmlQuestionContent.append(selectWrapper);

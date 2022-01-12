@@ -6,6 +6,8 @@ import { Opcion } from "./Classes/Opcion";
 import { LocationSelector } from "./Classes/LocationSelector";
 import { SimpleTextArea } from "./Classes/SimpleTextArea";
 import { ComplexDropDown } from "./Classes/ComplexDropDown";
+import { SimpleCheckBox } from "./Classes/SimpleCheckBox";
+import { ComplexRadioInput } from "./Classes/ComplexRadioInput";
 export const QUESTIONMAKER = {
   init: async () => {
     $("#btnAgregarPregunta").click(async () => {
@@ -33,6 +35,7 @@ export const QUESTIONMAKER = {
       let questionSelector = item.itemQuestionMaker();
       questionSelector.addEventListener("change", async (e) => {
         let newItem;
+        console.log(e.target.value)
         switch (e.target.value) {
           case "simpleTextInput":
             {
@@ -102,16 +105,31 @@ export const QUESTIONMAKER = {
 
           case "complexRadioInput":
             {
+              newItem = new ComplexRadioInput(
+                "simpleCheckBox",
+                "Titulo de la pregunta",
+                optionList,
+                [],
+                true
+              );
             }
             break;
-          case "simpleCheckbox":
+          case "simpleCheckBox":
             {
+              newItem = new SimpleCheckBox(
+                "simpleCheckBox",
+                "Titulo de la pregunta",
+                optionList,
+                [],
+                true
+              );
+              
             }
             break;
           case "location":
             {
               newItem = new LocationSelector(
-                "simpleTextInput",
+                "location",
                 "Titulo de la pregunta",
                 optionList,
                 [],

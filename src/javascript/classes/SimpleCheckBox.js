@@ -1,33 +1,91 @@
 import { Item } from "./Item";
 
 export class SimpleCheckBox extends Item {
-  constructor(questionType, questionText, optionsList, answersList) {
-    super(questionType, questionText, optionsList, answersList);
+  constructor(
+    questionType,
+    questionText,
+    optionsList,
+    answersList,
+    isQuestionMaker
+  ) {
+    super(
+      questionType,
+      questionText,
+      optionsList,
+      answersList,
+      isQuestionMaker
+    );
+  }
+
+  generateSingleCheckbox(checkBoxWrapper, dbCheckBox, disabled,checkBoxElements,checkboxArea) {
+
+    let elementsWrapper = document.createElement("div")
+    elementsWrapper.classList.add("elementsWrapper","row","g-0")
+
+    let delButtonWrapper = document.createElement("div");
+    delButtonWrapper.classList.add("col-1","simpleCheckBoxDeleteButtonWrapper")
+    let delButton = this.generateButtonWithIcon("btn-danger",["bi","bi-trash"])
+    delButtonWrapper.append(delButton)
+    delButton.addEventListener("click",()=>{
+      delButton.parentElement.parentElement.remove()
+    })
+
+    let checkBox = this.generateCheckBox(dbCheckBox, disabled);
+
+    let inputCheck = this.generateInput("", "Texto de la opcion");
+    inputCheck.htmlFor = checkBox.id;
+   
+    
+    if (this.isQuestionMaker) {
+      checkBoxWrapper.append(inputCheck);
+    } else {
+      let label = this.generateLabel(checkBox.id, dbCheckBox.textoOpcion);
+      checkBoxWrapper.append(checkBox);
+      checkBoxWrapper.append(label);
+      
+    }
+    checkBoxElements.push(checkBox)
+    elementsWrapper.append(checkBoxWrapper)
+    if(this.isQuestionMaker){
+      elementsWrapper.append(delButtonWrapper)
+    }
+    checkboxArea.append(elementsWrapper)
+   
+  }
+
+  generateCheckboxOptions(disabled, checkBoxElements,checkboxArea) {
+
+
+    this.optionsList.forEach((dbCheckBox, index) => {
+      let checkBoxWrapper = document.createElement("div");
+      checkBoxWrapper.classList.add("form-check","col-11");
+      this.generateSingleCheckbox(checkBoxWrapper,dbCheckBox,disabled,checkBoxElements,checkboxArea)
+
+      
+    });
   }
 
   createContents(hasAnswers) {
-    let label;
     let value = 0;
-    let checkBoxWrapper = document.createElement("div");
 
-    let disabled = true
-    checkBoxWrapper.classList.add("form-check");
+    let inputArea = document.createElement("div");
+    inputArea.classList.add("row","g-0", "inputArea");
+
+    let checkboxArea = document.createElement("div");
+    checkboxArea.classList.add("row","g-0", "checkboxArea");
+    
+    inputArea.append(checkboxArea)
+    
+
+    let disabled = true;
+   
     if (hasAnswers) {
       value = this.answersList[0].valor;
     } else {
-      disabled = false
+      disabled = false;
     }
     let checkBoxElements = [];
-    this.optionsList.forEach((dbCheckBox, index) => {
-      let checkBox = this.generateCheckBox(dbCheckBox,disabled);
-
-      label = this.generateLabel(checkBox.id, dbCheckBox.textoOpcion);
-
-      checkBoxElements.push(checkBox);
-      checkBoxWrapper.append(checkBox);
-      checkBoxWrapper.append(label);
-      checkBoxWrapper.append(document.createElement("br"));
-    });
+    this.generateCheckboxOptions(disabled, checkBoxElements, checkboxArea);
 
     if (hasAnswers) {
       this.answersList.forEach((opcion) => {
@@ -37,6 +95,29 @@ export class SimpleCheckBox extends Item {
       });
     }
 
-    this.htmlQuestionContent.append(checkBoxWrapper);
+    let addButtonWrapper = document.createElement("div");
+    addButtonWrapper.classList.add("col-1","simpleCheckBoxAddButtonWrapper");
+    
+
+    let addButton = this.generateButtonWithIcon("btn-outline-success", [
+      "bi",
+      "bi-plus-lg",
+    ]);
+
+    addButton.addEventListener("click",()=>{
+      let checkBoxWrapper = document.createElement("div");
+      checkBoxWrapper.classList.add("form-check","col-11")
+      this.generateSingleCheckbox(checkBoxWrapper,null,disabled,checkBoxElements,checkboxArea)
+
+    })
+
+    if(this.isQuestionMaker){
+      addButtonWrapper.append(addButton);
+      inputArea.prepend(addButtonWrapper);
+    }
+
+
+   
+    this.htmlQuestionContent.append(inputArea);
   }
 }

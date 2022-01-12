@@ -91,36 +91,41 @@ export class Item {
   itemQuestionMaker() {
     let questionSelector = this.generateSelect("", false);
     questionSelector.classList.add("questionSelector");
-    let deleteQuestionButton = this.generateButtonWithIcon("btn-danger",["bi","bi-trash"])
-
+    let deleteQuestionButton = this.generateButtonWithIcon("btn-danger", [
+      "bi",
+      "bi-trash",
+    ]);
+    deleteQuestionButton.addEventListener("click",()=>{
+      deleteQuestionButton.parentElement.parentElement.parentElement.parentElement.remove()
+    })
     this.generateSelectOptions(questionSelector);
     let selectorWrapper = document.createElement("div");
     selectorWrapper.classList.add("selectorWrapper");
     selectorWrapper.append(questionSelector);
-    selectorWrapper.append(deleteQuestionButton)
+    selectorWrapper.append(deleteQuestionButton);
     this.htmlFormGroup.prepend(selectorWrapper);
     return questionSelector;
   }
 
-  generateButtonWithIcon(boostrapClassColor,iconClass) {
+  generateButtonWithIcon(boostrapClassColor, iconClass) {
     let button = document.createElement("button");
-    button.classList.add("btn",boostrapClassColor);
-    
-    let buttonIcon = document.createElement("i")
-    iconClass.forEach(element => {
-      buttonIcon.classList.add(element)
+    button.classList.add("btn", boostrapClassColor);
+
+    let buttonIcon = document.createElement("i");
+    iconClass.forEach((element) => {
+      buttonIcon.classList.add(element);
     });
-    
-    button.append(buttonIcon)
-    return button
+
+    button.append(buttonIcon);
+    return button;
   }
 
   generateSelectOptions(select) {
     let questionTypesList = {
-      simpleCheckBox: "Selección Múliple",
-      complrexRadioInput: "Selección Única",
-      location: "Ubicación",
       simpleTextInput: "Texto corto",
+      simpleCheckBox: "Selección Múliple",
+      complexRadioInput: "Selección Única",
+      location: "Ubicación",
       simpleTextArea: "Texto largo",
       complexDropDown: "Lista desplegable",
     };
@@ -221,7 +226,7 @@ export class Item {
     let radio = document.createElement("input");
     radio.type = "radio";
     this.setProperties(radio, dbRadio);
-    radio.classList.add("custom-control-input");
+    radio.classList.add("form-check-input");
     radio.id = uuidv4();
     radio.disabled = disabled;
     return radio;
@@ -257,11 +262,13 @@ export class Item {
   };
 
   setProperties = (htmlElement, dbElement) => {
-    htmlElement.dataset.esrespuesta = dbElement.esRespuesta;
-    htmlElement.dataset.esdefault = dbElement.esDefault;
-    htmlElement.dataset.escompleja = dbElement.esCompleja;
-    htmlElement.dataset.tipoopcion = dbElement.tipoOpcion;
-    htmlElement.dataset.textoopcion = dbElement.textoOpcion;
-    htmlElement.dataset.placeholder = dbElement.placeholder;
+    if (dbElement) {
+      htmlElement.dataset.esrespuesta = dbElement.esRespuesta;
+      htmlElement.dataset.esdefault = dbElement.esDefault;
+      htmlElement.dataset.escompleja = dbElement.esCompleja;
+      htmlElement.dataset.tipoopcion = dbElement.tipoOpcion;
+      htmlElement.dataset.textoopcion = dbElement.textoOpcion;
+      htmlElement.dataset.placeholder = dbElement.placeholder;
+    }
   };
 }
