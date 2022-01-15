@@ -147,17 +147,7 @@ export class ComplexRadioInput extends Item {
 
     this.htmlQuestionContent.append(inputArea);
 
-    let dbTextArea = this.findAllOptionTypes(this.optionsList, "textArea");
-    dbTextArea.forEach((option) => {
-      let textArea = this.generateTextArea(
-        option.textoOpcion,
-        option.placeholder,
-        option,
-        disabled
-      );
-      optionElements.push(textArea);
-      extraOptions.push(textArea);
-    });
+   
 
     if (hasAnswers) {
       this.answersList.forEach((opcion) => {
@@ -165,7 +155,7 @@ export class ComplexRadioInput extends Item {
           optionElements[opcion.contador].checked = opcion.valor;
         } else {
           if (opcion.tipo == "textArea") {
-            optionElements[opcion.contador].value = opcion.valor;
+           
           }
         }
       });
@@ -176,6 +166,6 @@ export class ComplexRadioInput extends Item {
       inputArea.prepend(addButtonWrapper);
     }
 
-    this.htmlQuestionContent.append(this.createExtra(extraOptions));
+ 
   }
 }

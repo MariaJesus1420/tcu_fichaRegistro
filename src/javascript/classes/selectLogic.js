@@ -20,9 +20,9 @@ export class SelectTagLogic {
         }
 
         if (this.currentOption.dataset.escompleja == "true") {
-          this.changeRquired(true);
+        
         } else {
-          this.changeRquired(false);
+     
         }
         this.lastSelectedOption.dataset.esrespuesta = false;
         this.currentOption.dataset.esrespuesta = true;

@@ -96,7 +96,7 @@ export class Item {
       "bi-trash",
     ]);
     deleteQuestionButton.addEventListener("click",()=>{
-      deleteQuestionButton.parentElement.parentElement.parentElement.parentElement.remove()
+      deleteQuestionButton.parentElement.parentElement.parentElement.parentElement.parentElement.remove()
     })
     this.generateSelectOptions(questionSelector);
     let selectorWrapper = document.createElement("div");

@@ -6,6 +6,7 @@ export const COMMON = {
   init: async () => {
     let listaDeScripts = [
       "https://code.jquery.com/jquery-3.6.0.slim.min.js",
+      "https://kit.fontawesome.com/5fc4fd5412.js",
       "https://cdn.jsdelivr.net/npm/fullcalendar/main.js",
       "https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js",
       "https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js",

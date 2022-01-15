@@ -2,6 +2,11 @@
   display: flex;
   justify-content: center;
 }
+
+.seccionBotonesArriba {
+  display: flex;
+  justify-content: center;
+}
 button {
   padding: 0;
 }
@@ -23,6 +28,17 @@ button {
 
 .circularBtn:hover {
   background: #00866c;
+
+}
+
+.btnAzul{
+  font-size: 1.4rem;
+  background: #2880e6;
+  margin-bottom: 10px;
+}
+
+.btnAzul:hover {
+  background: #1178da;
 }
 
 .selectorWrapper {
@@ -68,15 +84,18 @@ button {
 }
 
 .buttonsWrapper > button {
-  margin-left: 3px;
-  margin-right: 3px;
+  margin-left: auto;
+  
 }
-.buttonsWrapper > label {
-  margin-bottom: 0px;
-}
+
 .optionInputWrapper {
   display: flex;
   margin-bottom: 3px;
+  
+}
+.optionInputWrapper > input {
+  margin-right: 3px;
+  
 }
 .simpleCheckBoxDeleteButtonWrapper{
   display: flex;
@@ -109,13 +128,13 @@ button {
 
 
 
-.elementsWrapper > .form-check{
+.elementsWrapper > .form-check-maker{
   padding-left: 0px;
 }
 div >.elementsWrapper{
   margin-bottom: 5px;
   width: 100%;
-  margin-left: 0px;
+ 
   padding-right: 0px;
 }
 div > .checkboxArea{

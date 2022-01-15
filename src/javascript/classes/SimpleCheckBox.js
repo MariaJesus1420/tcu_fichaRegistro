@@ -45,6 +45,7 @@ export class SimpleCheckBox extends Item {
       
     }
     checkBoxElements.push(checkBox)
+    
     elementsWrapper.append(checkBoxWrapper)
     if(this.isQuestionMaker){
       elementsWrapper.append(delButtonWrapper)
@@ -55,10 +56,18 @@ export class SimpleCheckBox extends Item {
 
   generateCheckboxOptions(disabled, checkBoxElements,checkboxArea) {
 
+    let  checkBoxOptions = this.findAllOptionTypes(this.optionsList, "input");
+    if(checkBoxOptions){
+      checkBoxOptions = this.findAllOptionTypes(this.optionsList, "checkbox");
+    }
 
-    this.optionsList.forEach((dbCheckBox, index) => {
+    checkBoxOptions.forEach((dbCheckBox, index) => {
       let checkBoxWrapper = document.createElement("div");
+      
       checkBoxWrapper.classList.add("form-check","col-11");
+      if(this.isQuestionMaker){
+        checkBoxWrapper.classList.add("form-check-maker");
+      }
       this.generateSingleCheckbox(checkBoxWrapper,dbCheckBox,disabled,checkBoxElements,checkboxArea)
 
       
@@ -106,7 +115,7 @@ export class SimpleCheckBox extends Item {
 
     addButton.addEventListener("click",()=>{
       let checkBoxWrapper = document.createElement("div");
-      checkBoxWrapper.classList.add("form-check","col-11")
+      checkBoxWrapper.classList.add("form-check","col-11","form-check-maker")
       this.generateSingleCheckbox(checkBoxWrapper,null,disabled,checkBoxElements,checkboxArea)
 
     })

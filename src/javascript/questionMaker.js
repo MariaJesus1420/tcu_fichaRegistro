@@ -21,7 +21,17 @@ export const QUESTIONMAKER = {
         "Esto es el pisapapeles para la respuesta"
       );
 
+      let opcion2 = new Opcion(
+        false,
+        "",
+        false,
+        false,
+        "radio",
+        "Texto de la opcion"
+      );
+
       optionList.push(opcion1);
+      optionList.push(opcion2);
       let item = new SimpleTextInput(
         "simpleTextInput",
         "Titulo de la pregunta",
@@ -35,7 +45,7 @@ export const QUESTIONMAKER = {
       let questionSelector = item.itemQuestionMaker();
       questionSelector.addEventListener("change", async (e) => {
         let newItem;
-        console.log(e.target.value)
+       
         switch (e.target.value) {
           case "simpleTextInput":
             {
@@ -116,6 +126,7 @@ export const QUESTIONMAKER = {
             break;
           case "simpleCheckBox":
             {
+            
               newItem = new SimpleCheckBox(
                 "simpleCheckBox",
                 "Titulo de la pregunta",
@@ -140,13 +151,15 @@ export const QUESTIONMAKER = {
           default:
             break;
         }
+        e.target.parentElement.parentElement.parentElement.parentElement.parentElement.dataset.questiontype= e.target.value
         await newItem.createContents();
         item.htmlItem
           .querySelector(".questionContent")
           .replaceWith(newItem.htmlQuestionContent);
       });
-
-      $("#mainContent").prepend(item.htmlItem);
+     console.log(document.querySelector(".seccionBotones")) 
+     document.querySelector("#mainContent").insertBefore(item.htmlItem,document.querySelector(".seccionBotones"))
+ 
     });
   },
 };

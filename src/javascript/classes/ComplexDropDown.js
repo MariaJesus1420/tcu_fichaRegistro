@@ -1,4 +1,5 @@
 import { Item } from "./Item";
+import { Opcion } from "./Opcion";
 
 export class ComplexDropDown extends Item {
   constructor(
@@ -20,32 +21,29 @@ export class ComplexDropDown extends Item {
   questionMaker(selectWrapper, select) {
     if (this.isQuestionMaker) {
       let optionInputWrapper = document.createElement("div");
-      optionInputWrapper.classList.add("col-md-11", "optionInputWrapper");
+      optionInputWrapper.classList.add("col-md-10", "optionInputWrapper");
 
       let optionInput = this.generateInput("", "Texto de la opcion");
       optionInputWrapper.append(optionInput);
 
       let buttonsWrapper = document.createElement("div");
-      buttonsWrapper.classList.add( "buttonsWrapper");
+      buttonsWrapper.classList.add("buttonsWrapper");
 
-      let saveButton = document.createElement("button")
-      saveButton.classList.add("btn","btn-success")
+      let saveButton = document.createElement("button");
+      saveButton.classList.add("btn", "btn-success");
       let saveButtonIcon = document.createElement("i");
-      saveButtonIcon.classList.add("bi", "bi-pencil");
-      saveButton.append(saveButtonIcon)
+      saveButtonIcon.classList.add("fas", "fa-check");
+      saveButton.append(saveButtonIcon);
 
+      saveButton.addEventListener("click",()=>{
+        let newValue = optionInput.value
+        select.options[select.selectedIndex].text=newValue
+      })
 
-      let extraButton = document.createElement("input");
-      extraButton.type = "checkbox";
-      extraButton.classList.add("btn-check");
-      extraButton.id = "extraButton";
-      buttonsWrapper.append(saveButton,extraButton);
-
-      let labelExtraButton = document.createElement("label");
-      labelExtraButton.classList.add("btn", "btn-outline-primary");
-      labelExtraButton.htmlFor = "extraButton";
-      labelExtraButton.innerText = "Extra";
-      buttonsWrapper.append(labelExtraButton);
+      select.addEventListener("change",()=>{
+        optionInput.value = select.options[select.selectedIndex].text
+      })
+      buttonsWrapper.append(saveButton);
 
       let selectColWrapper = document.createElement("div");
       selectColWrapper.classList.add("col-md-10", "selectColWrapper");
@@ -57,19 +55,40 @@ export class ComplexDropDown extends Item {
 
       selectWrapper.append(selectColWrapper);
 
-      
-
       let newDeleteButtonsWrapper = document.createElement("div");
 
-      newDeleteButtonsWrapper.classList.add("col-md-2", "newDeleteButtonsWrapper");
-      
-      let deleteButton =this.generateButtonWithIcon("btn-outline-danger",["bi","bi-trash"])
-      let addButton = this.generateButtonWithIcon("btn-outline-success",["bi","bi-plus-lg"])
-      
-    
-    
-     
-      newDeleteButtonsWrapper.append(addButton,deleteButton);
+      newDeleteButtonsWrapper.classList.add(
+        "col-md-2",
+        "newDeleteButtonsWrapper"
+      );
+
+      let deleteButton = this.generateButtonWithIcon("btn-outline-danger", [
+        "bi",
+        "bi-trash",
+      ]);
+      let addButton = this.generateButtonWithIcon("btn-outline-success", [
+        "bi",
+        "bi-plus-lg",
+      ]);
+
+      deleteButton.addEventListener("click", () => {
+        select.options[select.selectedIndex].remove();
+        select.dispatchEvent(new Event("change"));
+      });
+      addButton.addEventListener("click", () => {
+        let option1 = new Opcion(false, "", false, false, "option", "Opcion 1");
+        let index = select.options.length;
+        let result = this.generateOptions(
+          index,
+          `Opcion ${index + 1}`,
+          option1
+        );
+
+        select.options[index] = result;
+        select.selectedIndex= index
+        select.dispatchEvent(new Event("change"));
+      });
+      newDeleteButtonsWrapper.append(addButton, deleteButton);
       selectWrapper.append(newDeleteButtonsWrapper);
     } else {
       selectWrapper.append(select);
@@ -119,18 +138,5 @@ export class ComplexDropDown extends Item {
 
     selectWrapper = this.questionMaker(selectWrapper, select);
     this.htmlQuestionContent.append(selectWrapper);
-    let dbInputDropwdown = this.findOptionType(this.optionsList, "input");
-    let input = this.generateInput(
-      dbInputDropwdown.textoOpcion,
-      dbInputDropwdown.placeHolder,
-      dbInputDropwdown,
-      disabled
-    );
-
-    input.value = inputValue;
-
-    extraOptions.push(input);
-
-    this.htmlQuestionContent.append(this.createExtra(extraOptions));
   }
 }

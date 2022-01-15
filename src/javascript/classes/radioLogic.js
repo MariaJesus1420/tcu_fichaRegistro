@@ -20,9 +20,9 @@ export class RadioLogic {
           this.currentRadio.dataset.esrespuesta = true;
           if (this.currentRadio.dataset.escompleja == "true") {
             console.log("WORKING?");
-            this.changeRquired(true);
+      
           } else {
-            this.changeRquired(false);
+            
           }
         } else {
           this.currentRadio.dataset.esrespuesta = false;
