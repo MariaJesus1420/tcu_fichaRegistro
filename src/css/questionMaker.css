@@ -5,10 +5,13 @@
 
 .seccionBotonesArriba {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 button {
   padding: 0;
+}
+#btnGuardarCuestionario{
+  font-size: 1.5rem;
 }
 .circularBtn {
   width: 40px;

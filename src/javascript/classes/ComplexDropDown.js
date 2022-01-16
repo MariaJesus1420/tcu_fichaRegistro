@@ -23,7 +23,7 @@ export class ComplexDropDown extends Item {
       let optionInputWrapper = document.createElement("div");
       optionInputWrapper.classList.add("col-md-10", "optionInputWrapper");
 
-      let optionInput = this.generateInput("", "Texto de la opcion");
+      let optionInput = this.generateInput("", undefined,false,"Texto de la opcion");
       optionInputWrapper.append(optionInput);
 
       let buttonsWrapper = document.createElement("div");

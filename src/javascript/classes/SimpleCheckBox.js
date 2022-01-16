@@ -1,4 +1,5 @@
 import { Item } from "./Item";
+import { Opcion } from "./Opcion";
 
 export class SimpleCheckBox extends Item {
   constructor(
@@ -32,7 +33,15 @@ export class SimpleCheckBox extends Item {
 
     let checkBox = this.generateCheckBox(dbCheckBox, disabled);
 
-    let inputCheck = this.generateInput("", "Texto de la opcion");
+    let opcion = new Opcion(
+      false,
+      "",
+      false,
+      false,
+      "input",
+      "Texto de la opcion"
+    );
+    let inputCheck = this.generateInput("",opcion,disabled);
     inputCheck.htmlFor = checkBox.id;
    
     

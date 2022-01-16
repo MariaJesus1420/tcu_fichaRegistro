@@ -1,5 +1,6 @@
 import { Item } from "./Item";
 
+
 export class SimpleTextInput extends Item {
   constructor(questionType, questionText, optionsList, answersList,isQuestionMaker) {
     super(questionType, questionText, optionsList, answersList,isQuestionMaker);
@@ -13,9 +14,10 @@ export class SimpleTextInput extends Item {
     } else {
       disabled = false;
     }
+
     let input = this.generateInput(
       value,
-      this.optionsList[0].placeHolder,
+    
       this.optionsList[0],
       disabled
     );

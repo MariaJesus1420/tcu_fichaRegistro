@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import { Opcion } from "./Opcion";
 export class Item {
   _htmlItem;
   _optionList;
@@ -47,7 +48,8 @@ export class Item {
   titleMaker(isQuestionMaker, questionText) {
     let titulo;
     if (isQuestionMaker) {
-      titulo = this.generateInput("", questionText);
+      
+      titulo = this.generateInput("", undefined,false,questionText);
       titulo.classList.add("tituloInput");
     } else {
       titulo = document.createElement("label");
@@ -197,15 +199,19 @@ export class Item {
     return checkBox;
   };
 
-  generateInput = (value, placeHolder, dbInput, disabled) => {
+  generateInput = (value, dbInput, disabled,placeholder) => {
+    
     let input = document.createElement("input");
     if (dbInput) {
       this.setProperties(input, dbInput);
+      input.placeholder = dbInput.placeHolder;
+    }else{
+      input.placeholder = placeholder;
     }
 
     input.type = "text";
     input.required = true;
-    input.placeholder = placeHolder;
+ 
     input.disabled = disabled;
     input.classList.add("form-control");
     input.value = value;

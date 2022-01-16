@@ -21,17 +21,9 @@ export const QUESTIONMAKER = {
         "Esto es el pisapapeles para la respuesta"
       );
 
-      let opcion2 = new Opcion(
-        false,
-        "",
-        false,
-        false,
-        "radio",
-        "Texto de la opcion"
-      );
 
       optionList.push(opcion1);
-      optionList.push(opcion2);
+    
       let item = new SimpleTextInput(
         "simpleTextInput",
         "Titulo de la pregunta",
@@ -157,7 +149,7 @@ export const QUESTIONMAKER = {
           .querySelector(".questionContent")
           .replaceWith(newItem.htmlQuestionContent);
       });
-     console.log(document.querySelector(".seccionBotones")) 
+   
      document.querySelector("#mainContent").insertBefore(item.htmlItem,document.querySelector(".seccionBotones"))
  
     });
