@@ -40,7 +40,11 @@ export class ComplexRadioInput extends Item {
     ]);
     delButtonWrapper.append(delButton);
     delButton.addEventListener("click",()=>{
-      delButton.parentElement.parentElement.remove()
+      let elementsCount = delButton.parentElement.parentElement.parentElement.querySelectorAll(".elementsWrapper")
+      if(elementsCount.length > 1){
+        delButton.parentElement.parentElement.remove()
+      }
+   
     })
     let label;
     let radio = this.generateRadio(dbRadio, disabled);

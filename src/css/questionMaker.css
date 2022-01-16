@@ -10,6 +10,13 @@
 button {
   padding: 0;
 }
+
+.ghost{
+  opacity: .5;
+  background: #8fe493;
+  
+}
+
 #btnGuardarCuestionario{
   font-size: 1.5rem;
 }
@@ -52,6 +59,17 @@ button {
 
 .selectorWrapper > select {
   width: 30%;
+}
+.my-handle{
+  display: flex;
+  justify-content: center;
+  cursor: move;
+	margin-left: auto;
+  margin-right: auto;
+}
+
+.selectorWrapper > .btn-danger{
+  margin-left: auto;
 }
 .questionContent {
   width: 100%;

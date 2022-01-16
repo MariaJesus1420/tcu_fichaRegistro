@@ -8,8 +8,16 @@ import { SimpleTextArea } from "./Classes/SimpleTextArea";
 import { ComplexDropDown } from "./Classes/ComplexDropDown";
 import { SimpleCheckBox } from "./Classes/SimpleCheckBox";
 import { ComplexRadioInput } from "./Classes/ComplexRadioInput";
+import Sortable from "sortablejs";
+
 export const QUESTIONMAKER = {
   init: async () => {
+    let container = document.getElementById("itemsContainer");
+    let sortable = Sortable.create(container, {
+      ghostClass: 'ghost',
+      handle: ".my-handle"
+    });
+
     $("#btnAgregarPregunta").click(async () => {
       let optionList = [];
       let opcion1 = new Opcion(
@@ -21,9 +29,26 @@ export const QUESTIONMAKER = {
         "Esto es el pisapapeles para la respuesta"
       );
 
+      let opcion2 = new Opcion(
+        false,
+        "",
+        false,
+        false,
+        "checkbox",
+        "Esto es el pisapapeles para la respuesta"
+      );
 
+      let opcion3 = new Opcion(
+        false,
+        "",
+        false,
+        false,
+        "radio",
+        "Esto es el pisapapeles para la respuesta"
+      );
       optionList.push(opcion1);
-    
+      optionList.push(opcion2);
+      optionList.push(opcion3);
       let item = new SimpleTextInput(
         "simpleTextInput",
         "Titulo de la pregunta",
@@ -37,7 +62,7 @@ export const QUESTIONMAKER = {
       let questionSelector = item.itemQuestionMaker();
       questionSelector.addEventListener("change", async (e) => {
         let newItem;
-       
+
         switch (e.target.value) {
           case "simpleTextInput":
             {
@@ -81,27 +106,17 @@ export const QUESTIONMAKER = {
                 "Opcion 2"
               );
 
-              let option3 = new Opcion(
-                false,
-                "",
-                false,
-                false,
-                "input",
-                "Campo para la opcion extra"
-              );
-              optionList = []
-              optionList.push(option1)
-              optionList.push(option2)
-              optionList.push(option3)
-              
+              let newOptionList = [];
+              newOptionList.push(option1);
+              newOptionList.push(option2);
+
               newItem = new ComplexDropDown(
                 "complexDropDown",
                 "Titulo de la pregunta",
-                optionList,
+                newOptionList,
                 [],
                 true
               );
-
             }
             break;
 
@@ -118,7 +133,6 @@ export const QUESTIONMAKER = {
             break;
           case "simpleCheckBox":
             {
-            
               newItem = new SimpleCheckBox(
                 "simpleCheckBox",
                 "Titulo de la pregunta",
@@ -126,7 +140,6 @@ export const QUESTIONMAKER = {
                 [],
                 true
               );
-              
             }
             break;
           case "location":
@@ -143,15 +156,50 @@ export const QUESTIONMAKER = {
           default:
             break;
         }
-        e.target.parentElement.parentElement.parentElement.parentElement.parentElement.dataset.questiontype= e.target.value
+        e.target.parentElement.parentElement.parentElement.parentElement.parentElement.dataset.questiontype =
+          e.target.value;
         await newItem.createContents();
         item.htmlItem
           .querySelector(".questionContent")
           .replaceWith(newItem.htmlQuestionContent);
       });
-   
-     document.querySelector("#mainContent").insertBefore(item.htmlItem,document.querySelector(".seccionBotones"))
- 
+
+      $("#itemsContainer").append(item.htmlItem);
     });
+
+    const formChecker = () => {
+      let allItems = document.querySelector(".item");
+      for (const item of allItems) {
+        switch (item.dataset.questiontype) {
+          case "simpleTextInput":
+            {
+            }
+            break;
+          case "simpleTextArea":
+            {
+            }
+            break;
+          case "complexDropDown":
+            {
+            }
+            break;
+
+          case "complexRadioInput":
+            {
+            }
+            break;
+          case "simpleCheckBox":
+            {
+            }
+            break;
+          case "location":
+            {
+            }
+            break;
+          default:
+            break;
+        }
+      }
+    };
   },
 };

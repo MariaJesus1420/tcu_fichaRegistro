@@ -28,7 +28,11 @@ export class SimpleCheckBox extends Item {
     let delButton = this.generateButtonWithIcon("btn-danger",["bi","bi-trash"])
     delButtonWrapper.append(delButton)
     delButton.addEventListener("click",()=>{
-      delButton.parentElement.parentElement.remove()
+      let elementsCount = delButton.parentElement.parentElement.parentElement.querySelectorAll(".elementsWrapper")
+      if(elementsCount.length > 1){
+        delButton.parentElement.parentElement.remove()
+      }
+     
     })
 
     let checkBox = this.generateCheckBox(dbCheckBox, disabled);

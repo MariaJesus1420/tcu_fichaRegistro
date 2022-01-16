@@ -48,8 +48,7 @@ export class Item {
   titleMaker(isQuestionMaker, questionText) {
     let titulo;
     if (isQuestionMaker) {
-      
-      titulo = this.generateInput("", undefined,false,questionText);
+      titulo = this.generateInput("", undefined, false, questionText);
       titulo.classList.add("tituloInput");
     } else {
       titulo = document.createElement("label");
@@ -84,6 +83,14 @@ export class Item {
     this.htmlContents_Data.append(this.htmlFormGroup);
     this.htmlContents.append(this.htmlContents_Data);
     this._htmlItem.append(this.htmlContents);
+    let moveQuestionButton = document.createElement("div");
+    let icon = document.createElement("span");
+    icon.classList.add("fas", "fa-arrows-alt", "fa-lg", "my-handle");
+    moveQuestionButton.append(icon);
+    moveQuestionButton.classList.add("col-1");
+
+    moveQuestionButton.classList.add("my-handle");
+    this.htmlContents.prepend(moveQuestionButton);
   }
 
   get htmlItem() {
@@ -97,14 +104,16 @@ export class Item {
       "bi",
       "bi-trash",
     ]);
-    deleteQuestionButton.addEventListener("click",()=>{
-      deleteQuestionButton.parentElement.parentElement.parentElement.parentElement.parentElement.remove()
-    })
+
+    deleteQuestionButton.addEventListener("click", () => {
+      deleteQuestionButton.parentElement.parentElement.parentElement.parentElement.parentElement.remove();
+    });
     this.generateSelectOptions(questionSelector);
     let selectorWrapper = document.createElement("div");
     selectorWrapper.classList.add("selectorWrapper");
     selectorWrapper.append(questionSelector);
     selectorWrapper.append(deleteQuestionButton);
+
     this.htmlFormGroup.prepend(selectorWrapper);
     return questionSelector;
   }
@@ -112,7 +121,7 @@ export class Item {
   generateButtonWithIcon(boostrapClassColor, iconClass) {
     let button = document.createElement("button");
     button.classList.add("btn", boostrapClassColor);
-
+    button.type = "button";
     let buttonIcon = document.createElement("i");
     iconClass.forEach((element) => {
       buttonIcon.classList.add(element);
@@ -199,19 +208,18 @@ export class Item {
     return checkBox;
   };
 
-  generateInput = (value, dbInput, disabled,placeholder) => {
-    
+  generateInput = (value, dbInput, disabled, placeholder) => {
     let input = document.createElement("input");
     if (dbInput) {
       this.setProperties(input, dbInput);
       input.placeholder = dbInput.placeHolder;
-    }else{
+    } else {
       input.placeholder = placeholder;
     }
 
     input.type = "text";
     input.required = true;
- 
+
     input.disabled = disabled;
     input.classList.add("form-control");
     input.value = value;
