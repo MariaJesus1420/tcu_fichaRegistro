@@ -42,7 +42,7 @@ export class SimpleCheckBox extends Item {
       "",
       false,
       false,
-      "input",
+      "checkbox",
       "Texto de la opcion"
     );
     let inputCheck = this.generateInput("",opcion,disabled);

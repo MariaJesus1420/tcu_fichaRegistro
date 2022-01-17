@@ -9,6 +9,10 @@ import { ComplexDropDown } from "./Classes/ComplexDropDown";
 import { SimpleCheckBox } from "./Classes/SimpleCheckBox";
 import { ComplexRadioInput } from "./Classes/ComplexRadioInput";
 import Sortable from "sortablejs";
+import { Cuestionario } from "./classes/Cuestionario";
+import { Pregunta } from "./classes/Pregunta";
+import { generateQuestions } from "./questionCreator";
+
 
 export const QUESTIONMAKER = {
   init: async () => {
@@ -166,40 +170,89 @@ export const QUESTIONMAKER = {
 
       $("#itemsContainer").append(item.htmlItem);
     });
+    $("#btnVerCuestionario").click(async () => {
+      formcollectQuestions();
 
-    const formChecker = () => {
-      let allItems = document.querySelector(".item");
-      for (const item of allItems) {
-        switch (item.dataset.questiontype) {
-          case "simpleTextInput":
-            {
-            }
-            break;
-          case "simpleTextArea":
-            {
-            }
-            break;
-          case "complexDropDown":
-            {
-            }
-            break;
+    });
 
-          case "complexRadioInput":
-            {
-            }
-            break;
-          case "simpleCheckBox":
-            {
-            }
-            break;
-          case "location":
-            {
-            }
-            break;
-          default:
-            break;
+    const formcollectQuestions = () => {
+      let allItems = document.querySelectorAll(".item");
+
+      let optionsArray = [];
+      let listaPreguntas = [];
+      let listaOpciones = [];
+
+      allItems.forEach((question) => {
+        optionsArray = question.querySelectorAll("[data-esrespuesta]");
+        if (question.dataset.questiontype == "location") {
+          let opcionProvincia = new Opcion(
+            false,
+            "Opcion 1",
+            false,
+            false,
+            "option",
+            "Opcion 1"
+          );
+          let opcionCanton = new Opcion(
+            false,
+            "Opcion 1",
+            false,
+            false,
+            "option",
+            "Opcion 1"
+          );
+          let opcionDistrito = new Opcion(
+            false,
+            "Opcion 1",
+            false,
+            false,
+            "option",
+            "Opcion 1"
+          );
+          listaOpciones.push(opcionProvincia, opcionCanton, opcionDistrito);
+          let textoPregunta = question.querySelector(".tituloInput");
+
+          let pregunta = new Pregunta(
+            textoPregunta.value,
+            question.dataset.questiontype,
+            listaOpciones,
+            )
+            listaPreguntas.push(pregunta)
+        } else {
+          let textoPregunta = question.querySelector(".tituloInput");
+          console.log(optionsArray)
+          optionsArray.forEach((option) =>{
+            let nuevaOpcion = new Opcion (
+              option.dataset.esdefault,
+              option.dataset.textoopcion,
+              option.dataset.esrespuesta,
+              option.dataset.escompleja,
+              option.dataset.tipoopcion,
+              option.value,
+            )
+            
+            listaOpciones.push(nuevaOpcion);
+          })
+          let pregunta = new Pregunta(
+            textoPregunta.value,
+            question.dataset.questiontype,
+            listaOpciones,
+            )
+            listaOpciones= []
+            listaPreguntas.push(pregunta)
         }
-      }
+
+        let cuestionario = new Cuestionario (
+          listaPreguntas
+        )
+        return cuestionario
+        console.log(cuestionario)
+      })
+
+      
+
     };
   },
+
 };
+

@@ -53,7 +53,7 @@ export class ComplexRadioInput extends Item {
       "",
       false,
       false,
-      "input",
+      "radio",
       "Texto de la opcion"
     );
     let inputRadio = this.generateInput("", opcion,disabled);
