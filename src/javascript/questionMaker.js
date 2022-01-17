@@ -8,6 +8,7 @@ import { SimpleTextArea } from "./Classes/SimpleTextArea";
 import { ComplexDropDown } from "./Classes/ComplexDropDown";
 import { SimpleCheckBox } from "./Classes/SimpleCheckBox";
 import { ComplexRadioInput } from "./Classes/ComplexRadioInput";
+import { DATABASE } from "./Classes/DataBase";
 export const QUESTIONMAKER = {
   init: async () => {
     $("#btnAgregarPregunta").click(async () => {
@@ -45,7 +46,7 @@ export const QUESTIONMAKER = {
       let questionSelector = item.itemQuestionMaker();
       questionSelector.addEventListener("change", async (e) => {
         let newItem;
-       
+
         switch (e.target.value) {
           case "simpleTextInput":
             {
@@ -101,7 +102,7 @@ export const QUESTIONMAKER = {
               optionList.push(option1)
               optionList.push(option2)
               optionList.push(option3)
-              
+
               newItem = new ComplexDropDown(
                 "complexDropDown",
                 "Titulo de la pregunta",
@@ -126,7 +127,7 @@ export const QUESTIONMAKER = {
             break;
           case "simpleCheckBox":
             {
-            
+
               newItem = new SimpleCheckBox(
                 "simpleCheckBox",
                 "Titulo de la pregunta",
@@ -134,7 +135,7 @@ export const QUESTIONMAKER = {
                 [],
                 true
               );
-              
+
             }
             break;
           case "location":
@@ -151,15 +152,27 @@ export const QUESTIONMAKER = {
           default:
             break;
         }
-        e.target.parentElement.parentElement.parentElement.parentElement.parentElement.dataset.questiontype= e.target.value
+        e.target.parentElement.parentElement.parentElement.parentElement.parentElement.dataset.questiontype = e.target.value
         await newItem.createContents();
         item.htmlItem
           .querySelector(".questionContent")
           .replaceWith(newItem.htmlQuestionContent);
       });
-     console.log(document.querySelector(".seccionBotones")) 
-     document.querySelector("#mainContent").insertBefore(item.htmlItem,document.querySelector(".seccionBotones"))
- 
+      console.log(document.querySelector(".seccionBotones"))
+      document.querySelector("#mainContent").insertBefore(item.htmlItem, document.querySelector(".seccionBotones"))
+
     });
+
+    $("#btnVerCuestionario").click(async () => {
+      let db = new DATABASE();
+      let cuestionarioId = sessionStorage.getItem("cuestionarioId")
+      if (cuestionarioId==null){
+        cuestionarioId="1";
+        console.log(cuestionarioId)
+      }
+      
+      
+    });
+
   },
 };
