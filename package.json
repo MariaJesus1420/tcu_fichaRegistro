@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "fullcalendar": "^5.9.0",
+    "sortablejs": "^1.14.0",
     "uuid": "^8.3.2"
   },
   "repository": {

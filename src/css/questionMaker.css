@@ -5,10 +5,20 @@
 
 .seccionBotonesArriba {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 button {
   padding: 0;
+}
+
+.ghost{
+  opacity: .5;
+  background: #8fe493;
+  
+}
+
+#btnGuardarCuestionario{
+  font-size: 1.5rem;
 }
 .circularBtn {
   width: 40px;
@@ -49,6 +59,17 @@ button {
 
 .selectorWrapper > select {
   width: 30%;
+}
+.my-handle{
+  display: flex;
+  justify-content: center;
+  cursor: move;
+	margin-left: auto;
+  margin-right: auto;
+}
+
+.selectorWrapper > .btn-danger{
+  margin-left: auto;
 }
 .questionContent {
   width: 100%;

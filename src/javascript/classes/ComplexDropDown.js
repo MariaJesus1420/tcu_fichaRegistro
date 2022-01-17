@@ -23,26 +23,34 @@ export class ComplexDropDown extends Item {
       let optionInputWrapper = document.createElement("div");
       optionInputWrapper.classList.add("col-md-10", "optionInputWrapper");
 
-      let optionInput = this.generateInput("", "Texto de la opcion");
+      let optionInput = this.generateInput(
+        "",
+        undefined,
+        false,
+        "Texto de la opcion"
+      );
       optionInputWrapper.append(optionInput);
 
       let buttonsWrapper = document.createElement("div");
       buttonsWrapper.classList.add("buttonsWrapper");
 
-      let saveButton = document.createElement("button");
-      saveButton.classList.add("btn", "btn-success");
-      let saveButtonIcon = document.createElement("i");
-      saveButtonIcon.classList.add("fas", "fa-check");
-      saveButton.append(saveButtonIcon);
+      let saveButton = this.generateButtonWithIcon("btn-success", [
+        "fas",
+        "fa-check",
+      ]);
 
-      saveButton.addEventListener("click",()=>{
-        let newValue = optionInput.value
-        select.options[select.selectedIndex].text=newValue
-      })
+      saveButton.addEventListener("click", () => {
+        let newValue = optionInput.value;
+        if (newValue === "") {
+          select.options[select.selectedIndex].text = optionInput.placeholder;
+        } else {
+          select.options[select.selectedIndex].text = newValue;
+        }
+      });
 
-      select.addEventListener("change",()=>{
-        optionInput.value = select.options[select.selectedIndex].text
-      })
+      select.addEventListener("change", () => {
+        optionInput.value = select.options[select.selectedIndex].text;
+      });
       buttonsWrapper.append(saveButton);
 
       let selectColWrapper = document.createElement("div");
@@ -72,8 +80,10 @@ export class ComplexDropDown extends Item {
       ]);
 
       deleteButton.addEventListener("click", () => {
-        select.options[select.selectedIndex].remove();
-        select.dispatchEvent(new Event("change"));
+        if (select.options.length > 1) {
+          select.options[select.selectedIndex].remove();
+          select.dispatchEvent(new Event("change"));
+        }
       });
       addButton.addEventListener("click", () => {
         let option1 = new Opcion(false, "", false, false, "option", "Opcion 1");
@@ -85,7 +95,7 @@ export class ComplexDropDown extends Item {
         );
 
         select.options[index] = result;
-        select.selectedIndex= index
+        select.selectedIndex = index;
         select.dispatchEvent(new Event("change"));
       });
       newDeleteButtonsWrapper.append(addButton, deleteButton);

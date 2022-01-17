@@ -1,5 +1,6 @@
 import { Item } from "./Item";
 import { v4 as uuidv4 } from "uuid";
+import { Opcion } from "./Opcion";
 export class ComplexRadioInput extends Item {
   constructor(
     questionType,
@@ -39,11 +40,23 @@ export class ComplexRadioInput extends Item {
     ]);
     delButtonWrapper.append(delButton);
     delButton.addEventListener("click",()=>{
-      delButton.parentElement.parentElement.remove()
+      let elementsCount = delButton.parentElement.parentElement.parentElement.querySelectorAll(".elementsWrapper")
+      if(elementsCount.length > 1){
+        delButton.parentElement.parentElement.remove()
+      }
+   
     })
     let label;
     let radio = this.generateRadio(dbRadio, disabled);
-    let inputRadio = this.generateInput("", "Texto de la opcion");
+    let opcion = new Opcion(
+      false,
+      "",
+      false,
+      false,
+      "input",
+      "Texto de la opcion"
+    );
+    let inputRadio = this.generateInput("", opcion,disabled);
     inputRadio.htmlFor = radio.id;
     radio.name = groupName;
    

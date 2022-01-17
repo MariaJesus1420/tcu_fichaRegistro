@@ -1,4 +1,5 @@
 import { Item } from "./Item";
+import { Opcion } from "./Opcion";
 
 export class SimpleCheckBox extends Item {
   constructor(
@@ -27,12 +28,24 @@ export class SimpleCheckBox extends Item {
     let delButton = this.generateButtonWithIcon("btn-danger",["bi","bi-trash"])
     delButtonWrapper.append(delButton)
     delButton.addEventListener("click",()=>{
-      delButton.parentElement.parentElement.remove()
+      let elementsCount = delButton.parentElement.parentElement.parentElement.querySelectorAll(".elementsWrapper")
+      if(elementsCount.length > 1){
+        delButton.parentElement.parentElement.remove()
+      }
+     
     })
 
     let checkBox = this.generateCheckBox(dbCheckBox, disabled);
 
-    let inputCheck = this.generateInput("", "Texto de la opcion");
+    let opcion = new Opcion(
+      false,
+      "",
+      false,
+      false,
+      "input",
+      "Texto de la opcion"
+    );
+    let inputCheck = this.generateInput("",opcion,disabled);
     inputCheck.htmlFor = checkBox.id;
    
     
