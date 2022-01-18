@@ -7,6 +7,7 @@ import { SimpleTextInput } from "./Classes/SimpleTextInput";
 
 export async function generateQuestions(cuestionario, respuestaId) {
   let allQuestionsArray = cuestionario.listaPreguntas.reverse();
+  console.log(allQuestionsArray)
   let answersArray = [];
   if (respuestaId) {
     answersArray =
@@ -21,12 +22,13 @@ export async function generateQuestions(cuestionario, respuestaId) {
       answersList = currentAnswer.listaOpciones;
     }
     optionsArray = question.listaOpciones;
-
+    
     let item;
-
+    console.log(question)
     switch (question.tipoPregunta) {
       case "simpleTextInput":
         {
+
           item = new SimpleTextInput(
             question.tipoPregunta,
             question.textoPregunta,
@@ -76,6 +78,7 @@ export async function generateQuestions(cuestionario, respuestaId) {
         break;
       case "simpleCheckbox":
         {
+          console.log("case")
           item = new SimpleCheckBox(
             question.tipoPregunta,
             question.textoPregunta,
@@ -99,6 +102,7 @@ export async function generateQuestions(cuestionario, respuestaId) {
       default:
         break;
     }
+    console.log(item)
     item.createContents(respuestaId);
     item.generateItem()
     document.querySelector("#mainForm").prepend(item.htmlItem);

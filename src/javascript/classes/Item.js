@@ -38,7 +38,7 @@ export class Item {
     this.htmlContents_Data = document.createElement("div");
     this.htmlContents_Data.classList.add("contents-data");
     this.htmlFormGroup = document.createElement("div");
-    this.htmlFormGroup.classList.add("form-group");
+    this.htmlFormGroup.classList.add("form-group","text-wrap");
 
     this.htmlFormGroup.append();
   }
@@ -52,6 +52,7 @@ export class Item {
       titulo.classList.add("tituloInput");
     } else {
       titulo = document.createElement("label");
+      titulo.classList.add("text-break")
       titulo.innerText = questionText;
     }
 
@@ -90,7 +91,10 @@ export class Item {
     moveQuestionButton.classList.add("col-1");
 
     moveQuestionButton.classList.add("my-handle");
-    this.htmlContents.prepend(moveQuestionButton);
+    if(this.isQuestionMaker){
+      this.htmlContents.prepend(moveQuestionButton);
+    }
+   
   }
 
   get htmlItem() {
@@ -134,7 +138,7 @@ export class Item {
   generateSelectOptions(select) {
     let questionTypesList = {
       simpleTextInput: "Texto corto",
-      simpleCheckBox: "Selección Múliple",
+      simpleCheckbox: "Selección Múliple",
       complexRadioInput: "Selección Única",
       location: "Ubicación",
       simpleTextArea: "Texto largo",
@@ -229,7 +233,7 @@ export class Item {
 
   generateLabel = (id, text) => {
     let label = document.createElement("label");
-    label.classList.add("custom-control-label");
+    label.classList.add("custom-control-label","text-break");
     label.htmlFor = id;
     label.innerHTML = text;
     label.disabled = true;

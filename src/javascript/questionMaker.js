@@ -13,13 +13,12 @@ import { Cuestionario } from "./classes/Cuestionario";
 import { Pregunta } from "./classes/Pregunta";
 import { generateQuestions } from "./questionCreator";
 
-
 export const QUESTIONMAKER = {
   init: async () => {
     let container = document.getElementById("itemsContainer");
     let sortable = Sortable.create(container, {
-      ghostClass: 'ghost',
-      handle: ".my-handle"
+      ghostClass: "ghost",
+      handle: ".my-handle",
     });
 
     $("#btnAgregarPregunta").click(async () => {
@@ -135,7 +134,7 @@ export const QUESTIONMAKER = {
               );
             }
             break;
-          case "simpleCheckBox":
+          case "simpleCheckbox":
             {
               newItem = new SimpleCheckBox(
                 "simpleCheckBox",
@@ -170,9 +169,16 @@ export const QUESTIONMAKER = {
 
       $("#itemsContainer").append(item.htmlItem);
     });
-    $("#btnVerCuestionario").click(async () => {
-      formcollectQuestions();
+    $("#formMaker").submit(() => {
+      window.open("formViewver.html", "_blank");
+    });
 
+    $("#btnVerCuestionario").click(async (e) => {
+      let cuestionarioResult = formcollectQuestions();
+      sessionStorage.setItem(
+        "cuestionarioPreview",
+        JSON.stringify(cuestionarioResult)
+      );
     });
 
     const formcollectQuestions = () => {
@@ -184,75 +190,94 @@ export const QUESTIONMAKER = {
 
       allItems.forEach((question) => {
         optionsArray = question.querySelectorAll("[data-esrespuesta]");
-        if (question.dataset.questiontype == "location") {
-          let opcionProvincia = new Opcion(
-            false,
-            "Opcion 1",
-            false,
-            false,
-            "option",
-            "Opcion 1"
-          );
-          let opcionCanton = new Opcion(
-            false,
-            "Opcion 1",
-            false,
-            false,
-            "option",
-            "Opcion 1"
-          );
-          let opcionDistrito = new Opcion(
-            false,
-            "Opcion 1",
-            false,
-            false,
-            "option",
-            "Opcion 1"
-          );
-          listaOpciones.push(opcionProvincia, opcionCanton, opcionDistrito);
-          let textoPregunta = question.querySelector(".tituloInput");
-
-          let pregunta = new Pregunta(
-            textoPregunta.value,
-            question.dataset.questiontype,
-            listaOpciones,
-            )
-            listaPreguntas.push(pregunta)
-        } else {
-          let textoPregunta = question.querySelector(".tituloInput");
-          console.log(optionsArray)
-          optionsArray.forEach((option) =>{
-            let nuevaOpcion = new Opcion (
-              option.dataset.esdefault,
-              option.dataset.textoopcion,
-              option.dataset.esrespuesta,
-              option.dataset.escompleja,
-              option.dataset.tipoopcion,
-              option.value,
-            )
+        let textoPregunta = question.querySelector(".tituloInput");
+        switch (question.dataset.questiontype) {
+          case "location":
+            let opcionProvincia = new Opcion(
+              false,
+              "Opcion 1",
+              false,
+              false,
+              "option",
+              "Opcion 1"
+            );
+            let opcionCanton = new Opcion(
+              false,
+              "Opcion 1",
+              false,
+              false,
+              "option",
+              "Opcion 1"
+            );
+            let opcionDistrito = new Opcion(
+              false,
+              "Opcion 1",
+              false,
+              false,
+              "option",
+              "Opcion 1"
+            );
+            listaOpciones.push(opcionProvincia, opcionCanton, opcionDistrito);
+         
+  
+           
+            break;
+          case "simpleCheckbox":
+            optionsArray.forEach((option) => {
+              let nuevaOpcion = new Opcion(
+                option.dataset.esdefault,
+                option.value,
+                option.dataset.esrespuesta,
+                option.dataset.escompleja,
+                option.dataset.tipoopcion,
+                option.placeHolder
+              );
+  
+              listaOpciones.push(nuevaOpcion);
+            });
+            break;
+          case "complexRadioInput":
+            optionsArray.forEach((option) => {
+              let nuevaOpcion = new Opcion(
+                option.dataset.esdefault,
+                option.value,
+                option.dataset.esrespuesta,
+                option.dataset.escompleja,
+                option.dataset.tipoopcion,
+                option.placeHolder
+              );
+  
+              listaOpciones.push(nuevaOpcion);
+            });
+            break;
+            default:
+             
+              optionsArray.forEach((option) => {
+                let nuevaOpcion = new Opcion(
+                  option.dataset.esdefault,
+                  option.dataset.textoopcion,
+                  option.dataset.esrespuesta,
+                  option.dataset.escompleja,
+                  option.dataset.tipoopcion,
+                  option.value
+                );
+    
+                listaOpciones.push(nuevaOpcion);
+              });
             
-            listaOpciones.push(nuevaOpcion);
-          })
-          let pregunta = new Pregunta(
-            textoPregunta.value,
-            question.dataset.questiontype,
-            listaOpciones,
-            )
-            listaOpciones= []
-            listaPreguntas.push(pregunta)
+    
+              break;
         }
-
-        let cuestionario = new Cuestionario (
-          listaPreguntas
-        )
-        return cuestionario
-        console.log(cuestionario)
-      })
-
-      
-
+        let pregunta = new Pregunta(
+          textoPregunta.value,
+          question.dataset.questiontype,
+          listaOpciones
+        );
+        listaOpciones = [];
+        listaPreguntas.push(pregunta);
+      });
+      let cuestionario = new Cuestionario(listaPreguntas);
+      return cuestionario;
     };
   },
-
 };
-

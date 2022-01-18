@@ -107,6 +107,7 @@ export class ComplexRadioInput extends Item {
     let extraOptions = [];
     let value = 0;
     let radioOptions = this.findAllOptionTypes(this.optionsList, "radio");
+    console.log(radioOptions)
     let disabled = true;
     let optionElements = [];
 

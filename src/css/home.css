@@ -38,7 +38,9 @@ div[data-questionType="complexDropDown"] div.contents-data{
   row-gap: 10px;
 }
 
-
+.custom-radio > input{
+  margin-right: 5px;
+}
 .custom-control {
   
   font-weight: normal;

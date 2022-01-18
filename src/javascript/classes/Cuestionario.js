@@ -1,6 +1,6 @@
 export class Cuestionario{
-    listaDePreguntas;
-    constructor(listaDePreguntas){
-        this.listaDePreguntas = listaDePreguntas
+    listaPreguntas;
+    constructor(listaPreguntas){
+        this.listaPreguntas = listaPreguntas
     } 
 }

@@ -7,19 +7,31 @@ import { v4 as uuidv4 } from "uuid";
 import "../css/home.css";
 import { collectAllQuestions } from "./questionCollector";
 import { generateQuestions } from "./questionCreator";
+import { Cuestionario } from "./classes/Cuestionario";
 export const FORMVIEWVER = {
     init: async() =>{
-        console.log("INIT FORM")
+      window.onbeforeunload = function() {
+        sessionStorage.removeItem("cuestionarioId");
+        
+      };
         let db = new DATABASE();
         let cuestionarioId = sessionStorage.getItem("cuestionarioId")
-        let cuestionario = await db.obtenerDocumento("Cuestionarios",'F63qRfCjdgxjALMUVRN5')
-    
+        console.log(cuestionarioId)
+      //  let cuestionario = await db.obtenerDocumento("Cuestionarios",cuestionarioId)
+
+        let cuestionarioPreview =  JSON.parse(sessionStorage.getItem("cuestionarioPreview"))
+      
         //  .newEvent333.fichasRegistro['2f3e3e68-a3f4-4a84-9c1c-80e167ae5a1d']
 
-       
+        if(cuestionarioPreview){
+          generateQuestions(cuestionarioPreview)
+        }else{
+          console.log(cuestionario)
+          generateQuestions(cuestionario)
+        }
         
        // buildAllQuestions(cuestionario,"1eeff9dc-02ff-4890-925e-1887332007c5");
-        generateQuestions(cuestionario,"1eeff9dc-02ff-4890-925e-1887332007c5")
+        
         let checkBoxList = document.querySelectorAll("input[type='checkbox']")
         let checkBoxLogic = new CheckBoxLogic();
         checkBoxLogic.changeSelectedCheckBox(checkBoxList)

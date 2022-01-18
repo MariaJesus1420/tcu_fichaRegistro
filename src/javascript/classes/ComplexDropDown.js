@@ -29,6 +29,7 @@ export class ComplexDropDown extends Item {
         false,
         "Texto de la opcion"
       );
+      optionInput.required =false
       optionInputWrapper.append(optionInput);
 
       let buttonsWrapper = document.createElement("div");

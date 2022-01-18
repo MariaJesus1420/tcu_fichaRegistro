@@ -31,7 +31,7 @@ export class Card {
 
     card_text.innerText = this.description;
     card_tittle.innerText = this.title;
-    href.href = href;
+    href.href = this.href;
     card.append(card_body);
     let cardBodyBtns = document.createElement("div");
     cardBodyBtns.classList.add("card-body-btns");
@@ -63,7 +63,7 @@ export class Card {
 
     href.addEventListener("click", (e) => {
       e.preventDefault();
-      sessionStorage.cuestionarioId = this.href;
+      sessionStorage.setItem("cuestionarioId",this.href);
       location.href = "formViewver.html";
     });
     return cardWrapper;
