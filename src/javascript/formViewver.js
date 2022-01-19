@@ -10,9 +10,9 @@ import { generateQuestions } from "./questionCreator";
 import { Cuestionario } from "./classes/Cuestionario";
 export const FORMVIEWVER = {
     init: async() =>{
-      window.onbeforeunload = function() {
-        sessionStorage.removeItem("cuestionarioId");
-      };
+      // window.onbeforeunload = function() {
+      //   sessionStorage.removeItem("cuestionarioId");
+      // };
         let db = new DATABASE();
         let cuestionarioId = sessionStorage.getItem("cuestionarioId")
         console.log(cuestionarioId)
@@ -68,6 +68,7 @@ export const FORMVIEWVER = {
         
 
         $("#btnGuardarForm").click(async (e) => {
+          e.preventDefault();
           let respuestas = await collectAllQuestions();
           await db.addAnwsers(cuestionarioId,uuidv4(),respuestas)
         });

@@ -44,8 +44,10 @@ export class ComplexDropDown extends Item {
         let newValue = optionInput.value;
         if (newValue === "") {
           select.options[select.selectedIndex].text = optionInput.placeholder;
+          select.options[select.selectedIndex].dataset.textoopcion = optionInput.placeholder;
         } else {
           select.options[select.selectedIndex].text = newValue;
+          select.options[select.selectedIndex].dataset.textoopcion = newValue;
         }
       });
 
@@ -87,8 +89,8 @@ export class ComplexDropDown extends Item {
         }
       });
       addButton.addEventListener("click", () => {
-        let option1 = new Opcion(false, "", false, false, "option", "Opcion 1");
         let index = select.options.length;
+        let option1 = new Opcion(false,`Opcion ${index + 1}`, false, false, "option", "Opcion 1");
         let result = this.generateOptions(
           index,
           `Opcion ${index + 1}`,

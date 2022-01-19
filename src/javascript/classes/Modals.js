@@ -13,27 +13,27 @@ export class Modals {
   }
 
   generateModal() {
-    let div = document.createElement("div");
-    div.classList.add("modal-superior");
-    let div2 = document.createElement("div");
-    div2.classList.add("modal-superior-segundo");
-    let table = document.createElement("table");
-    table.classList.add("table", "table-hover", "table-striped", "table-sm");
-    let thead = document.createElement("thead");
-    thead.classList.add("table-tittle");
-    let trThead = document.createElement("tr");
-    trThead.classList.add("tr-thead");
-    let thId = document.createElement("th");
-    thId.innerText="ID";
-    thId.classList.add("th-id");
-    let thUser = document.createElement("th");
-    thUser.innerText="Usuario";
-    thUser.classList.add("th-user");
-    let thAction = document.createElement("th");
-    thAction.classList.add("text-end");
-    thAction.innerText="Accion";
-    let tbody = document.createElement("tbody");
-    tbody.classList.add("table-body");
+    // let div = document.createElement("div");
+    // div.classList.add("modal-superior");
+    // let div2 = document.createElement("div");
+    // div2.classList.add("modal-superior-segundo");
+    // let table = document.createElement("table");
+    // table.classList.add("table", "table-hover", "table-striped", "table-sm");
+    // let thead = document.createElement("thead");
+    // thead.classList.add("table-tittle");
+    // let trThead = document.createElement("tr");
+    // trThead.classList.add("tr-thead");
+    // let thId = document.createElement("th");
+    // thId.innerText="ID";
+    // thId.classList.add("th-id");
+    // let thUser = document.createElement("th");
+    // thUser.innerText="Usuario";
+    // thUser.classList.add("th-user");
+    // let thAction = document.createElement("th");
+    // thAction.classList.add("text-end");
+    // thAction.innerText="Accion";
+    // let tbody = document.createElement("tbody");
+    // tbody.classList.add("table-body");
     let trBody = document.createElement("tr");
     trBody.classList.add("tr-body");
     let tdUserId = document.createElement("td");
@@ -61,18 +61,18 @@ export class Modals {
     divBtn.append(btnDelete);
     tdUserAction.append(divBtn);
 
-    trThead.append(thId);
-    trThead.append(thUser);
-    trThead.append(thAction);
+    // trThead.append(thId);
+    // trThead.append(thUser);
+    // trThead.append(thAction);
     trBody.append(tdUserId);
     trBody.append(tdUserName);
     trBody.append(tdUserAction);
-    thead.append(trThead);
-    tbody.append(trBody);
-    table.append(thead);
-    table.append(tbody);
-    div2.append(table);
-    div.append(div2);
+    // thead.append(trThead);
+    // tbody.append(trBody);
+    // table.append(thead);
+    // table.append(tbody);
+    // div2.append(table);
+    // div.append(div2);
 
     console.log("card respuestID", this.respuestaId)
    btnVer.addEventListener("click", (e) => {
@@ -81,7 +81,7 @@ export class Modals {
     sessionStorage.setItem("respuestaId", this.respuestaId);
     location.href = "formViewver.html";
   });
-    return div;
+    return trBody;
 
   }
 

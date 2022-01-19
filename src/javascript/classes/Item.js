@@ -216,6 +216,7 @@ export class Item {
     let input = document.createElement("input");
     if (dbInput) {
       this.setProperties(input, dbInput);
+      input.dataset.esrespuesta =true;
       input.placeholder = dbInput.placeHolder;
     } else {
       input.placeholder = placeholder;
@@ -270,6 +271,7 @@ export class Item {
   generateTextArea = (value, placeHolder, dbTextArea, disabled) => {
     let textArea = document.createElement("textArea");
     this.setProperties(textArea, dbTextArea);
+    textArea.dataset.esrespuesta=true;
     textArea.required = true;
     textArea.placeholder = placeHolder;
     textArea.classList.add("form-control");

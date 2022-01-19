@@ -10,6 +10,7 @@ export async function collectAllQuestions() {
 
   allQuestionsArray.forEach((question) => {
     optionsArray = question.querySelectorAll("[data-esrespuesta]");
+    console.log("array",optionsArray)
     let indexFinal = optionsArray.length - 1;
     questionType = question.dataset.questiontype;
     questionText = question.querySelector("label").innerText;
@@ -56,6 +57,7 @@ export async function collectAllQuestions() {
             tipo: option.dataset.tipoopcion,
             contador: index
           };
+          console.log("opcion3w", listaOpciones)
 
           listaOpciones.push(opcion);
         }
@@ -69,6 +71,5 @@ export async function collectAllQuestions() {
     });
     listaOpciones = [];
   });
-  console.log(listaPreguntas);
   return listaPreguntas;
 }

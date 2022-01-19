@@ -5,7 +5,7 @@ export class Opcion {
   esCompleja;
   tipoOpcion;
   placeHolder;
-  constructor(esDefault = false, textoOpcion, esRespuesta = false, esCompleja = false, tipoOpcion,placeHolder) {
+  constructor(esDefault = false, textoOpcion="", esRespuesta = false, esCompleja = false, tipoOpcion="",placeHolder="") {
     this.esDefault = esDefault;
     this.textoOpcion = textoOpcion;
     this.esRespuesta = esRespuesta;

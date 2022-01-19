@@ -56,7 +56,7 @@ export const HOME = {
         }
         //    await db.addForm(object);
         
-        cuestionariosWrapper.append(new Card("Cuestionario sobre patrimonio", cuestionarioDB.descripcion, cuestionario, cuestionarioDB.Respuestas).generateCard(cuestionario, cuestionarioDB))
+        cuestionariosWrapper.append(new Card(cuestionarioDB.titulo, cuestionarioDB.descripcion, cuestionario, cuestionarioDB.Respuestas).generateCard(cuestionario, cuestionarioDB))
         console.log("cuestionarioDb",cuestionarioDB)
       }
     }

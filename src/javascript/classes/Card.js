@@ -43,14 +43,15 @@ export class Card {
 
     cardBodyBtns.append(href);
     participantes.addEventListener("click",()=>{
-      let cuestionariosWrapper = document.querySelectorAll("#respuestasWrapper");
+      let cuestionariosWrapper = document.querySelector("#respuestasWrapper");
+      let tbody = cuestionariosWrapper.querySelector("tbody")
       let div = document.querySelector(".modal-superior");
       let id=1;
       console.log("CLICK RESPUESTAS")
       $('#modalEvent').modal('hide');
-      cuestionariosWrapper.forEach((div, index) =>{
+      Object.entries(this.listaRespuestas).forEach((respuesta) =>{
         console.log("entro al div");
-        div.append(new Modals(id,cuestionarioDB.usuario, this.href, Object.entries(this.listaRespuestas)[index][0]).generateModal());
+        tbody.append(new Modals(id,cuestionarioDB.usuario, this.href, respuesta[0]).generateModal());
         id++;
       })
       console.log("respuesas",Object.entries(this.listaRespuestas))
@@ -67,13 +68,14 @@ export class Card {
     card_body.append(cardBodyBtns);
 
     cardWrapper.append(card);
-
+    console.log("href",this.href);
     href.addEventListener("click", (e) => {
       e.preventDefault();
       sessionStorage.setItem("cuestionarioId",this.href);
       location.href = "formViewver.html";
       sessionStorage.removeItem("cuestionarioPreview");
       sessionStorage.removeItem("respuestaId");
+     
     });
     return cardWrapper;
   }
