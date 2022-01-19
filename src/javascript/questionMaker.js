@@ -12,6 +12,7 @@ import Sortable from "sortablejs";
 import { Cuestionario } from "./classes/Cuestionario";
 import { Pregunta } from "./classes/Pregunta";
 import { generateQuestions } from "./questionCreator";
+import { DATABASE } from "./Classes/DataBase";
 
 export const QUESTIONMAKER = {
   init: async () => {
@@ -174,12 +175,29 @@ export const QUESTIONMAKER = {
     });
 
     $("#btnVerCuestionario").click(async (e) => {
+      e.preventDefault();
       let cuestionarioResult = formcollectQuestions();
       sessionStorage.setItem(
         "cuestionarioPreview",
         JSON.stringify(cuestionarioResult)
       );
+      window.open("formViewver.html", "_blank");
     });
+
+    let db = new DATABASE();
+    $("#btnGuardarCuestionario").click(async (e)=>{
+      e.preventDefault();
+      let cuestionario= formcollectQuestions();
+      
+      let resultadoCuestionario= {
+        listaPreguntas: cuestionario.preguntasDb(),
+        titulo: cuestionario.titulo,
+        descripcion: cuestionario.descripcion
+      }
+      console.log(resultadoCuestionario)
+      await db.addForm( resultadoCuestionario);
+  
+    })
 
     const formcollectQuestions = () => {
       let allItems = document.querySelectorAll(".item");
@@ -268,6 +286,8 @@ export const QUESTIONMAKER = {
     
               break;
         }
+        let titulo = question.querySelector("#titulo");
+        let descipcion = question.querySelector("#descipcion");
         let pregunta = new Pregunta(
           textoPregunta.value,
           question.dataset.questiontype,
@@ -276,7 +296,7 @@ export const QUESTIONMAKER = {
         listaOpciones = [];
         listaPreguntas.push(pregunta);
       });
-      let cuestionario = new Cuestionario(listaPreguntas);
+      let cuestionario = new Cuestionario(listaPreguntas, titulo.value,descipcion.value );
       return cuestionario;
     };
   },

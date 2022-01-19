@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Eventos</title>
 </head>
 
 <body id="start" class="events">
@@ -16,7 +16,6 @@
                 <img id="imagenHeader" src="assets/img/firma-ucr-c.svg"></img>
             </a>
 
-            <!-- <p><a >Ver datos de eventos</a></p> -->
         </header>
     </div>
     <h1 class="text-center" style="margin-top: 30px; margin-bottom: 30px;">
@@ -77,22 +76,22 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-6">
+                <!-- <div class="row"> -->
+                    <!-- <div class="col-6">
                         <button type="button" class="btn btn-secondary" id="btnCrearForm"
                             style="margin-top: 30px; margin-left: 500px;" onclick="back()">Crear Cuestionario</button>
-                    </div>
+                    </div> -->
 
                     <div class="col">
                         <button type="button" class="btn btn-success" id="btnAddEvent"
                             style="margin-top: 30px; margin-left: 500px;" >Guardar</button>
                     </div>
-                    <div class="col-6">
+                    <div class="col">
                         <button type="button" class="btn btn-secondary" id="btnAddEvent"
-                            style="margin-top: 30px; margin-left: 500px;" onclick="back()">Volver</button>
+                            style="margin-top: 30px; " onclick="back()">Volver</button>
                     </div>
 
-                </div>
+                <!-- </div> -->
                 <div>
                     <div class="modal" tabindex="-1" role="dialog" id="succes">
                         <div class="modal-dialog" role="document">
@@ -101,10 +100,10 @@
                               <h5 class="modal-title">Proceso exitoso</h5>
                             </div>
                             <div class="modal-body">
-                              <p>El evento se ha agregado con exito</p>
+                              <p>El evento se ha creado correctamente, para asociar un cuestionario para este evento presione continuar</p>
                             </div>
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-primary" onclick="back()">Aceptar</button>
+                              <button type="button" class="btn btn-primary" onclick="crearForm()">Continuar</button>
                             </div>
                           </div>
                         </div>
@@ -155,6 +154,9 @@
     <script>
         function back() {
             location.href = "index.html";
+        };
+        function crearForm() {
+            location.href = "questionMaker.html";
         };
     </script>
 

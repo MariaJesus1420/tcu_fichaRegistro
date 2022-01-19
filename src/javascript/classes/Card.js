@@ -4,11 +4,13 @@ export class Card {
   title;
   description;
   href;
+  listaRespuestas;
 
-  constructor(title, description, href) {
+  constructor(title, description, href, listaRespuestas) {
     this.title = title;
     this.description = description;
     this.href = href;
+    this.listaRespuestas=listaRespuestas
   }
 
   generateCard(cuestionario, cuestionarioDB) {
@@ -43,10 +45,15 @@ export class Card {
     participantes.addEventListener("click",()=>{
       let cuestionariosWrapper = document.querySelectorAll("#respuestasWrapper");
       let div = document.querySelector(".modal-superior");
-      let id=0;
+      let id=1;
       console.log("CLICK RESPUESTAS")
       $('#modalEvent').modal('hide');
-      cuestionariosWrapper.forEach(div => div.append(new Modals(id,cuestionarioDB.usuario).generateModal()), id++);
+      cuestionariosWrapper.forEach((div, index) =>{
+        console.log("entro al div");
+        div.append(new Modals(id,cuestionarioDB.usuario, this.href, Object.entries(this.listaRespuestas)[index][0]).generateModal());
+        id++;
+      })
+      console.log("respuesas",Object.entries(this.listaRespuestas))
       $('#modalRespuestas').modal('show');
     })
     $("#btnVolverRespuestas").click(()=>{
@@ -65,6 +72,8 @@ export class Card {
       e.preventDefault();
       sessionStorage.setItem("cuestionarioId",this.href);
       location.href = "formViewver.html";
+      sessionStorage.removeItem("cuestionarioPreview");
+      sessionStorage.removeItem("respuestaId");
     });
     return cardWrapper;
   }

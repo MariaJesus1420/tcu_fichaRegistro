@@ -55,7 +55,9 @@ export const HOME = {
           usuario: cuestionarioDB.usuario
         }
         //    await db.addForm(object);
-        cuestionariosWrapper.append(new Card("Cuestionario sobre patrimonio", cuestionarioDB.descripcion, cuestionario).generateCard(cuestionario, cuestionarioDB))
+        
+        cuestionariosWrapper.append(new Card("Cuestionario sobre patrimonio", cuestionarioDB.descripcion, cuestionario, cuestionarioDB.Respuestas).generateCard(cuestionario, cuestionarioDB))
+        console.log("cuestionarioDb",cuestionarioDB)
       }
     }
 

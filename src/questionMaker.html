@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cuestionarios</title>
 </head>
 
 <body id="start" class="questionMaker">
@@ -18,44 +18,47 @@
                         <img id="imagenHeader" src="assets/img/firma-ucr-c.svg"></img>
                     </a>
                 </div>
-                <div class="col-2">
-
-                    <div class="dropdown">
-                        <button onclick="myFunction()" class="dropbtn"></button>
-                        <div id="myDropdown" class="dropdown-content">
-                            <a href="">Ver eventos</a>
-                            <a href="events.html">Agregar evento</a>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-
-
-            <!-- <div><a href="#"
-                    style=" font-weight: normal; margin-top: 5px; background-color: #41ade7; border-color: #030303; font-size: 25px;"
-                    class="btn btn-info" id="btnSeleccion" role="button">Ver datos de eventos</a></div> -->
-
-
-            <!-- <p><a >Ver datos de eventos</a></p> -->
         </header>
     </div>
     <h1 class="text-center" style="margin-top: 30px; margin-bottom: 30px;">
-        Question Maker
+        Creador de cuestionarios
     </h1>
     <div class="mainContentWrapper container">
         <div id="mainContent" class="container row  mainContent">
             <form id="formMaker">
-            <div class="seccionBotonesArriba">
-                <button type="submit"  class="circularBtn " id="btnGuardarCuestionario"><i class="far fa-save" > </i></button>
-               
-                <button type="submit"  class="circularBtn btnAzul" id="btnVerCuestionario"><i class="fas fa-eye" ></i></button>
-            </div>
-            <div id="itemsContainer" class="container"></div>
-            <div class="seccionBotones">
-                <button type="button"  class="circularBtn" id="btnAgregarPregunta"><i class="bi bi-plus" ></i></button>
-            </div>
-        </form>
+                <div class="seccionBotonesArriba">
+                    <button type="submit" class="circularBtn " id="btnGuardarCuestionario"><i class="far fa-save">
+                        </i></button>
+
+                    <button type="submit" class="circularBtn btnAzul" id="btnVerCuestionario"><i
+                            class="fas fa-eye"></i></button>
+                </div>
+                <div class="titulos simpleTextInput container">
+                    <div class="contents row">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Titulo</label>
+                            <input type="text" class="form-control" id="titulo"
+                                placeholder="Ingrese el titulo " />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="titulos simpleTextInput container">
+                    <div class="contents row">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Descipcion</label>
+                            <textarea class="form-control" id="descipcion" placeholder=" " required></textarea>
+
+                        </div>
+                    </div>
+                </div>
+                <div id="itemsContainer" class="container"></div>
+                <div class="seccionBotones">
+                    <button type="button" class="circularBtn" id="btnAgregarPregunta"><i
+                            class="bi bi-plus"></i></button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -82,7 +85,7 @@
 
         </footer>
     </div>
-  
+
 
 </body>
 <script>

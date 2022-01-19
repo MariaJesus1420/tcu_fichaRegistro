@@ -12,13 +12,11 @@ export const FORMVIEWVER = {
     init: async() =>{
       window.onbeforeunload = function() {
         sessionStorage.removeItem("cuestionarioId");
-        
       };
         let db = new DATABASE();
         let cuestionarioId = sessionStorage.getItem("cuestionarioId")
         console.log(cuestionarioId)
-      //  let cuestionario = await db.obtenerDocumento("Cuestionarios",cuestionarioId)
-
+    
         let cuestionarioPreview =  JSON.parse(sessionStorage.getItem("cuestionarioPreview"))
       
         //  .newEvent333.fichasRegistro['2f3e3e68-a3f4-4a84-9c1c-80e167ae5a1d']
@@ -26,8 +24,10 @@ export const FORMVIEWVER = {
         if(cuestionarioPreview){
           generateQuestions(cuestionarioPreview)
         }else{
+          let cuestionario = await db.obtenerDocumento("Cuestionarios",cuestionarioId)
+          let respuestaId = sessionStorage.getItem("respuestaId")
           console.log(cuestionario)
-          generateQuestions(cuestionario)
+          generateQuestions(cuestionario, respuestaId)
         }
         
        // buildAllQuestions(cuestionario,"1eeff9dc-02ff-4890-925e-1887332007c5");

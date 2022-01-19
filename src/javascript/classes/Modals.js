@@ -1,11 +1,15 @@
 export class Modals {
   id;
   usuario;
-  action;
+  cuestionarioId;
+  respuestaId;
+  
 
-  constructor(id, usuario) {
+  constructor(id, usuario,cuestionarioId, respuestaId) {
     this.id = id;
     this.usuario = usuario;
+    this.cuestionarioId=cuestionarioId;
+    this.respuestaId=respuestaId;
   }
 
   generateModal() {
@@ -70,9 +74,11 @@ export class Modals {
     div2.append(table);
     div.append(div2);
 
+    console.log("card respuestID", this.respuestaId)
    btnVer.addEventListener("click", (e) => {
     e.preventDefault();
-    sessionStorage.cuestionarioId = this.action;
+    sessionStorage.setItem("cuestionarioId", this.cuestionarioId);
+    sessionStorage.setItem("respuestaId", this.respuestaId);
     location.href = "formViewver.html";
   });
     return div;
