@@ -1,6 +1,6 @@
 export class DATABASE {
   db = firebase.firestore();
-  constructor() {}
+  constructor() { }
 
   async addEvent(event, year, id) {
     event.start = new Date(event.start);
@@ -19,9 +19,35 @@ export class DATABASE {
       });
   }
 
+  async addFormToEvent(year, eventoId, cuestionarioId) {
+    let eventPath = `${eventoId}.cuestionarios`;
+    this.db
+      .collection("Events")
+      .doc(year)
+      .update({ [eventPath]: firebase.firestore.FieldValue.arrayUnion(cuestionarioId) })
+      .then((docRef) => {
+        console.log("Document written");
+      })
+      .catch((error) => {
+        console.log("Error while writing document, ", error);
+      });
+  }
 
-  async addAnwsers(cuestionario, id,respuestas) {
-    let userAnswerPath = `Respuestas.${id}.listaPreguntas`
+  async deleteFormFromEvent(year, eventoId, cuestionarioId) {
+    let eventPath = `${eventoId}.cuestionarios`;
+    this.db
+      .collection("Events")
+      .doc(year)
+      .update({ [eventPath]: firebase.firestore.FieldValue.arrayRemove(cuestionarioId) })
+      .then((docRef) => {
+        console.log("Document deleted");
+      })
+      .catch((error) => {
+        console.log("Error while deleting document, ", error);
+      });
+  }
+  async addAnwsers(cuestionario, id, respuestas) {
+    let userAnswerPath = `Respuestas.${id}.listaPreguntas`;
     this.db
       .collection("Cuestionarios")
       .doc(cuestionario)
@@ -37,7 +63,7 @@ export class DATABASE {
   }
 
   async getAnswers(respuestas, id) {
-    let respuestaUser = `Respuestas.${id}`
+    let respuestaUser = `Respuestas.${id}`;
     this.db
       .collection("Cuestionarios")
       .doc(id)
@@ -53,17 +79,16 @@ export class DATABASE {
   }
 
   async addForm(cuestionario) {
-    this.db.collection("Cuestionarios").add(
-      cuestionario
-  )
-  .then((docRef) => {
-      console.log("Document written with ID: ", docRef.id);
-  })
-  .catch((error) => {
-      console.error("Error adding document: ", error);
-  });
+    this.db
+      .collection("Cuestionarios")
+      .add(cuestionario)
+      .then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
   }
-
 
   async obtenerDocumento(coleccion, documento) {
     var docRef = this.db.collection(coleccion).doc(documento);
@@ -74,7 +99,6 @@ export class DATABASE {
       .then((doc) => {
         if (doc.exists) {
           result = doc.data();
-  
         } else {
           console.log("No such document!");
         }
@@ -84,10 +108,26 @@ export class DATABASE {
       });
     return result;
   }
+  async obtenerTodos(coleccion) {
+    let docRef = this.db.collection(coleccion);
+    let result = [];
 
-  async addFichaRegistro(eventoId,year, fichaRegistro,fichaRegistroId) {
-    let eventoPath = `${eventoId}.fichasRegistro.${fichaRegistroId}`
-    console.log(fichaRegistro)
+    await docRef.get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        result.push(
+          {
+            data: doc.data(),
+            id: doc.id
+          }
+        );
+      });
+    });
+    return result;
+  }
+
+  async addFichaRegistro(eventoId, year, fichaRegistro, fichaRegistroId) {
+    let eventoPath = `${eventoId}.fichasRegistro.${fichaRegistroId}`;
+    console.log(fichaRegistro);
     this.db
       .collection("Events")
       .doc(year)
@@ -99,11 +139,6 @@ export class DATABASE {
       })
       .catch((error) => {
         console.error("Error adding document: ", error);
-      })
-      
-      
-      
+      });
   }
-
-  
 }

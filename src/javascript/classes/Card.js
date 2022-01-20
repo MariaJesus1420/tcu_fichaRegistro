@@ -1,4 +1,5 @@
 import { Modals } from "./Modals";
+import { DATABASE } from "./DataBase";
 
 export class Card {
   title;
@@ -10,26 +11,37 @@ export class Card {
     this.title = title;
     this.description = description;
     this.href = href;
-    this.listaRespuestas=listaRespuestas
+    this.listaRespuestas = listaRespuestas
   }
 
-  generateCard(cuestionario, cuestionarioDB) {
+  async generateCard(year, eventoId, cuestionarioDB, cuestionarioId) {
+    let db = new DATABASE();
     let cardWrapper = document.createElement("div");
-    cardWrapper.classList.add("col-lg-4");
+    cardWrapper.classList.add("col-xl-4");
     let card = document.createElement("div");
     card.classList.add("card", "cuestionarioCard");
+    let btnEliminar = document.createElement("button")
+    btnEliminar.classList.add("btn", "btn-danger")
+    let iEliminar = document.createElement("i")
+    iEliminar.classList.add("bi", "bi-trash")
+    btnEliminar.append(iEliminar)
+    card.append(btnEliminar)
+    btnEliminar.addEventListener("click", async (e) => {
+      await db.deleteFormFromEvent(year, eventoId, cuestionarioId)
+      e.target.parentElement.parentElement.remove();
+    })
     let card_body = document.createElement("div");
     card_body.classList.add("card-body");
     let card_tittle = document.createElement("h5");
-    card_tittle.classList.add("card-tittle","text-center");
+    card_tittle.classList.add("card-tittle", "text-center");
     let card_text = document.createElement("p");
-    card_text.classList.add("card-text","text-center");
+    card_text.classList.add("card-text", "text-center");
     let href = document.createElement("a");
     let participantes = document.createElement("a");
     participantes.innerText = "Respuestas";
-    participantes.classList.add("btn", "btn-success","col-5");
+    participantes.classList.add("btn", "btn-success", "col-5");
     href.innerText = "Completar";
-    href.classList.add("btn", "btn-primary","col-5");
+    href.classList.add("btn", "btn-primary", "col-5");
 
     card_text.innerText = this.description;
     card_tittle.innerText = this.title;
@@ -42,22 +54,22 @@ export class Card {
     card_body.append(card_text);
 
     cardBodyBtns.append(href);
-    participantes.addEventListener("click",()=>{
+    participantes.addEventListener("click", () => {
       let cuestionariosWrapper = document.querySelector("#respuestasWrapper");
       let tbody = cuestionariosWrapper.querySelector("tbody")
       let div = document.querySelector(".modal-superior");
-      let id=1;
-      console.log("CLICK RESPUESTAS")
+      let id = 1;
+     
       $('#modalEvent').modal('hide');
-      Object.entries(this.listaRespuestas).forEach((respuesta) =>{
-        console.log("entro al div");
-        tbody.append(new Modals(id,cuestionarioDB.usuario, this.href, respuesta[0]).generateModal());
+      Object.entries(this.listaRespuestas).forEach((respuesta) => {
+      
+        tbody.append(new Modals(id, cuestionarioDB.usuario, this.href, respuesta[0]).generateModal());
         id++;
       })
-      console.log("respuesas",Object.entries(this.listaRespuestas))
+    
       $('#modalRespuestas').modal('show');
     })
-    $("#btnVolverRespuestas").click(()=>{
+    $("#btnVolverRespuestas").click(() => {
       let div = document.querySelectorAll(".modal-superior");
       let div2 = document.querySelector(".modal-superior-segundo");
       $('#modalRespuestas').modal('hide');
@@ -68,14 +80,14 @@ export class Card {
     card_body.append(cardBodyBtns);
 
     cardWrapper.append(card);
-    console.log("href",this.href);
+   
     href.addEventListener("click", (e) => {
       e.preventDefault();
-      sessionStorage.setItem("cuestionarioId",this.href);
+      sessionStorage.setItem("cuestionarioId", this.href);
       location.href = "formViewver.html";
       sessionStorage.removeItem("cuestionarioPreview");
       sessionStorage.removeItem("respuestaId");
-     
+
     });
     return cardWrapper;
   }
