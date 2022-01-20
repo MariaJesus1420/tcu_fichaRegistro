@@ -1,3 +1,5 @@
+import { DATABASE } from "./DataBase";
+
 export class Modals {
   id;
   usuario;
@@ -30,8 +32,15 @@ export class Modals {
     iVer.classList.add("bi", "bi-eye-fill");
     let btnDelete = document.createElement("button");
     btnDelete.classList.add("btn", "btn-danger");
-    btnDelete.addEventListener("click",async(e)=>{
-      await db.deleteAswer(cuestionarioId,this.respuestaId)
+    let db = new DATABASE();
+    btnDelete.addEventListener("click", async (e) => {
+      await db.deleteAswer(this.cuestionarioId, this.respuestaId)
+      $('#modalRespuestas').modal('hide')
+      $('#successDelete').modal('show');
+      $("#closeDelete").click(() => {
+        $('#successDelete').modal('hide');
+        location.href = "index.html";
+      })
     })
     let iDelete = document.createElement("i");
     iDelete.classList.add("bi", "bi-x");
