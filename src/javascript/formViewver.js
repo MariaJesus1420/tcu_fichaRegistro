@@ -10,27 +10,65 @@ import { generateQuestions } from "./questionCreator";
 import { Cuestionario } from "./classes/Cuestionario";
 export const FORMVIEWVER = {
     init: async() =>{
-      // window.onbeforeunload = function() {
-      //   sessionStorage.removeItem("cuestionarioId");
-      // };
+
         let db = new DATABASE();
         let cuestionarioId = sessionStorage.getItem("cuestionarioId")
         console.log(cuestionarioId)
     
         let cuestionarioPreview =  JSON.parse(sessionStorage.getItem("cuestionarioPreview"))
       
-        //  .newEvent333.fichasRegistro['2f3e3e68-a3f4-4a84-9c1c-80e167ae5a1d']
+       
 
         if(cuestionarioPreview){
           generateQuestions(cuestionarioPreview)
         }else{
           let cuestionario = await db.obtenerDocumento("Cuestionarios",cuestionarioId)
           let respuestaId = sessionStorage.getItem("respuestaId")
+          let form = document.querySelector("#form")
           console.log(cuestionario)
           generateQuestions(cuestionario, respuestaId)
+          let titulo = document.createElement("h1")
+          titulo.innerText= cuestionario.titulo
+          titulo.classList.add("text-center")
+          let descripcion = document.createElement("label")
+          descripcion.innerText= cuestionario.descripcion
+          descripcion.classList.add("text-center")
+          form.prepend(descripcion)
+          form.prepend(titulo)
+          
+
+          if (!respuestaId){
+            let button = document.createElement("button");
+            button.classList.add("btn", "btn-secondary")
+            button.id= "enviarRespuestas"
+            button.innerText="Enviar respuestas"
+
+            $('.seccionBotones').append(button)
+            $('.enviarRespuestas').click(async (e) => {
+              e.preventDefault();
+              let respuestas = await collectAllQuestions();
+              await db.addAnwsers(cuestionarioId,uuidv4(),respuestas)
+              $('#successSave').modal('show');
+              $("#closeSave").click(()=>{
+                $('#successSave').modal('hide');
+                location.href ="index.html";
+              })
+            });
+          }else{
+            $('.enviarRespuestas').remove();
+            let buttonVolver = document.createElement("a");
+            buttonVolver.classList.add("btn", "btn-secondary")
+            buttonVolver.id= "volver"
+            buttonVolver.innerText="Volver"
+
+            $('.seccionBotones').append(buttonVolver)
+            $("#volver").click(()=>{
+              location.href ="index.html";
+            })
+
+
+          }
         }
-        
-       // buildAllQuestions(cuestionario,"1eeff9dc-02ff-4890-925e-1887332007c5");
         
         let checkBoxList = document.querySelectorAll("input[type='checkbox']")
         let checkBoxLogic = new CheckBoxLogic();
@@ -65,12 +103,6 @@ export const FORMVIEWVER = {
     
         })
 
-        
 
-        $("#btnGuardarForm").click(async (e) => {
-          e.preventDefault();
-          let respuestas = await collectAllQuestions();
-          await db.addAnwsers(cuestionarioId,uuidv4(),respuestas)
-        });
     }
 }

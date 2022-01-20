@@ -59,19 +59,25 @@ export class Card {
       let tbody = cuestionariosWrapper.querySelector("tbody")
       let div = document.querySelector(".modal-superior");
       let id = 1;
-     
+
       $('#modalEvent').modal('hide');
-      Object.entries(this.listaRespuestas).forEach((respuesta) => {
-      
-        tbody.append(new Modals(id, cuestionarioDB.usuario, this.href, respuesta[0]).generateModal());
-        id++;
+      if (this.listaRespuestas != null) {
+        Object.entries(this.listaRespuestas).forEach((respuesta) => {
+          console.log("respuesta", respuesta)
+          tbody.append(new Modals(id, cuestionarioDB.usuario, this.href, respuesta[0]).generateModal());
+          id++;
+          $('#modalRespuestas').modal('show');
       })
-    
-      $('#modalRespuestas').modal('show');
+      }else{
+        $('#noAnswer').modal('show');
+        $("#closeAnswer").click(()=>{
+          $('#noAnswer').modal('hide');
+        })
+      }
     })
     $("#btnVolverRespuestas").click(() => {
-      let div = document.querySelectorAll(".modal-superior");
-      let div2 = document.querySelector(".modal-superior-segundo");
+      let div = document.querySelectorAll(".modal-superior tbody tr");
+      console.log(div)
       $('#modalRespuestas').modal('hide');
       div.forEach(div2 => div2.remove());
       $('#modalEvent').modal('show');
@@ -80,7 +86,7 @@ export class Card {
     card_body.append(cardBodyBtns);
 
     cardWrapper.append(card);
-   
+
     href.addEventListener("click", (e) => {
       e.preventDefault();
       sessionStorage.setItem("cuestionarioId", this.href);

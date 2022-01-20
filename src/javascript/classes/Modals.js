@@ -18,7 +18,7 @@ export class Modals {
     tdUserId.innerText = this.id;
     tdUserId.classList.add("td-userId");
     let tdUserName = document.createElement("td");
-    tdUserName.innerText = this.usuario;
+    tdUserName.innerText = "Anonimo";
     tdUserName.classList.add("td-userName");
     let tdUserAction = document.createElement("td");
     tdUserAction.classList.add("text-end");

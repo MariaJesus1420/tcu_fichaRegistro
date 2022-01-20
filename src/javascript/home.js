@@ -31,11 +31,18 @@ export const HOME = {
     const eventoClick = async info => {
       let cuestionariosWrapper = document.querySelector('#cuestionariosWrapper')
       let clickedEvent = info.event
+      console.log(clickedEvent);
       let db = new DATABASE()
       let eventListDB = await db.obtenerDocumento('Events', '2021')
       eventoId = clickedEvent.id
 
+
       $('#modalEvent').modal('show')
+      
+      $('#modalEvent').on("shown.bs.modal", function (){
+        let desc = document.querySelector('#labelDesc')
+        desc.innerText= clickedEvent.extendedProps.descripcion;
+      })
       let cuestionariosWrapper2 = document.querySelectorAll('.col-xl-4')
 
       cuestionariosWrapper2.forEach(cuestionarioCard =>

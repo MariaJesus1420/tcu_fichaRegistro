@@ -1,8 +1,13 @@
 
 .seccionBotones{
+  display: flex;
   justify-content: center;
-  align-items: center;
-  margin: auto;
+}
+
+#btnGuardarForm{
+  margin-left: auto;
+  margin-right: auto;
+  
 }
 .mainContent{
   min-height: calc(100vh - 4rem);
@@ -114,12 +119,8 @@ margin-right: 5px;
   text-align: center;
 }
 
-#imagenHeader99 {
-  max-width: none;
-}
-#linkHeader99 {
-  width: 650px;
-  overflow: hidden;
+#linkHeader>img {
+  max-width: 100%;
 }
 
 body {

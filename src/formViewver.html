@@ -22,20 +22,18 @@
             </div>
         </header>
     </div>
-    <h1 class="text-center" style="margin-top: 30px; margin-bottom: 30px;">
-        Ficha de Registro TCU-374/486 Patrimonio y Cultura
-    </h1>
     <div class="mainContentWrapper container">
-        <div class="container row  mainContent">
+        <div class="container row  mainContent" id="form">
 
             <form id="mainForm">
-                <div class="row seccionBotones">
-                    <button type="submit" class="btn btn-secondary" id="btnGuardarForm">Guardar</button>
+                <div class="seccionBotones">
+                    <!-- <button type="submit" class="btn btn-secondary" id="btnGuardarForm">Enviar respuestas</button> -->
                 </div>
+            </form>
         </div>
-      </div>
-    </form>
     </div>
+
+
     <div class="container-fluid">
         <footer class="row py-3 border-top " id="footer">
             <div class="col-sm imagenFooter">
@@ -76,6 +74,24 @@
             </div>
         </div>
     </div>
+
+    <div class="modal" id="successSave" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Proceso exitoso</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Las respuestas se han guardado correctamente.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="closeSave">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </body>
 <script>
