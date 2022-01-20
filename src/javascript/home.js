@@ -7,6 +7,8 @@ import { CuestionarioLoader } from './Classes/CuestionarioLoader'
 
 export const HOME = {
   init: async () => {
+
+    
     let eventoId
     const generateEventsList = eventsDB => {
       let eventsList = []
@@ -29,56 +31,67 @@ export const HOME = {
     }
 
     const eventoClick = async info => {
+     
+
+      $("#cuestionariosWrapper").empty()
+      
+      $(".eventoInfo").hide()
+
+      $(".spinner-border").show()
       let cuestionariosWrapper = document.querySelector('#cuestionariosWrapper')
+
+    
+
       let clickedEvent = info.event
-      console.log(clickedEvent);
+
       let db = new DATABASE()
       let eventListDB = await db.obtenerDocumento('Events', '2021')
       eventoId = clickedEvent.id
 
+      let modalEvent = new bootstrap.Modal($("#modalEvent"))
 
-      $('#modalEvent').modal('show')
-      
-      $('#modalEvent').on("shown.bs.modal", function (){
-        let desc = document.querySelector('#labelDesc')
-        desc.innerText= clickedEvent.extendedProps.descripcion;
-      })
-      let cuestionariosWrapper2 = document.querySelectorAll('.col-xl-4')
+      modalEvent.show()
 
-      cuestionariosWrapper2.forEach(cuestionarioCard =>
-        cuestionarioCard.remove()
-      )
-      let result = cuestionariosWrapper.querySelectorAll("label")
-     
-      result.forEach(element => {
-      
-        element.remove();
-      });
+
       if (eventListDB[eventoId].cuestionarios == undefined || eventListDB[eventoId].cuestionarios.length === 0) {
-      
+
         let labelCuestionarios = document.createElement('label')
-        labelCuestionarios.innerText ='Este evento no tiene formularios asociadios.';
+        labelCuestionarios.innerText = 'Este evento no tiene formularios asociadios.';
         cuestionariosWrapper.append(labelCuestionarios)
       } else {
-        for ( let index = 0; index < eventListDB[eventoId].cuestionarios.length; index++) {
-          let cuestionario = eventListDB[eventoId].cuestionarios[index]
+     
+      
+        $('#modalEvent').one("shown.bs.modal", async function () {
+       
+          let desc = document.querySelector('#labelDesc')
+          desc.innerText = clickedEvent.extendedProps.descripcion;
 
-          let cuestionarioDB = await db.obtenerDocumento(
-            'Cuestionarios',
-            cuestionario
-          )
+          for (let index = 0; index < eventListDB[eventoId].cuestionarios.length; index++) { 
+          
+            let cuestionario = eventListDB[eventoId].cuestionarios[index]
 
-          //    await db.addForm(object);
-  
-          cuestionariosWrapper.append(
-           await new Card(
-              cuestionarioDB.titulo,
-              cuestionarioDB.descripcion,
-              cuestionario,
-              cuestionarioDB.Respuestas
-            ).generateCard("2021",eventoId, cuestionarioDB,cuestionario)
-          )
-        }
+            let cuestionarioDB = await db.obtenerDocumento(
+              'Cuestionarios',
+              cuestionario
+            )
+
+            //    await db.addForm(object);
+
+            cuestionariosWrapper.append(
+              await new Card(
+                cuestionarioDB.titulo,
+                cuestionarioDB.descripcion,
+                cuestionario,
+                cuestionarioDB.Respuestas
+              ).generateCard("2021", eventoId, cuestionarioDB, cuestionario)
+            )
+
+          }
+          $(".spinner-border").hide()
+
+          $(".eventoInfo").show()
+
+        })
       }
     }
 
@@ -135,13 +148,7 @@ export const HOME = {
 
     let db = new DATABASE()
 
-    $('#btnGuardarForm').click(async e => {
-      let listaPreguntas = await collectAllQuestions()
-      let cuestionario = cuestionarioBuilder(listaPreguntas)
-      e.preventDefault()
 
-      await db.addFichaRegistro('newEvent333', '2021', cuestionario, uuidv4())
-    })
     let eventsDB = await db.obtenerDocumento('Events', '2021')
     calendarObj = generateCalendar(generateEventsList(eventsDB))
 
@@ -151,11 +158,12 @@ export const HOME = {
       let loader = new CuestionarioLoader()
       let trBody = await loader.loadCuestionarios('2021', eventoId)
       $('#listaCuestionariosWrapper tbody').replaceWith(trBody)
-      
+
     })
     $('#btnVolverListaCuestionarios').click(e => {
       $('#modalCuestionarioSelect').modal('hide')
       $('#modalEvent').modal('show')
+
     })
   }
 }

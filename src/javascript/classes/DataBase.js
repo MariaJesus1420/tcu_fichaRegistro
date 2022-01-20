@@ -62,6 +62,22 @@ export class DATABASE {
       });
   }
 
+  async deleteAswer(cuestionario, id) {
+    let userAnswerPath = `Respuestas.${id}`;
+    this.db
+      .collection("Cuestionarios")
+      .doc(cuestionario)
+      .update({
+        [userAnswerPath]: firebase.firestore.FieldValue.delete()
+      })
+      .then((docRef) => {
+        console.log("Document written with ID: ");
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
+  }
+
   async getAnswers(respuestas, id) {
     let respuestaUser = `Respuestas.${id}`;
     this.db

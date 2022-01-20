@@ -25,6 +25,7 @@ export class Card {
     let iEliminar = document.createElement("i")
     iEliminar.classList.add("bi", "bi-trash")
     btnEliminar.append(iEliminar)
+  
     card.append(btnEliminar)
     btnEliminar.addEventListener("click", async (e) => {
       await db.deleteFormFromEvent(year, eventoId, cuestionarioId)
@@ -63,7 +64,7 @@ export class Card {
       $('#modalEvent').modal('hide');
       if (this.listaRespuestas != null) {
         Object.entries(this.listaRespuestas).forEach((respuesta) => {
-          console.log("respuesta", respuesta)
+         
           tbody.append(new Modals(id, cuestionarioDB.usuario, this.href, respuesta[0]).generateModal());
           id++;
           $('#modalRespuestas').modal('show');
@@ -77,7 +78,7 @@ export class Card {
     })
     $("#btnVolverRespuestas").click(() => {
       let div = document.querySelectorAll(".modal-superior tbody tr");
-      console.log(div)
+      
       $('#modalRespuestas').modal('hide');
       div.forEach(div2 => div2.remove());
       $('#modalEvent').modal('show');

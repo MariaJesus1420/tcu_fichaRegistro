@@ -1,4 +1,4 @@
-export const FirebaseINIT = () => {
+export const FirebaseINIT = async () => {
   console.log("Firing initial config firebase")
   const firebaseConfig = {
     apiKey: "AIzaSyAgg0nJjChQ2R7TrmiRKT-wGcCVGM5ct7Y",
@@ -9,5 +9,5 @@ export const FirebaseINIT = () => {
     appId: "1:725202363337:web:74d3e3d1da770c0f0e7e18",
   };
 
-  firebase.initializeApp(firebaseConfig);
+  await firebase.initializeApp(firebaseConfig);
 };

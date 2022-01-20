@@ -1,7 +1,8 @@
 export async function linksLoader(link_url) {
   return new Promise(function (resolve, reject) {
     if (linksLoader.loaded.has(link_url)) {
-      resolve();
+    
+      resolve("hola");
     } else {
       var link = document.createElement("link");
       link.rel = "stylesheet";

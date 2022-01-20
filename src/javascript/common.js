@@ -12,7 +12,8 @@ export const COMMON = {
       "https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js",
       "https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js",
       "https://www.gstatic.com/firebasejs/8.6.7/firebase-firestore.js",
-    
+      "https://cdn.jsdelivr.net/npm/fullcalendar/locales/es.js"
+
     ];
 
     let listaDeLinks = [
@@ -25,31 +26,42 @@ export const COMMON = {
     let promises = [];
 
 
-
-    listaDeLinks.map(async (element) => {
-      linksLoader.loaded = new Set();
-    
-      promises.push(linksLoader([element]));
-    });
-
     listaDeScripts.map(async (element) => {
- 
+
       scriptsLoader.loaded = new Set();
       promises.push(scriptsLoader([element]));
     });
 
+    await Promise.all(promises).then((result) => {
+    
+      promises = []
+    }).catch((error)=>{
+      console.log("Something went wrong >>" , error);
+    })
+
+
+    listaDeLinks.map(async (element) => {
+      linksLoader.loaded = new Set();
+
+      promises.push(linksLoader([element]));
+    });
+
+
+
     await Promise.all(promises).then(
-      (result) => {
-         scriptsLoader.loaded = new Set();
-        scriptsLoader(  "https://cdn.jsdelivr.net/npm/fullcalendar/locales/es.js")
-      },
-      (error) => {
-        console.log(error,"Error al cargar algo")
+      async (result) => {
+    
+      
+        scriptsLoader("https://cdn.jsdelivr.net/npm/fullcalendar/locales/es.js")
+        console.log("LOADING FIRESTORE");
+        await FirebaseINIT();
+        console.log("FINISH COMMON");
       }
-    );
+      
+    ).catch((error)=>{
+      console.log("Links wrong ," , error);
+    });
     // Now do stuff with those scripts.
-    console.log("LOADING FIRESTORE");
-    FirebaseINIT();
-    console.log("FINISH COMMON");
+  
   },
 };

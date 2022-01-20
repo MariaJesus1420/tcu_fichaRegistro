@@ -71,15 +71,24 @@
                     <h5 class="modal-title" id="modalEventLabelTitle">Informacion acerca del evento</h5>
                 </div>
                 <div class="modal-body">
-                  <div id="descripcionEvento">
-                      <label id="labelDesc">
-
-                      </label>
-
-                  </div>
-                    <hr />
-                    <div class="row cuestionariosWrapper" id="cuestionariosWrapper"> </div>
-                    
+                    <div class="loadingContent">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                    </div>
+                   
+                    <div class="eventoInfo">
+                        <div id="descripcionEvento">
+                            <label id="labelDesc">
+      
+                            </label>
+      
+                        </div>
+                          <hr />
+                          <div class="row cuestionariosWrapper" id="cuestionariosWrapper"></div>
+                          
+                    </div>
+                
                 </div>
                 <div class="modal-footer">
                     <a id="btnCrearNuevoCuestionario" href="questionMaker.html"class="btn btn-success">Crear nuevo</a>

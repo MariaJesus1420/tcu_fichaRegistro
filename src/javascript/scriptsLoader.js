@@ -2,7 +2,7 @@ export async function scriptsLoader(script_url) {
   return new Promise(function (resolve, reject) {
     if (scriptsLoader.loaded.has(script_url)) {
    
-      resolve();
+      resolve("hola");
     } else {
       let script = document.createElement("script");
 

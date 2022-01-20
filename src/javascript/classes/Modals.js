@@ -30,6 +30,9 @@ export class Modals {
     iVer.classList.add("bi", "bi-eye-fill");
     let btnDelete = document.createElement("button");
     btnDelete.classList.add("btn", "btn-danger");
+    btnDelete.addEventListener("click",async(e)=>{
+      await db.deleteAswer(cuestionarioId,this.respuestaId)
+    })
     let iDelete = document.createElement("i");
     iDelete.classList.add("bi", "bi-x");
 

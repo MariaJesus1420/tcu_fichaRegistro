@@ -100,7 +100,16 @@ margin-right: 5px;
 .header {
   background-color: #41ade7;
 }
+.loadingContent{
+  display: flex;
+  justify-content: center;
+ 
+}
 
+div > .spinner-border{
+  width: 3rem;
+  height: 3rem;
+}
 #footer {
   background-color: #323232;
   color: white;
