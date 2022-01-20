@@ -38,8 +38,7 @@
                     <div class="contents row">
                         <div class="form-group">
                             <label for="formGroupExampleInput2">Titulo</label>
-                            <input type="text" class="form-control" id="titulo"
-                                placeholder="Ingrese el titulo " />
+                            <input type="text" class="form-control" id="titulo" placeholder="Ingrese el titulo " />
                         </div>
                     </div>
                 </div>
@@ -62,6 +61,39 @@
         </div>
     </div>
 
+    <div class="modal" id="errorSave" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Proceso fallido</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Todos los campos deben estar completos. No se pueden guardar cuestionarios sin preguntas.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="close">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="successSave" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Proceso exitoso</h5>
+            </div>
+            <div class="modal-body">
+                <p>La creación del cuestionario se ha completado satisfactoriamente.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="closeSave">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     <div class="container-fluid">
         <footer class="row py-3 border-top " id="footer">
@@ -89,10 +121,9 @@
 
 </body>
 <script>
-
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
-    }
+    };
 
     // Close the dropdown menu if the user clicks outside of it
     window.onclick = function (event) {

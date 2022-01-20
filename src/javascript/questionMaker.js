@@ -189,14 +189,27 @@ export const QUESTIONMAKER = {
       e.preventDefault();
       let cuestionario= formcollectQuestions();
       
-      let resultadoCuestionario= {
-        listaPreguntas: cuestionario.preguntasDb(),
-        titulo: cuestionario.titulo,
-        descripcion: cuestionario.descripcion
+      if(cuestionario.titulo=="" || cuestionario.descripcion=="" || cuestionario.preguntasDb().length ==0){
+        console.log("null")
+        $('#errorSave').modal('show');
+        $("#close").click(()=>{
+          $('#errorSave').modal('hide');
+        })
+        
+      }else{
+        let resultadoCuestionario= {
+          listaPreguntas: cuestionario.preguntasDb(),
+          titulo: cuestionario.titulo,
+          descripcion: cuestionario.descripcion
+        }
+        await db.addForm( resultadoCuestionario);
+        $('#successSave').modal('show');
+        $("#closeSave").click(()=>{
+          $('#successSave').modal('hide');
+          location.href ="index.html";
+
+        })
       }
-      console.log(resultadoCuestionario)
-      await db.addForm( resultadoCuestionario);
-  
     })
 
     const formcollectQuestions = () => {
