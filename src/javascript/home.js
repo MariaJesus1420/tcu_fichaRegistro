@@ -151,6 +151,7 @@ export const HOME = {
       let loader = new CuestionarioLoader()
       let trBody = await loader.loadCuestionarios('2021', eventoId)
       $('#listaCuestionariosWrapper tbody').replaceWith(trBody)
+      
     })
     $('#btnVolverListaCuestionarios').click(e => {
       $('#modalCuestionarioSelect').modal('hide')

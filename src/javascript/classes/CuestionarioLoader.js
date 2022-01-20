@@ -48,6 +48,12 @@ export class CuestionarioLoader{
 
             btnAgregar.addEventListener("click",async(e)=>{
                 await db.addFormToEvent(year,eventoId,cuestionario.id)
+                $('#modalCuestionarioSelect').modal('hide')
+                $('#successAdd').modal('show')
+                $("#closeAdd").click(()=>{
+                    $('#successSave').modal('hide');
+                    location.href ="index.html";
+                  })
             })
 
             divBtn.append(btnVer);
