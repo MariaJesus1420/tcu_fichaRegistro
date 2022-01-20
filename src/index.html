@@ -85,24 +85,9 @@
 
         </footer>
     </div>
-    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
+ 
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="btnAddEvent" class="btn btn-success">Add event</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <div class="modal fade" id="modalEvent" tabindex="-1" aria-labelledby="modalEventLabelTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -111,12 +96,16 @@
                     <h5 class="modal-title" id="modalEventLabelTitle">Informacion acerca del evento</h5>
                 </div>
                 <div class="modal-body">
+                  
                     <hr />
                     <div class="row cuestionariosWrapper" id="cuestionariosWrapper"> </div>
+                    
                 </div>
                 <div class="modal-footer">
+                    <a id="btnCrearNuevoCuestionario" href="questionMaker.html"class="btn btn-success">Crear nuevo</a>
+                    <button id="btnAgregarCuestionario" class="btn btn-primary">Agregar</button>
+                   
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-
                 </div>
             </div>
         </div>
@@ -124,7 +113,7 @@
 
     <div class="modal fade" id="modalRespuestas" tabindex="-1" aria-labelledby="modalRespuestasLabelTitle"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+        <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalRespuestasLabelTitle">Lista de respuestas obtenidas</h5>
@@ -154,6 +143,41 @@
                     <button id="btnVolverRespuestas" type="button" class="btn btn-primary"
                         data-bs-dismiss="modal">Volver</button>
 
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modalCuestionarioSelect" tabindex="-1" aria-labelledby="modalCuestionarioSelectTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCuestionarioSelectTitle">Lista de formularios disponibles</h5>
+                </div>
+                <div class="modal-body">
+                    <hr />
+                    <div class="row listaCuestionariosWrapper" id="listaCuestionariosWrapper"> 
+                        <table class="table table-hover table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Titulo</th>
+                                    <th class="text-break">Descripcion</th>
+                                    <th >Fecha creado</th>
+                                    <th class="text-end">Accion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button id="btnVolverListaCuestionarios" type="button" class="btn btn-primary"
+                    data-bs-dismiss="modal">Volver</button>
                 </div>
             </div>
         </div>

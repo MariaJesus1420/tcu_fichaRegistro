@@ -38,6 +38,9 @@ div[data-questionType="complexDropDown"] div.contents-data{
   row-gap: 10px;
 }
 
+#btnCrearNuevoCuestionario{
+  margin-right: auto;
+}
 .custom-radio > input{
   margin-right: 5px;
 }
@@ -62,13 +65,17 @@ div[data-questionType="complexDropDown"] div.contents-data{
   margin-left: 20px;
 
 }
-
+.card > button{
+margin-left: auto;
+margin-top: 5px;
+margin-right: 5px;
+}
 .infoContent{
   justify-content: space-between;
   padding-bottom: 20px;
 }
 .cuestionariosWrapper{
-  justify-content: space-evenly;
+  justify-content: flex-start;
 }
 .calendarWrapper{
   margin-top: 10px;
