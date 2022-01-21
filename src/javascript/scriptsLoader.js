@@ -9,7 +9,9 @@ export async function scriptsLoader(script_url) {
       script.onload = resolve;
       script.onerror = reject;
       script.src = script_url;
-      document.head.appendChild(script);
+      script.crossOrigin= "anonymous"
+
+      document.body.appendChild(script);
     }
   });
 

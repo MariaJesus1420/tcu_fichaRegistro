@@ -32,7 +32,7 @@
             <div class="sombreado calendarWrapper col-12">
                 <div id='calendar'></div>
                 <div >
-                    <button type="button" onclick="addEvent()" id="btnAddEvent" class="btn btn-success" style="margin-top: 20px; margin-bottom: 15px; margin-left: 28.125rem;" >Agregar Evento</button>
+                    <button type="button" onclick="addEvent()" id="btnAddEvent" class="btn btn-success" style="margin-top: 20px; margin-bottom: 15px;" >Agregar Evento</button>
                 </div>
             </div>
         </div>
@@ -221,27 +221,6 @@
     </div>
 
 </body>
-<script>
 
-    function myFunction() {
-        document.getElementById("myDropdown").classList.toggle("show");
-    }
-    function addEvent() {
-        location.href = "events.html";
-    }
-    // Close the dropdown menu if the user clicks outside of it
-    window.onclick = function (event) {
-        if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-            }
-        }
-    }
-</script>
 
 </html>

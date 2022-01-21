@@ -60,9 +60,9 @@ export class Card {
       let tbody = cuestionariosWrapper.querySelector("tbody")
       let div = document.querySelector(".modal-superior");
       let id = 1;
-
+     
       $('#modalEvent').modal('hide');
-      if (this.listaRespuestas != null) {
+      if (this.listaRespuestas != undefined && Object.entries(this.listaRespuestas).length != 0 ) {
         Object.entries(this.listaRespuestas).forEach((respuesta) => {
          
           tbody.append(new Modals(id, cuestionarioDB.usuario, this.href, respuesta[0]).generateModal());
