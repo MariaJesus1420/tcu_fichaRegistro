@@ -44,7 +44,7 @@ export const FORMVIEWVER = {
             button.innerText="Enviar respuestas"
 
             $('.seccionBotones').append(button)
-            $('.enviarRespuestas').click(async (e) => {
+            $('#enviarRespuestas').click(async (e) => {
               e.preventDefault();
               let respuestas = await collectAllQuestions();
               await db.addAnwsers(cuestionarioId,uuidv4(),respuestas)
@@ -55,7 +55,7 @@ export const FORMVIEWVER = {
               })
             });
           }else{
-            $('.enviarRespuestas').remove();
+            $('#enviarRespuestas').remove();
             let buttonVolver = document.createElement("a");
             buttonVolver.classList.add("btn", "btn-secondary")
             buttonVolver.id= "volver"
