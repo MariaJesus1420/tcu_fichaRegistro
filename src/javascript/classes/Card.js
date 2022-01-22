@@ -67,8 +67,9 @@ export class Card {
          
           tbody.append(new Modals(id, cuestionarioDB.usuario, this.href, respuesta[0]).generateModal());
           id++;
-          $('#modalRespuestas').modal('show');
+         
       })
+      $('#modalRespuestas').modal('show');
       }else{
         $('#noAnswer').modal('show');
         $("#closeAnswer").click(()=>{
@@ -80,8 +81,12 @@ export class Card {
       let div = document.querySelectorAll(".modal-superior tbody tr");
       
       $('#modalRespuestas').modal('hide');
-      div.forEach(div2 => div2.remove());
+     
       $('#modalEvent').modal('show');
+      $("#modalRespuestas").one("hidden.bs.modal",()=>{
+        div.forEach(div2 => div2.remove());
+      })
+    
     })
     cardBodyBtns.append(participantes);
     card_body.append(cardBodyBtns);

@@ -7,7 +7,7 @@ export const COMMON = {
     let listaDeScripts = [
      
       "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js",
-      "https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js",
+      
       "https://kit.fontawesome.com/5fc4fd5412.js",
       "https://cdn.jsdelivr.net/npm/fullcalendar/main.js",
      
@@ -28,11 +28,15 @@ export const COMMON = {
     let promises = [];
 
 
-    listaDeScripts.map(async (element) => {
+    listaDeLinks.map(async (element) => {
+      linksLoader.loaded = new Set();
 
-      scriptsLoader.loaded = new Set();
-      promises.push(scriptsLoader([element]));
+      promises.push(linksLoader([element]));
     });
+
+
+
+
 
     await Promise.all(promises).then((result) => {
     
@@ -49,12 +53,19 @@ export const COMMON = {
     });
 
 
+    listaDeScripts.map(async (element) => {
+
+      scriptsLoader.loaded = new Set();
+      promises.push(scriptsLoader([element]));
+    });
+
 
     await Promise.all(promises).then(
       async (result) => {
     
       
         scriptsLoader("https://cdn.jsdelivr.net/npm/fullcalendar/locales/es.js")
+        scriptsLoader("https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js")
         console.log("LOADING FIRESTORE");
         await FirebaseINIT();
         console.log("FINISH COMMON");

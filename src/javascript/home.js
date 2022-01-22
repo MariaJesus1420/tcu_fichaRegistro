@@ -101,7 +101,7 @@ export const HOME = {
 
       var calendar = new FullCalendar.Calendar(calendarEl, {
         eventClick: eventoClick,
-        events: eventList,
+        
         eventOverlap: false,
         themeSystem: 'bootstrap',
         height: 600,
@@ -112,7 +112,9 @@ export const HOME = {
 
         initialView: 'listMonth',
         buttonText: {
-          listMonth: 'Agenda'
+          listMonth: 'Agenda',
+          month: "Mensual",
+          today: "Hoy",
         },
         footerToolbar: {
           start: 'today',
@@ -137,6 +139,7 @@ export const HOME = {
         }
       })
       calendar.render()
+    
       return calendar
     }
 
@@ -148,9 +151,12 @@ export const HOME = {
 
     let db = new DATABASE()
 
-
+    calendarObj = generateCalendar()
+  
     let eventsDB = await db.obtenerDocumento('Events', '2021')
-    calendarObj = generateCalendar(generateEventsList(eventsDB))
+    generateEventsList(eventsDB).forEach(event => {
+      calendarObj.addEvent(event)
+    });
 
     $('#btnAgregarCuestionario').click(async e => {
       $('#modalEvent').modal('hide')
